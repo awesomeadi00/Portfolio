@@ -190,3 +190,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// This is for the skills item
+document.querySelectorAll('.skillItem').forEach(item => {
+  item.addEventListener('mouseover', function () {
+    const skillText = document.getElementById('skillText');
+    skillText.textContent = this.getAttribute('data-skill');
+    skillText.style.opacity = 1;
+  });
+  item.addEventListener('mouseout', function () {
+    const skillText = document.getElementById('skillText');
+    skillText.style.opacity = 0;
+  });
+});
