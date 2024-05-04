@@ -167,3 +167,26 @@ document.body.addEventListener("mouseout", function () {
 document.body.addEventListener("mouseover", function () {
   cursor.classList.remove("disabled");
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const headerHeight = document.querySelector(".header").offsetHeight; // Get the current height of the header
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault(); // Prevent default anchor click behavior
+
+      const targetId = this.getAttribute("href"); // Get the target element id
+      const targetElement = document.querySelector(targetId);
+
+      if (targetElement) {
+        const targetPosition = targetElement.getBoundingClientRect().top; // Get the target element top position
+        const offsetPosition = targetPosition + window.pageYOffset - headerHeight; // Calculate position with offset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+});
