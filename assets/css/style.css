@@ -444,43 +444,32 @@ body.active { overflow: hidden; }
 }
 
 .aboutContainer {
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 100%;
-  max-width: 1200px;
 }
 
 .aboutContent {
   flex-basis: 50%;
-  padding-right: 5px;
   z-index: 3;
 }
 
 .aboutImage {
-  flex-basis: 20%;
-  border-radius: 20px;
-  height: auto;
-  width: 100%;
+  flex-basis: 40%; 
+  max-width: 500px; 
 }
 
 .aboutImage img {
-  height: 100%;
-  width: auto;
-  object-fit: cover;
-}
-
-.myImage {
-  width: auto;
-  height: 300px;
-  border-radius: 5px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-  object-fit: cover;
-  flex-shrink: 0;
+  width: 100%; 
+  height: auto; 
+  object-fit: cover; 
+  border-radius: 20px;
 }
 
 .aboutTitle {
-  font-size: 5em;
+  font-size: 7em;
 }
 
 .section-text {
@@ -505,7 +494,40 @@ body.active { overflow: hidden; }
   margin-block-end: 35px;
 }
 
+/* Perks Container Styling */
+.perks-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive layout */
+  gap: 10px; /* Space between perks */
+  margin-top: 10px;
+  align-items: stretch; /* Ensure all items are the same height */
+}
 
+/* Individual Perk (Bubble) Styling */
+.perk {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color, #333);
+  color: white;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 150px; /* Set a minimum height */
+}
+
+/* Font styling for text inside Perks */
+.perk h3 {
+  font-size: 1.2em; 
+}
+
+.perk p {
+  font-size: 1.1em;
+  line-height: 1.5;
+}
 
 /* Projects Section: ============================================================================================ */
 .projectSectionTitle {

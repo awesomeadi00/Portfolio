@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (targetElement) {
         const targetPosition = targetElement.getBoundingClientRect().top; // Get the target element top position
-        const offsetPosition = targetPosition + window.pageYOffset - headerHeight; // Calculate position with offset
+        const offsetPosition = targetPosition + window.scrollY; // Calculate position with offset
 
         window.scrollTo({
           top: offsetPosition,
