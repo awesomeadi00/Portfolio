@@ -1,13 +1,5 @@
+// Preloading the loading animations: ===================================================================================
 'use strict';
-
-const addEventOnElements = function (elements, eventType, callback) {
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].addEventListener(eventType, callback);
-  }
-}
-
-
-// Preloading the loading animations 
 const loadingElement = document.querySelector("[data-loading]");
 
 window.addEventListener("load", function () {
@@ -16,8 +8,7 @@ window.addEventListener("load", function () {
 });
 
 
-
-// When the user scrolls down the header adds some properties
+// Header Javascript when the user scrolls down it adds some properties: =================================================
 const header = document.querySelector(".header");
 
 const activeElementOnScroll = function () {
@@ -30,8 +21,7 @@ const activeElementOnScroll = function () {
 
 window.addEventListener("scroll", activeElementOnScroll);
 
-
-// Text animation at the top of the home page 
+// Sub-title Wave Effect Animation for each letter: =====================================================================
 const letterBoxes = document.querySelectorAll("[data-letter-effect]");
 
 let activeLetterBoxIndex = 0;
@@ -111,9 +101,7 @@ const setLetterEffect = function () {
 // call the letter effect function after window loaded
 window.addEventListener("load", setLetterEffect);
 
-
-
-// This is added to all elements which we will eventually reveal 
+// When scrolled down, this JS code will deveal the data in a fading animation: =================================================
 const revealElements = document.querySelectorAll("[data-reveal]");
 
 const scrollReveal = function () {
@@ -133,7 +121,13 @@ window.addEventListener("scroll", scrollReveal);
 scrollReveal();
 
 
-// JS for the custom cursor: 
+// JS for the custom cursor: ==========================================================================================
+const addEventOnElements = function (elements, eventType, callback) {
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].addEventListener(eventType, callback);
+  }
+}
+
 const cursor = document.querySelector("[data-cursor]");
 const anchorElements = document.querySelectorAll("a");
 const buttons = document.querySelectorAll("button");
@@ -168,6 +162,8 @@ document.body.addEventListener("mouseover", function () {
   cursor.classList.remove("disabled");
 });
 
+
+// Scroll to Javascript code for navigation hyperlinks on the header: =============================================
 document.addEventListener("DOMContentLoaded", function () {
   const headerHeight = document.querySelector(".header").offsetHeight; // Get the current height of the header
 
@@ -188,18 +184,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
     });
-  });
-});
-
-// This is for the skills item
-document.querySelectorAll('.skillItem').forEach(item => {
-  item.addEventListener('mouseover', function () {
-    const skillText = document.getElementById('skillText');
-    skillText.textContent = this.getAttribute('data-skill');
-    skillText.style.opacity = 1;
-  });
-  item.addEventListener('mouseout', function () {
-    const skillText = document.getElementById('skillText');
-    skillText.style.opacity = 0;
   });
 });
