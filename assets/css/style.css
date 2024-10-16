@@ -150,8 +150,6 @@ body.active { overflow: hidden; }
 
 .shape { display: none; }
 
-.section { padding-block: var(--section-padding); }
-
 .h1,
 .h2,
 .h3,
@@ -337,7 +335,7 @@ body.active { overflow: hidden; }
 }
 
 /* Home Container ================================================================================================ */
-.homeSection {
+.home {
   position: relative;
   background-image: url('../images/background.jpg');
   background-size: cover;
@@ -345,13 +343,13 @@ body.active { overflow: hidden; }
   background-repeat: no-repeat;
 }
 
-.homeSection::after {
+.home::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: linear-gradient(to bottom, transparent, transparent 40%, hsl(0, 0%, 7%) 100%);
   z-index: 2;
 }
@@ -408,7 +406,7 @@ body.active { overflow: hidden; }
 }
 
 /* Animation for Text Wave CSS Properties: */
-.main .wrapper .space { padding: 0.1em; }
+.wrapper .space { padding: 0.1em; }
 
 .main .wrapper :is(.in, .out) {
   opacity: 0;
@@ -440,7 +438,6 @@ body.active { overflow: hidden; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
 }
 
 .aboutContainer {
@@ -527,6 +524,18 @@ body.active { overflow: hidden; }
 .perk p {
   font-size: 1.1em;
   line-height: 1.5;
+}
+
+/* Experiences Section: ============================================================================================ */
+.experiences {
+  padding-top: 20px;
+}
+
+.experiencesContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 /* Projects Section: ============================================================================================ */
