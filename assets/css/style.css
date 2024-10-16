@@ -369,7 +369,7 @@ body.active { overflow: hidden; }
   position:absolute;
   font-size: 9em;
   margin-left: 20px;
-  top: 25%;
+  top: 30%;
   left: 7%;
 }
 
@@ -377,7 +377,7 @@ body.active { overflow: hidden; }
   position: absolute;
   font-size: 7em;
   margin-left: 20px;
-  top: 45%;
+  top: 50%;
   left: 7%;
 }
 
@@ -438,6 +438,7 @@ body.active { overflow: hidden; }
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 }
 
 .aboutContainer {
@@ -469,7 +470,7 @@ body.active { overflow: hidden; }
   font-size: 7em;
 }
 
-.section-text {
+.about .section-text {
   font-size: 1.5em;
 }
 
@@ -786,4 +787,62 @@ body.active { overflow: hidden; }
 .social-link:hover .social-icon {
   transform: scale(1.2);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+
+
+
+/* Media Sizes: ============================================================================================ */
+/* Media Query for MacBook Screens */
+@media screen and (max-width: 1600px) {
+  .navbar a {
+    font-size: 1.6em;
+  }
+
+  .nameTitle {
+    font-size: 7.5em;
+  }
+
+  .subTitle {
+    font-size: 5em;
+  }
+
+  #container3D canvas {
+    width: 40vw;
+    height: 80vh;
+    right: 10px;
+  }
+
+  /* Adjust About Section */
+  .aboutTitle {
+    font-size: 4em;
+  }
+
+  .aboutContent .section-text {
+    font-size: 1.4em;
+  }
+
+  .perk {
+    min-height: 50px;
+  }
+
+  /* Project Section Adjustments */
+  .projectCard {
+    width: calc(45% - 30px);
+    /* Reduce size for MacBook screens */
+  }
+
+  /* Adjust Footer Layout */
+  .footer-content {
+    flex-direction: column;
+    /* Stack footer sections */
+    align-items: center;
+  }
+
+  .footer-left,
+  .footer-right {
+    width: 100%;
+    /* Full width on smaller screens */
+    padding: 10px;
+  }
 }

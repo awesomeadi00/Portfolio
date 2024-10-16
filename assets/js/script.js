@@ -165,18 +165,23 @@ document.body.addEventListener("mouseover", function () {
 
 // Scroll to Javascript code for navigation hyperlinks on the header: =============================================
 document.addEventListener("DOMContentLoaded", function () {
-  const headerHeight = document.querySelector(".header").offsetHeight; // Get the current height of the header
+  const headerHeight = document.querySelector(".header").offsetHeight; // Get the header height
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
-      e.preventDefault(); // Prevent default anchor click behavior
+      e.preventDefault(); // Prevent default anchor behavior
 
-      const targetId = this.getAttribute("href"); // Get the target element id
+      const targetId = this.getAttribute("href"); // Get the target element ID
       const targetElement = document.querySelector(targetId);
 
       if (targetElement) {
-        const targetPosition = targetElement.getBoundingClientRect().top; // Get the target element top position
-        const offsetPosition = targetPosition + window.scrollY - headerHeight; // Calculate position with offset
+        const targetPosition = targetElement.getBoundingClientRect().top; // Get target element position
+
+        // Adjust offset based on whether it's the #about section or not
+        const offsetPosition =
+          targetId === "#about"
+            ? targetPosition + window.scrollY // No header height offset for #about
+            : targetPosition + window.scrollY - headerHeight; // Include header height offset for other sections
 
         window.scrollTo({
           top: offsetPosition,
