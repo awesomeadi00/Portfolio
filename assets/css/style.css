@@ -332,7 +332,11 @@ body.active { overflow: hidden; }
   color: white;
   text-decoration: none;
   margin: 0 10px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s ease-in-out; 
+}
+
+.navbar a:hover {
+  color: var(--radical-red);
 }
 
 /* Home Container ================================================================================================ */
@@ -638,21 +642,152 @@ body.active { overflow: hidden; }
 
 /* Projects Section: ============================================================================================ */
 .projects {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 20px;
-}
-
-.projectTitle {
-  font-size: 4em;
+  box-sizing: border-box;
 }
 
 .projectContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  gap: 20px;
+}
+
+/* Title Styling */
+.projectTitle {
+  font-size: 4em;
+  margin: 0;
+  color: var(--white);
+  font-family: var(--ff-recoleta);
+  text-align: center;
+}
+
+/* Project Cells Container */
+.projectCells {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  flex: 1; /* Ensures the cells take up all available space */
+}
+
+/* Individual Project Cell */
+.projectCell {
+  flex: 1; /* Cells evenly split the width */
+  height: 60%; /* Make cells fill the available height */
+  margin: 0 10px; /* Slight horizontal padding between cells */
+  background-color: var(--jet-2);
+  color: var(--white);
+  border-radius: 100px;
+  text-decoration: none;
+  font-family: var(--ff-recoleta);
+  font-size: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.projectCell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+  color: var(--radical-red); 
+}
+
+/* Sub-Pages Styling for Project Cards: ============================================================================================ */
+.subProjects {
+  padding: 20px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.subProjectTitleContainer {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  text-align: center; 
+  margin-bottom: 40px;
 }
+
+.subProjectTitle {
+  font-size: 6rem;
+  text-align: center;
+  color: var(--white);
+  font-family: var(--ff-recoleta);
+  margin: 0;
+}
+
+.projectsCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.projectCard {
+  width: calc(33.33% - 40px);
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5%;
+  overflow: hidden;
+  padding: 20px;
+  background: var(--eerie-black);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.projectCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+
+}
+
+.projectLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.projectImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 3%;
+}
+
+.projectInfo {
+  padding: 15px;
+  flex: 1;
+}
+
+.projectCardTitle,
+.projectDescription {
+  margin-top: 0;
+}
+
+.projectCardTitle {
+  font-size: 1.5em;
+  font-family: var(--ff-recoleta);
+}
+
+.projectDescription {
+  margin-top: 0;
+  font-size: 1em;
+  color: #666;
+}
+
 
 /* Skills Section ==================================================================================================== */
 .skillsSectionTitle {

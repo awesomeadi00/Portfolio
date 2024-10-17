@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <title>Aditya Pandhare</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/font/font.css">
+
+  <link rel="preload" as="image" href="../assets/images/favicon.png">
+  <link rel="preload" as="image" href="../assets/images/loading-circle.svg">
+
+</head>
+
+<body class="active" id="top">
+
+    <!-- Loading before showing the page -->
+    <div class="loading" data-loading>
+      <img src="../assets/images/favicon.png" width="110" height="110" alt="loading" class="img">
+      <img src="../assets/images/loading-circle.svg" width="130" height="130" alt="" class="circle">
+    </div>
+  
+  
+    <!-- Main body: -->
+    <main>
+        <article>
+            <div class="header" data-navbar>
+                <div class="navContainer">
+                
+                  <a href="../index.html#home" class="logo">
+                    <img src="../assets/images/favicon.png" width="60" height="60" alt="Aditya">
+                  </a>
+                
+                  <nav class="navbar" data-navbar>
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#experiences">Experiences</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="../index.html#skills">Skills</a>
+                    <a href="../index.html#contact">Contact</a>
+                  </nav>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <section class="section subProjects" id="subProjects" aria-label="subProjects">
+                <div class="subProjectTitleContainer">
+                    <h2 class="h2 subProjectTitle" data-reveal="right">3D Modeling:</h2>
+                </div>
+
+                <div class="projectsCardsContainer">
+                    <!-- Project 1 -->
+                    <div class="projectCard" data-reveal>
+                        <a href="https://drive.google.com/drive/folders/1q1mFWAlpw-PrlsTg-Ubji4_E769OUR5N?usp=sharing" target="_blank" class="projectLink">
+                        <img src="../assets/images/projects/attic.jpeg" alt="Project Image Description" class="projectImage">
+                        <div class="projectInfo">
+                            <h3 class="projectCardTitle">3D Model: Attic Environment</h3>
+                            <p class="projectDescription">A 3D modeled environment of an attic modeled entirely from scratch using Arnold Rendering. </p>
+                            <div class="projectTags">
+                            <span>#Maya 3D</span>
+                            <span>#Arnold Rendering</span>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="projectCard" data-reveal>
+                        <a href="https://drive.google.com/drive/folders/1XklF8Mn33bBWg2lhSp_SBjlaigUN_5zg?usp=sharing" target="_blank" class="projectLink">
+                        <img src="../assets/images/projects/guitar.png" alt="Project Image Description" class="projectImage">
+                        <div class="projectInfo">
+                            <h3 class="projectCardTitle">3D Model: LTD Bass Guitar</h3>
+                            <p class="projectDescription">A 3D model of an LTD Bass Guitar with extreme detail and precision.</p>
+                            <div class="projectTags">
+                            <span>#Maya 3D</span>
+                            <span>#Guitar</span>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        
+        </article>
+    </main>
+
+    <!-- Cursor and the script -->
+  <div class="cursor" data-cursor></div>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>
