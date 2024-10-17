@@ -177,9 +177,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (targetElement) {
         const targetPosition = targetElement.getBoundingClientRect().top; // Get target element position
 
-        // Adjust offset based on whether it's the #about section or not
+        // Adjust offset based on whether it's the about/projects section or not
+        // Reasoning for this is because when we want 100vh it takes the whole viewport without the header into account
+        // Hence if we want to use 100vh (starting off in the center), we shouldn't subtract the header
         const offsetPosition =
-          targetId === "#about"
+          targetId === "#about" || targetId === "#projects"
             ? targetPosition + window.scrollY // No header height offset for #about
             : targetPosition + window.scrollY - headerHeight; // Include header height offset for other sections
 
