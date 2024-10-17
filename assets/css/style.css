@@ -713,35 +713,57 @@ body.active { overflow: hidden; }
   box-sizing: border-box;
 }
 
-.subProjectTitleContainer {
+/* Header with Title and Button */
+.subProjectHeader {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  text-align: center; /* Center-align the content */
   margin-bottom: 40px;
 }
 
 .subProjectTitle {
-  font-size: 6rem;
-  text-align: center;
+  font-size: 4em;
+  margin-bottom: 20px; /* Add spacing below the title */
   color: var(--white);
   font-family: var(--ff-recoleta);
-  margin: 0;
 }
 
+/* Back Button Styling */
+.backButton {
+  font-family: var(--ff-recoleta);
+  display: inline-block; 
+  padding: 10px 30px; 
+  text-decoration: none;
+  color: var(--white);
+  font-size: 1.2em;
+  border-radius: 15px;
+  background-color: var(--jet-2);
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 10px; 
+}
+
+/* Hover Effect for Back Button */
+.backButton:hover {
+  background-color: var(--radical-red);
+  transform: scale(1.05); 
+}
 .projectsCardsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
   padding: 20px;
+  justify-items: center;
+  box-sizing: border-box;
 }
 
+/* Project Card Styling */
 .projectCard {
-  width: calc(33.33% - 40px);
-  margin: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 5%;
   overflow: hidden;
-  padding: 20px;
   background: var(--eerie-black);
   display: flex;
   flex-direction: column;
