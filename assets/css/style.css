@@ -3,6 +3,7 @@
 /* Colours */
   --smokey-black: hsl(0, 0%, 7%);
   --eerie-black: hsl(0, 0%, 9%);
+  --darker-eerie-black: hsl(0, 0%, 7%);
   --radical-red: hsl(346, 100%, 58%);
   --white_a9: hsla(0, 0%, 100%, 0.09);
   --white_a15: hsla(0, 0%, 100%, 0.15);
@@ -303,7 +304,7 @@ body.active { overflow: hidden; }
 }
 
 .header.active {
-  background-color: var(--eerie-black);
+  background-color: var(--darker-eerie-black);
   padding-block: 12px;
   box-shadow: var(--shadow);
 }
@@ -529,26 +530,128 @@ body.active { overflow: hidden; }
 
 /* Experiences Section: ============================================================================================ */
 .experiences {
-  padding-top: 20px;
+  padding : 20px;
 }
 
 .experiencesContainer {
   width: 100%;
   height: 100vh;
+  text-align: center; 
+  display: flex;              
+  flex-direction: column;     
+  align-items: center;
+  justify-content: center;
+}
+
+.experienceTitle {
+  font-size: 4em;
+  margin-bottom: 40px;
+}
+
+/* Experience Card Container */
+.experienceCardContainer {
+  width: 90%; 
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  gap: 40px;
+}
+
+  /* Adjust Experience Card Styles */
+.experienceCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--eerie-black);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  gap: 15px; 
+}
+
+.experienceCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Experience Info Styling */
+.experienceInfo {
+  flex: 1;
+  text-align: left;
+  padding-right: 15px;
+}
+
+/* Position and Duration Styling */
+.experiencePosition {
+  font-size: 1.8em;
+  font-weight: var(--fw-500);
+  margin-bottom: 5px;
+}
+
+.experienceDuration {
+  font-size: 1.2em;
+  color: var(--white_a70);
+  margin-bottom: 5px;
+  display: flex;
+  gap: 5px; 
+}
+
+.separator {
+  margin: 0 5px;
+  color: var(--white_a50);
+}
+
+.experienceCompany {
+  color: var(--white);
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.experienceCompany:hover {
+  color: var(--radical-red);
+}
+
+/* Bullet Point and Description Styling */
+.experienceDescription {
+  font-size: 1em;
+  color: var(--white_a50);
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.descriptionList {
+  color: var(--white_a50);
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+/* Image Styling */
+.experienceImage {
+  width: 180px; 
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-left: 10px; 
 }
 
 /* Projects Section: ============================================================================================ */
-.projectSectionTitle {
-  margin-left: 50px;
+.projects {
+  padding: 20px;
 }
 
-.projectsContainer {
+.projectTitle {
+  font-size: 5em;
+}
+
+.projectContainer {
+  width: 100%;
+  height: 100vh;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
 }
 
 .projectCard {
