@@ -31,11 +31,8 @@ loader.load(
   function (gltf) {
     object = gltf.scene;
 
-    // Scale the model down appropriately
-    object.scale.set(0.002, 0.002, 0.002); // Reasonable size for the model
-
     // Position the model to the right side of the container
-    adjustModelPosition(); // Adjust initial position based on screen size
+    adjustModelPositionScale(); // Adjust initial position based on screen size
 
     // Set an initial rotation along the Z-axis
     object.rotation.z = THREE.MathUtils.degToRad(180);
@@ -74,20 +71,44 @@ function animate() {
 }
 
 // Adjust model position based on screen size
-function adjustModelPosition() {
-  if (window.matchMedia("(max-width: 1600px)").matches) {
-    object.position.set(2.8, 0.9, 0); // Adjust position for smaller screens
-  } else {
-    object.position.set(2.8, 0.9, 0); // Default position
+function adjustModelPositionScale() {
+  const width = window.innerWidth;
+
+  // iPhone 12
+  if (width <= 844) { 
+    object.position.set(0, -1, 0);
+    object.scale.set(0.0012, 0.0012, 0.0012); // Reasonable size for the model
+  } 
+  
+  // iPad Pro
+  else if (width <= 1200) { 
+    object.position.set(2.2, 0.9, 0);
+    object.scale.set(0.0015, 0.0015, 0.0015); // Reasonable size for the model
+  } 
+  
+  // Macbook
+  else if (width <= 1600) { 
+    object.position.set(2.8, 0.9, 0);
+    object.scale.set(0.002, 0.002, 0.002); // Reasonable size for the model
+  } 
+  
+  else { // Default for larger screens
+    object.position.set(2.8, 0.9, 0);
+    object.scale.set(0.002, 0.002, 0.002); // Reasonable size for the model
+
   }
 }
 
-// Handle window resizing
+// Ensure model position is adjusted after resize
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  adjustModelPositionScale(); // Recalculate model position
 });
+
+// Trigger initial adjustments
+window.addEventListener("load", adjustModelPositionScale);
 
 // Start the rendering loop
 animate();

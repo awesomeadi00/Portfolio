@@ -889,7 +889,6 @@ body.active { overflow: hidden; }
 .contactSubTitle {
   font-family: var(--ff-recoleta);
   font-size: 3em;
-  margin-bottom: 10px;
 }
 
 .socialIcons {
@@ -968,7 +967,7 @@ body.active { overflow: hidden; }
 
 /* Media Screens Section: ==================================================================================== */
 /* For Macbooks (1440px - 900px) with max-width of 1600px as some Macbooks have this*/
-@media screen and (max-width: 1600px) {
+@media screen and (min-width: 1200px) and (max-width: 1600px) {
 
   /* Header Settings ------------------------ */
   .navbar a {
@@ -1026,5 +1025,326 @@ body.active { overflow: hidden; }
   .contactForm textarea {
     height: 80px;
     resize: none;
+  }
+}
+
+/* For iPad Pro (Portrait & Landscape) */
+@media only screen and (min-width: 834px) and (max-width: 1200px) {
+
+  /* Header Settings ------------------------ */
+  .navbar a {
+    font-size: 1.4em;
+  }
+
+  /* Home Settings ------------------------ */
+  .nameTitle {
+    font-size: 6em;
+  }
+
+  .subTitle {
+    font-size: 4.5em;
+  }
+
+  /* About Settings ------------------------ */
+  .aboutTitle {
+    font-size: 3em;
+  }
+
+  .about .section-text {
+    font-size: 1em;
+  }
+
+  /* Font styling for text inside Perks */
+  .perk h3 {
+    font-size: 1.em;
+  }
+
+  .perk p {
+    font-size: 0.8em;
+  }
+
+  /* Experience Settings ---------------------- */
+  .experiencePosition {
+    font-size: 1.6em;
+  }
+
+  .experienceDuration {
+    font-size: 0.9em;
+  }
+
+  .experienceCompany {
+    font-size: 1em;
+  }
+
+  /* Project Settings ------------------------ */
+  .projectCell {
+    font-size: 1.6em;
+  }
+
+  /* Skill Settings ------------------------- */
+  .skillsTitle {
+    font-size: 4em;
+  }
+
+  .skillName {
+    font-size: 1.5em;
+  }
+
+  /* Contact Settings ------------------------ */
+  .contactTitle {
+    font-size: 3em;
+  }
+
+  .contactSubTitle {
+    font-size: 1.8em;
+  }
+
+  .socialIcons {
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .social-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .contactForm label {
+    font-size: 0.8em;
+  }
+
+  .contactForm input,
+  .contactForm textarea {
+    font-size: 0.8em;
+  }
+
+  .contactForm textarea {
+    height: 50px;
+    resize: none;
+  }
+
+  .sendButton {
+    padding: 8px;
+  }
+}
+
+/* For iPhone 12 (Portrait & Landscape) */
+@media screen and (max-width: 834px) {
+
+  /* Header Settings ------------------------ */
+  .navbar a {
+    font-size: 0.9em;
+    margin: 0 9px;
+  }
+
+  /* Home Settings ------------------------ */
+  .nameTitle {
+    font-size: 4em;
+  }
+
+  .subTitle {
+    font-size: 3em;
+  }
+
+  /* About Settings ------------------------ */
+ .aboutContainer {
+   margin-top: 90px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+   padding: 10px;
+ }
+
+ .aboutTitle {
+   font-size: 2em;
+   text-align: center;
+ }
+
+ .about .section-text {
+   font-size: 0.9em;
+   text-align: center;
+   margin-bottom: 10px;
+ }
+
+ .perks-container {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   align-items: center;
+ }
+
+ .perk {
+   width: 90%;
+   min-height: 50px;
+   text-align: center;
+ }
+
+ .perk h3 {
+   font-size: 0.8em;
+ }
+
+ .perk p {
+   font-size: 0.8em;
+ }
+
+ .aboutImage {
+   margin-top: 20px;
+   max-width: 200px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+  /* Experience Settings ---------------------- */
+  .experienceCardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  /* Experience Card Styling */
+  .experienceCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--eerie-black);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  /* Adjust Image Styling */
+  .experienceImage {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+
+  /* Text Content Styling */
+  .experienceInfo {
+    padding: 0 10px;
+  }
+
+  .experiencePosition {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+
+  .experienceDuration {
+    font-size: 0.8em;
+    color: var(--white_a70);
+    margin-bottom: 5px;
+  }
+
+  .experienceCompany {
+    font-size: 1em;
+    color: var(--radical-red);
+    text-decoration: underline;
+    margin-bottom: 10px;
+  }
+
+  .experienceDescription {
+    font-size: 0.9em;
+    color: var(--white_a50);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .descriptionList {
+    font-size: 0.85em;
+    color: var(--white_a50);
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  /* Project Settings ------------------------ */
+  .projectCell {
+    font-size: 0.9em;
+    border-radius: 40px;
+  }
+
+  /* Skill Settings ------------------------- */
+  .skillsTitle {
+    font-size: 2em;
+  }
+
+  .skillName {
+    margin-top: 60px;
+    font-size: 1em;
+  }
+
+  /* Contact Settings ------------------------ */
+  .contactTitle {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
+  .contactSubTitle {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+
+  /* Social Icons Styling */
+  .socialIcons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .socialIcons img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s;
+  }
+
+  .socialIcons img:hover {
+    transform: scale(1.2);
+  }
+
+  /* Contact Form Styling */
+  .contactForm {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  .contactForm label {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+  }
+
+  .contactForm input[type="text"],
+  .contactForm textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .contactForm textarea {
+    height: 80px;
+    resize: vertical;
+  }
+
+  .sendButton {
+    width: 100%;
+    padding: 12px;
+    background-color: #222222;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
   }
 }
