@@ -3,7 +3,7 @@
 /* Colours */
   --smokey-black: hsl(0, 0%, 7%);
   --eerie-black: hsl(0, 0%, 9%);
-  --darker-eerie-black: hsl(0, 0%, 7%);
+  --eerie-black-2: hsl(0, 0%, 11%);
   --radical-red: hsl(346, 100%, 58%);
   --white_a9: hsla(0, 0%, 100%, 0.09);
   --white_a15: hsla(0, 0%, 100%, 0.15);
@@ -304,7 +304,7 @@ body.active { overflow: hidden; }
 }
 
 .header.active {
-  background-color: var(--darker-eerie-black);
+  background-color: var(--eerie-black-2);
   padding-block: 12px;
   box-shadow: var(--shadow);
 }
@@ -812,90 +812,55 @@ body.active { overflow: hidden; }
 
 
 /* Skills Section ==================================================================================================== */
-.skillsSectionTitle {
-  margin-left: 50px;
-}
-
 .skillsContainer {
-  text-align: center;
-  padding: 20px;
-}
-
-.skillsTitle {
-  font-size: 2em;
-  margin-bottom: 10px;
-}
-
-.skillsDescription {
-  font-size: 2em;
-  color: #666;
-  height: 20px;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  margin-bottom: 3%;
-}
-
-.gridWrapper {
-  display: flex;
-  justify-content: center;
-  margin-left: 10%;
-}
-
-.skillsGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 20px;
-  justify-content: center;
-  padding: 20px;
-  width: 100%;
-}
-
-.skillItem {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.skillImage {
+/* Center Title Horizontally and Vertically */
+.skillsTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5em;
+  color: var(--white);
+  text-align: center;
+  font-family: var(--ff-recoleta);
+  z-index: 2; /* Ensure it's above the canvas */
+}
+
+/* Canvas Wrapper to Offset Canvas Area */
+.canvasWrapper {
+  position: absolute;
+  top: 80px; /* Height of the header */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px); /* Remaining height after header */
+  overflow: hidden;
+  z-index: 1; /* Ensure it's behind the title */
+}
+
+/* Canvas Styling */
+#skillsCanvas {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border: 1px solid white;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: block;
 }
 
-.skillItem::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50%;
-  padding: 3px;
-  box-shadow: 0 0 8px white;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.skillItem:hover::before {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-.skillItem:hover {
-  transform: scale(1.2);
-  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
-
+.skillName {
+  font-size: 2em;
+  color: var(--white_a70);
+  font-family: var(--ff-recoleta);
+  margin-top: 160px;
+  text-align: center;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 2;
 }
 
 /* Footer CSS Properties ========================================================================================================= */
@@ -1002,7 +967,7 @@ body.active { overflow: hidden; }
 
 /* Media Sizes: ============================================================================================ */
 /* Media Query for MacBook Screens */
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1440px) {
   .navbar a {
     font-size: 1.6em;
   }
@@ -1021,7 +986,6 @@ body.active { overflow: hidden; }
     right: 10px;
   }
 
-  /* Adjust About Section */
   .aboutTitle {
     font-size: 4em;
   }
@@ -1034,23 +998,18 @@ body.active { overflow: hidden; }
     min-height: 50px;
   }
 
-  /* Project Section Adjustments */
   .projectCard {
     width: calc(45% - 30px);
-    /* Reduce size for MacBook screens */
   }
 
-  /* Adjust Footer Layout */
   .footer-content {
     flex-direction: column;
-    /* Stack footer sections */
     align-items: center;
   }
 
   .footer-left,
   .footer-right {
     width: 100%;
-    /* Full width on smaller screens */
     padding: 10px;
   }
 }

@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Reasoning for this is because when we want 100vh it takes the whole viewport without the header into account
         // Hence if we want to use 100vh (starting off in the center), we shouldn't subtract the header
         const offsetPosition =
-          targetId === "#about" || targetId === "#projects"
+          targetId !== "#experiences" || targetId !== "#contact"
             ? targetPosition + window.scrollY // No header height offset for #about
             : targetPosition + window.scrollY - headerHeight; // Include header height offset for other sections
 
@@ -193,3 +193,125 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// =======================================================================================================================
+window.onload = function () {
+  const canvas = document.getElementById('skillsCanvas');
+  const ctx = canvas.getContext('2d');
+  const skillNameElement = document.getElementById('skillName');
+
+  function resizeCanvas() {
+    const canvasWrapper = document.querySelector('.canvasWrapper');
+    canvas.width = canvasWrapper.clientWidth;
+    canvas.height = canvasWrapper.clientHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const skills = [
+    { imgSrc: '../assets/images/skills/arduino.png', name: 'Arduino' },
+    { imgSrc: '../assets/images/skills/blender.svg', name: 'Blender' },
+    { imgSrc: '../assets/images/skills/c.png', name: 'C' },
+    { imgSrc: '../assets/images/skills/c++.png', name: 'C++' },
+    { imgSrc: '../assets/images/skills/csharp.png', name: 'C#' },
+    { imgSrc: '../assets/images/skills/css.png', name: 'CSS' },
+    { imgSrc: '../assets/images/skills/digitalocean.png', name: 'Digital Ocean' },
+    { imgSrc: '../assets/images/skills/python.png', name: 'Python' },
+    { imgSrc: '../assets/images/skills/docker.png', name: 'Docker' },
+    { imgSrc: '../assets/images/skills/github.png', name: 'GitHub' },
+    { imgSrc: '../assets/images/skills/html.png', name: 'HTML' },
+    { imgSrc: '../assets/images/skills/github.png', name: 'GitHub' },
+    { imgSrc: '../assets/images/skills/javascript.png', name: 'JavaScript' },
+    { imgSrc: '../assets/images/skills/linux.png', name: 'Linux' },
+    { imgSrc: '../assets/images/skills/maya.png', name: 'Maya 3D' },
+    { imgSrc: '../assets/images/skills/microsoft_office.png', name: 'Microsoft Office' },
+    { imgSrc: '../assets/images/skills/mongodb.svg', name: 'MongoDB' },
+    { imgSrc: '../assets/images/skills/python.png', name: 'Python' },
+    { imgSrc: '../assets/images/skills/pytorch.png', name: 'PyTorch' },
+    { imgSrc: '../assets/images/skills/tensorflow.png', name: 'TensorFlow' },
+    { imgSrc: '../assets/images/skills/unity.png', name: 'Unity' },
+    { imgSrc: '../assets/images/skills/unreal.png', name: 'Unreal Engine' },
+    { imgSrc: '../assets/images/skills/vscode.jpeg', name: 'Virtual Studio Code' },
+  ];
+
+  const balls = [];
+
+  class Ball {
+    constructor(skill, x, y, radius, dx, dy) {
+      this.skill = skill;
+      this.img = new Image();
+      this.img.src = skill.imgSrc;
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.dx = dx;
+      this.dy = dy;
+    }
+
+    draw() {
+      ctx.drawImage(this.img, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+    }
+
+    update() {
+      if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+        this.dx = -this.dx;
+      }
+      if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+        this.dy = -this.dy;
+      }
+
+      this.x += this.dx;
+      this.y += this.dy;
+
+      this.draw();
+    }
+
+    isHovered(mouseX, mouseY) {
+      const dist = Math.hypot(mouseX - this.x, mouseY - this.y);
+      return dist < this.radius;
+    }
+  }
+
+  function init() {
+    skills.forEach((skill) => {
+      const radius = 40;
+      const x = Math.random() * (canvas.width - radius * 2) + radius;
+      const y = Math.random() * (canvas.height - radius * 2) + radius;
+      const dx = (Math.random() - 0.5) * 2;
+      const dy = (Math.random() - 0.5) * 2;
+      balls.push(new Ball(skill, x, y, radius, dx, dy));
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    balls.forEach((ball) => ball.update());
+    requestAnimationFrame(animate);
+  }
+
+  canvas.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    let hoveredSkill = null;
+
+    balls.forEach((ball) => {
+      if (ball.isHovered(mouseX, mouseY)) {
+        hoveredSkill = ball.skill.name;
+      }
+    });
+
+    if (hoveredSkill) {
+      skillNameElement.textContent = hoveredSkill;
+      skillNameElement.style.opacity = 1;
+    } else {
+      skillNameElement.textContent = 'Hover over a skill!';
+      skillNameElement.style.opacity = 0.7;
+    }
+  });
+
+  init();
+  animate();
+};
