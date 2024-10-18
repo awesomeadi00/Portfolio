@@ -35,7 +35,7 @@ loader.load(
     object.scale.set(0.002, 0.002, 0.002); // Reasonable size for the model
 
     // Position the model to the right side of the container
-    object.position.set(2.5, 0.8, 0); // Adjust X/Y/Z as needed
+    adjustModelPosition(); // Adjust initial position based on screen size
 
     // Set an initial rotation along the Z-axis
     object.rotation.z = THREE.MathUtils.degToRad(180);
@@ -71,6 +71,15 @@ function animate() {
 
   controls.update(); // Update controls
   renderer.render(scene, camera);
+}
+
+// Adjust model position based on screen size
+function adjustModelPosition() {
+  if (window.matchMedia("(max-width: 1600px)").matches) {
+    object.position.set(2.8, 0.8, 0); // Adjust position for smaller screens
+  } else {
+    object.position.set(2.5, 0.8, 0); // Default position
+  }
 }
 
 // Handle window resizing

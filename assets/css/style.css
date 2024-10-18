@@ -549,6 +549,7 @@ body.active { overflow: hidden; }
 
 .experienceTitle {
   font-size: 4em;
+  margin-top: 90px;
   margin-bottom: 40px;
 }
 
@@ -658,6 +659,7 @@ body.active { overflow: hidden; }
   width: 100%;
   height: 100%;
   gap: 20px;
+  margin-top: 70px;
 }
 
 /* Title Styling */
@@ -962,4 +964,67 @@ body.active { overflow: hidden; }
 
 .sendButton:hover {
   background-color: #464646;
+}
+
+/* Media Screens Section: ==================================================================================== */
+/* For Macbooks (1440px - 900px) with max-width of 1600px as some Macbooks have this*/
+@media screen and (max-width: 1600px) {
+
+  /* Header Settings ------------------------ */
+  .navbar a {
+    font-size: 1.5em;
+  }
+
+  /* Home Settings ------------------------ */
+  .nameTitle {
+    font-size: 8.5em;
+  }
+
+  .subTitle {
+    font-size: 6.5em;
+  }
+
+  #container3D canvas {
+    width: 40vw;
+    height: 80vh;
+  }
+
+  /* About Settings ------------------------ */
+  .aboutTitle {
+    font-size: 5em;
+  }
+
+  .about .section-text {
+    font-size: 1.3em;
+  }
+
+  /* Project Settings ------------------------ */
+  .projectCell {
+    font-size: 1.8em;
+  }
+
+  /* Contact Settings ------------------------ */
+  .contactTitle {
+    font-size: 4.5em;
+    margin-bottom: 0px;
+  }
+
+  .contactSubTitle {
+    font-size: 2.2em;
+    margin-bottom: 0px;
+  }
+
+  .socialIcons {
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+
+  .contactForm label {
+    font-size: 1em;
+  }
+
+  .contactForm textarea {
+    height: 80px;
+    resize: none;
+  }
 }
