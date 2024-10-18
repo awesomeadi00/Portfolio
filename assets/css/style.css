@@ -863,153 +863,103 @@ body.active { overflow: hidden; }
   z-index: 2;
 }
 
-/* Footer CSS Properties ========================================================================================================= */
-.footer {
-  padding: 20px;
-}
-
-.contactTitleSection {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.contactTitle {
-  font-size: 6em;
-}
-
-.footer-content {
-  display: flex;
-  width: 100%;
-}
-
-.footer-left {
-  flex: 70%;
-  /* Assigns 70% of the space */
-  padding: 20px;
-}
-
-.footer-right {
-  flex: 30%;
-  /* Assigns 30% of the space */
-  padding: 20px;
+/* Contact Section Stylings ========================================================================================================= */
+.contact {
+  height: 100vh; /* Full screen height */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Center the content vertically and horizontally */
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Title and Socials */
+.contactTitleSection {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.contactTitle {
+  font-size: 5em;
+}
+
+.contactSubTitle {
+  font-family: var(--ff-recoleta);
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  width: 60px;
+  height: 60px;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Form Wrapper */
+.contactFormWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .contactForm {
-  display: flex;
-  flex-direction: column;
+  width: 70%;
+  max-width: 90%;
   background-color: rgba(102, 102, 102, 0.1);
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .contactForm label {
   font-weight: bold;
-  margin-top: 10px;
   font-family: var(--ff-recoleta);
+  font-size: 1.2em;
 }
 
-.contactForm input[type="text"],
+.contactForm input,
 .contactForm textarea {
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   font-family: var(--ff-recoleta);
+  font-size: 1em;
 }
 
 .contactForm textarea {
-  height: 120px;
+  height: 100px;
   resize: none;
 }
 
 .sendButton {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #222222;
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #222;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .sendButton:hover {
   background-color: #464646;
-}
-
-.miniHeader {
-  margin-bottom: 20px;
-}
-
-.social-link {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.social-icon {
-  width: 120px;
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-.social-link:hover .social-icon {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-}
-
-
-
-
-/* Media Sizes: ============================================================================================ */
-/* Media Query for MacBook Screens */
-@media screen and (max-width: 1440px) {
-  .navbar a {
-    font-size: 1.6em;
-  }
-
-  .nameTitle {
-    font-size: 7.5em;
-  }
-
-  .subTitle {
-    font-size: 5em;
-  }
-
-  #container3D canvas {
-    width: 40vw;
-    height: 80vh;
-    right: 10px;
-  }
-
-  .aboutTitle {
-    font-size: 4em;
-  }
-
-  .aboutContent .section-text {
-    font-size: 1.4em;
-  }
-
-  .perk {
-    min-height: 50px;
-  }
-
-  .projectCard {
-    width: calc(45% - 30px);
-  }
-
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer-left,
-  .footer-right {
-    width: 100%;
-    padding: 10px;
-  }
 }

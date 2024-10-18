@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// =======================================================================================================================
+// Bouncing Balls for Skills Section: =======================================================================================================================
 window.onload = function () {
   const canvas = document.getElementById('skillsCanvas');
   const ctx = canvas.getContext('2d');
