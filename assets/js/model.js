@@ -76,9 +76,9 @@ function animate() {
 // Adjust model position based on screen size
 function adjustModelPosition() {
   if (window.matchMedia("(max-width: 1600px)").matches) {
-    object.position.set(2.8, 0.8, 0); // Adjust position for smaller screens
+    object.position.set(2.8, 0.9, 0); // Adjust position for smaller screens
   } else {
-    object.position.set(2.5, 0.8, 0); // Default position
+    object.position.set(2.8, 0.9, 0); // Default position
   }
 }
 
