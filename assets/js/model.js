@@ -90,7 +90,7 @@ function adjustModelPositionScale() {
   
   // Macbook
   else if (width <= 1600) { 
-    object.position.set(2.8, 0.9, 0);
+    object.position.set(2.6, 0.9, 0);
     object.scale.set(0.002, 0.002, 0.002); // Reasonable size for the model
   } 
   

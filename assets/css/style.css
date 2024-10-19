@@ -971,16 +971,16 @@ body.active { overflow: hidden; }
 
   /* Header Settings ------------------------ */
   .navbar a {
-    font-size: 1.5em;
+    font-size: 1.3em;
   }
 
   /* Home Settings ------------------------ */
   .nameTitle {
-    font-size: 8.5em;
+    font-size: 7em;
   }
 
   .subTitle {
-    font-size: 6.5em;
+    font-size: 5em;
   }
 
   #container3D canvas {
@@ -990,26 +990,26 @@ body.active { overflow: hidden; }
 
   /* About Settings ------------------------ */
   .aboutTitle {
-    font-size: 5em;
+    font-size: 4em;
   }
 
   .about .section-text {
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   /* Project Settings ------------------------ */
   .projectCell {
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
 
   /* Contact Settings ------------------------ */
   .contactTitle {
-    font-size: 4.5em;
+    font-size: 4em;
     margin-bottom: 0px;
   }
 
   .contactSubTitle {
-    font-size: 2.2em;
+    font-size: 1.9em;
     margin-bottom: 0px;
   }
 
@@ -1019,12 +1019,21 @@ body.active { overflow: hidden; }
   }
 
   .contactForm label {
-    font-size: 1em;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+
+  .contactForm input,
+  .contactForm textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+    width: 100%;
   }
 
   .contactForm textarea {
-    height: 80px;
-    resize: none;
+    height: 70px;
   }
 }
 
