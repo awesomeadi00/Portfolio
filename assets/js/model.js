@@ -72,6 +72,8 @@ function animate() {
 
 // Adjust model position based on screen size
 function adjustModelPositionScale() {
+  if (!object) return; // Ensure the model is loaded
+
   const width = window.innerWidth;
 
   // iPhone 12
@@ -104,7 +106,7 @@ window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  adjustModelPositionScale(); // Recalculate model position
+  if (object) adjustModelPositionScale(); // Recalculate model position only if loaded
 });
 
 // Trigger initial adjustments
