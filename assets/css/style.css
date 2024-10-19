@@ -927,7 +927,7 @@ body.active { overflow: hidden; }
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 5px;
 }
 
 .contactForm label {
@@ -971,7 +971,7 @@ body.active { overflow: hidden; }
 
   /* Header Settings ------------------------ */
   .navbar a {
-    font-size: 1.3em;
+    font-size: 1.4em;
   }
 
   /* Home Settings ------------------------ */
@@ -1016,6 +1016,11 @@ body.active { overflow: hidden; }
   .socialIcons {
     margin-top: 0px;
     margin-bottom: 20px;
+  }
+
+  .contactForm {
+    gap: 5px;
+    padding: 25px;
   }
 
   .contactForm label {
