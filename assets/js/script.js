@@ -315,3 +315,15 @@ window.onload = function () {
   init();
   animate();
 };
+
+// Contact form JS for sending an email ================================================
+const form = document.getElementById("contactForm");
+const sendButton = document.getElementById("sendButton");
+
+// Add an event listener for form submission
+form.addEventListener("submit", function (e) {
+  // Change button text and disable it
+  sendButton.textContent = "Sending... Please wait.";
+  sendButton.disabled = true;
+  sendButton.style.cursor = "not-allowed"; // Optional: change the cursor to indicate non-clickable state
+});
