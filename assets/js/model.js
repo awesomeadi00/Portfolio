@@ -77,31 +77,43 @@ function adjustModelPositionScale() {
   const width = window.innerWidth;
   console.log(width);
 
-  // Detect if it's iPad Pro in portrait mode
-  const isIpadProPortrait = window.matchMedia(
-    "(device-width: 768px) and (device-height: 1366px) and (orientation: portrait)"
+  // Different media screenings: 
+  const isPhones = window.matchMedia(
+    "(min-device-width: 320px) and (max-device-width: 480px)"
   ).matches;
 
+  const isIpadProPortrait = window.matchMedia(
+    "(min-device-width: 768px) and (max-device-width: 1366px) and (orientation: portrait)"
+  ).matches;
+
+  const isIpadProLandscape = window.matchMedia(
+    "(min-device-width: 768px) and (max-device-width: 1366px) and (orientation: landscape)"
+  ).matches;
+
+  const isLaptops = window.matchMedia(
+    "(min-width: 1200px) and (max-width: 1600px)"
+  ).matches;
+
+  // Phones
+  if (isPhones) { 
+    object.position.set(0, -1, 0);
+    object.scale.set(0.0012, 0.0012, 0.0012); 
+  } 
+
   // If it is an iPad Pro Portrait Screening: 
-  if (isIpadProPortrait) {
+  else if (isIpadProPortrait) {
     object.position.set(0, -0.6, 0);
     object.scale.set(0.0014, 0.0014, 0.0014); 
   }
 
-  // Phones
-  else if (width <= 480) { 
-    object.position.set(0, -1, 0);
-    object.scale.set(0.0012, 0.0012, 0.0012); 
-  } 
-  
   // iPad Pro (Landscape)
-  else if (width <= 1200) { 
+  else if (isIpadProLandscape) { 
     object.position.set(2.2, 0.9, 0);
     object.scale.set(0.0015, 0.0015, 0.0015); 
   } 
   
   // Macbook
-  else if (width <= 1600) { 
+  else if (isLaptops) { 
     object.position.set(2.6, 0.9, 0);
     object.scale.set(0.002, 0.002, 0.002); 
   } 
