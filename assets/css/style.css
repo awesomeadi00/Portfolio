@@ -1050,7 +1050,7 @@ body.active { overflow: hidden; }
 }
 
 /* For iPad Pro (Portrait) */
-@media only screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait) {
+@media only screen and (min-device-width: 834px) and (max-device-width: 834px) and (orientation: portrait) {
   /* Header Settings ------------------------ */
   .navbar a {
     font-size: 1.8em;
@@ -1085,7 +1085,6 @@ body.active { overflow: hidden; }
   .about .section-text {
     font-size: 1.45em;
     padding: 0px 60px;
-    margin-bottom: 50px;
   }
  
   .perks-container {
@@ -1093,7 +1092,7 @@ body.active { overflow: hidden; }
     display: flex;
     gap: 20px;
     align-items: center;
-    padding: 40px;
+    padding: 20px;
   }
  
   .perk {
@@ -1111,7 +1110,6 @@ body.active { overflow: hidden; }
   }
  
   .aboutImage {
-    margin-top: 25px;
     max-width: 80%;
   }
 
@@ -1171,7 +1169,7 @@ body.active { overflow: hidden; }
   }
 
   .contactForm label {
-    font-size: 2em;
+    font-size: 1.5em;
     margin-bottom: 5px;
   }
 
@@ -1182,7 +1180,7 @@ body.active { overflow: hidden; }
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 2em;
+    font-size: 1.5em;
   }
 
   .contactForm textarea {
@@ -1198,7 +1196,7 @@ body.active { overflow: hidden; }
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: 2em;
+    font-size: 1.5em;
   }
 }
 
