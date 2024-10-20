@@ -973,7 +973,7 @@ body.active { overflow: hidden; }
 }
 
 /* Media Screens Section: ==================================================================================== */
-/* For Macbooks (1440px - 900px) with max-width of 1600px as some Macbooks have this*/
+/* For Standard Macbooks (1440px - 900px) with max-width of 1600px*/
 @media screen and (min-width: 1200px) and (max-width: 1600px) {
 
   /* Header Settings ------------------------ */
@@ -1049,8 +1049,8 @@ body.active { overflow: hidden; }
   }
 }
 
-/* For iPad Pro (Portrait) */
-@media only screen and (min-device-width: 834px) and (max-device-width: 834px) and (orientation: portrait) {
+/* For iPads (Portrait) */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: portrait) {
   /* Header Settings ------------------------ */
   .navbar a {
     font-size: 1.8em;
@@ -1200,8 +1200,8 @@ body.active { overflow: hidden; }
   }
 }
 
-/* Anything less than 1200px and For iPad Pro (Landscape) */
-@media only screen and (min-width: 834px) and (max-width: 1200px) and (orientation: landscape) {
+/* For iPads (Landscape) */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: landscape) {
 
   /* Header Settings ------------------------ */
   .navbar a {
@@ -1250,7 +1250,7 @@ body.active { overflow: hidden; }
 
   /* Project Settings ------------------------ */
   .projectCell {
-    font-size: 1.6em;
+    font-size: 1.4em;
   }
 
   /* Skill Settings ------------------------- */
@@ -1300,7 +1300,7 @@ body.active { overflow: hidden; }
   }
 }
 
-/* For iPhone 12 (Portrait & Landscape) */
+/* For Phones or any device less than 834px (Tablets) */
 @media screen and (max-width: 834px) {
 
   /* Header Settings ------------------------ */

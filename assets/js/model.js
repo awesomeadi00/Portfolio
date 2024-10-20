@@ -75,6 +75,7 @@ function adjustModelPositionScale() {
   if (!object) return; // Ensure the model is loaded
 
   const width = window.innerWidth;
+  console.log(width);
 
   // Detect if it's iPad Pro in portrait mode
   const isIpadProPortrait = window.matchMedia(
