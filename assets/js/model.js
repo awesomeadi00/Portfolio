@@ -76,27 +76,37 @@ function adjustModelPositionScale() {
 
   const width = window.innerWidth;
 
+  // Detect if it's iPad Pro in portrait mode
+  const isIpadProPortrait = window.matchMedia(
+    "(device-width: 1024px) and (device-height: 1366px) and (orientation: portrait)"
+  ).matches;
+
+  if (isIpadProPortrait) {
+    object.position.set(0, -0.6, 0);
+    object.scale.set(0.0014, 0.0014, 0.0014); 
+  }
+
   // iPhone 12
-  if (width <= 844) { 
+  else if (width <= 844) { 
     object.position.set(0, -1, 0);
-    object.scale.set(0.0012, 0.0012, 0.0012); // Reasonable size for the model
+    object.scale.set(0.0012, 0.0012, 0.0012); 
   } 
   
-  // iPad Pro
+  // iPad Pro (Landscape)
   else if (width <= 1200) { 
     object.position.set(2.2, 0.9, 0);
-    object.scale.set(0.0015, 0.0015, 0.0015); // Reasonable size for the model
+    object.scale.set(0.0015, 0.0015, 0.0015); 
   } 
   
   // Macbook
   else if (width <= 1600) { 
     object.position.set(2.6, 0.9, 0);
-    object.scale.set(0.002, 0.002, 0.002); // Reasonable size for the model
+    object.scale.set(0.002, 0.002, 0.002); 
   } 
   
   else { // Default for larger screens
     object.position.set(2.8, 0.9, 0);
-    object.scale.set(0.002, 0.002, 0.002); // Reasonable size for the model
+    object.scale.set(0.002, 0.002, 0.002); 
 
   }
 }

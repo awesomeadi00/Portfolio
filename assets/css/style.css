@@ -1049,8 +1049,156 @@ body.active { overflow: hidden; }
   }
 }
 
-/* For iPad Pro (Portrait & Landscape) */
-@media only screen and (min-width: 834px) and (max-width: 1200px) {
+/* For iPad Pro (Portrait) */
+@media only screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait) {
+  /* Header Settings ------------------------ */
+  .navbar a {
+    font-size: 2.2em;
+  }
+
+  /* Home Settings ------------------------ */
+  .nameTitle {
+    top: 25%;
+    font-size: 8.5em; 
+  }
+
+  .subTitle {
+    top: 40%;
+    font-size: 6em; 
+  }
+
+  /* About Settings ------------------------ */
+  .aboutContainer {
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+  }
+ 
+  .aboutTitle {
+    font-size: 7em;
+    text-align: center;
+  }
+ 
+  .about .section-text {
+    font-size: 1.9em;
+    padding: 0px 60px;
+    margin-bottom: 50px;
+  }
+ 
+  .perks-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+ 
+  .perk {
+    width: 90%;
+    min-height: 150px;
+    text-align: center;
+  }
+ 
+  .perk h3 {
+    font-size: 1.5em;
+  }
+ 
+  .perk p {
+    font-size: 1.5em;
+  }
+ 
+  .aboutImage {
+    margin-top: 65px;
+    max-width: 80%;
+  }
+
+  /* Experience Settings ------------------------ */
+  .experiencesContainer {
+    margin-top: 20px;
+  }
+
+  .experienceDescription {
+    font-size: 1.3em;
+  }
+
+  .descriptionList {
+    font-size: 1.3em;
+  }
+
+  /* Contact Settings ------------------------ */
+  .contactTitle {
+    font-size: 9em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .contactSubTitle {
+    font-size: 4em;
+    margin-bottom: 15px;
+  }
+
+  /* Social Icons Styling */
+  .socialIcons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .socialIcons img {
+    width: 90px;
+    height: 90px;
+    transition: transform 0.3s;
+  }
+
+  .socialIcons img:hover {
+    transform: scale(1.2);
+  }
+
+  /* Contact Form Styling */
+  .contactForm {
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px;
+  }
+
+  .contactForm label {
+    font-size: 2em;
+    margin-bottom: 5px;
+  }
+
+  .contactForm input[type="text"],
+  .contactForm textarea {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 2em;
+  }
+
+  .contactForm textarea {
+    height: 100px;
+  }
+
+  .sendButton {
+    width: 100%;
+    padding: 12px;
+    background-color: #222222;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 2em;
+  }
+}
+
+/* Anything less than 1200px and For iPad Pro (Landscape) */
+@media only screen and (min-width: 834px) and (max-width: 1200px) and (orientation: landscape) {
 
   /* Header Settings ------------------------ */
   .navbar a {
