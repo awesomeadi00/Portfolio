@@ -81,6 +81,7 @@ function adjustModelPositionScale() {
     "(device-width: 1024px) and (device-height: 1366px) and (orientation: portrait)"
   ).matches;
 
+  // If it is an iPad Pro Portrait Screening: 
   if (isIpadProPortrait) {
     object.position.set(0, -0.6, 0);
     object.scale.set(0.0014, 0.0014, 0.0014); 

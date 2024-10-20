@@ -1053,18 +1053,18 @@ body.active { overflow: hidden; }
 @media only screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait) {
   /* Header Settings ------------------------ */
   .navbar a {
-    font-size: 2.2em;
+    font-size: 1.8em;
   }
 
   /* Home Settings ------------------------ */
   .nameTitle {
     top: 25%;
-    font-size: 8.5em; 
+    font-size: 7em; 
   }
 
   .subTitle {
     top: 40%;
-    font-size: 6em; 
+    font-size: 5em; 
   }
 
   /* About Settings ------------------------ */
@@ -1083,7 +1083,7 @@ body.active { overflow: hidden; }
   }
  
   .about .section-text {
-    font-size: 1.9em;
+    font-size: 1.45em;
     padding: 0px 60px;
     margin-bottom: 50px;
   }
@@ -1091,27 +1091,27 @@ body.active { overflow: hidden; }
   .perks-container {
     width: 100%;
     display: flex;
-    flex-direction: column;
     gap: 20px;
     align-items: center;
+    padding: 40px;
   }
  
   .perk {
     width: 90%;
-    min-height: 150px;
+    min-height: 130px;
     text-align: center;
   }
  
   .perk h3 {
-    font-size: 1.5em;
+    font-size: 1.3em;
   }
  
   .perk p {
-    font-size: 1.5em;
+    font-size: 1.3em;
   }
  
   .aboutImage {
-    margin-top: 65px;
+    margin-top: 25px;
     max-width: 80%;
   }
 
@@ -1121,22 +1121,27 @@ body.active { overflow: hidden; }
   }
 
   .experienceDescription {
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   .descriptionList {
-    font-size: 1.3em;
+    font-size: 1.1em;
+  }
+
+  /* Project Settings ------------------------ */
+  .projectCell {
+    font-size: 1.9em;
   }
 
   /* Contact Settings ------------------------ */
   .contactTitle {
-    font-size: 9em;
+    font-size: 6em;
     margin-top: 20px;
     margin-bottom: 10px;
   }
 
   .contactSubTitle {
-    font-size: 4em;
+    font-size: 2.5em;
     margin-bottom: 15px;
   }
 
