@@ -1300,8 +1300,8 @@ body.active { overflow: hidden; }
   }
 }
 
-/* For Phones or any device less than 834px (Tablets) */
-@media screen and (max-width: 834px) {
+/* For Phones */
+@media screen and (min-device-width: 320px) and (max-device-width: 480px) {
 
   /* Header Settings ------------------------ */
   .navbar a {

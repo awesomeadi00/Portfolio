@@ -88,8 +88,8 @@ function adjustModelPositionScale() {
     object.scale.set(0.0014, 0.0014, 0.0014); 
   }
 
-  // iPhone 12
-  else if (width <= 844) { 
+  // Phones
+  else if (width <= 480) { 
     object.position.set(0, -1, 0);
     object.scale.set(0.0012, 0.0012, 0.0012); 
   } 
