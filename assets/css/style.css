@@ -1059,12 +1059,12 @@ body.active { overflow: hidden; }
   /* Home Settings ------------------------ */
   .nameTitle {
     top: 25%;
-    font-size: 7em; 
+    font-size: 6em; 
   }
 
   .subTitle {
     top: 40%;
-    font-size: 5em; 
+    font-size: 4.5em; 
   }
 
   /* About Settings ------------------------ */
@@ -1078,13 +1078,14 @@ body.active { overflow: hidden; }
   }
  
   .aboutTitle {
-    font-size: 7em;
+    font-size: 4em;
     text-align: center;
   }
  
   .about .section-text {
-    font-size: 1.45em;
+    font-size: 1.3em;
     padding: 0px 60px;
+    margin-bottom: 0px;
   }
  
   .perks-container {
@@ -1093,6 +1094,7 @@ body.active { overflow: hidden; }
     gap: 20px;
     align-items: center;
     padding: 20px;
+    margin-top: 0px;
   }
  
   .perk {
@@ -1110,7 +1112,7 @@ body.active { overflow: hidden; }
   }
  
   .aboutImage {
-    max-width: 80%;
+    max-width: 50%;
   }
 
   /* Experience Settings ------------------------ */

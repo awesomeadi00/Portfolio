@@ -79,7 +79,7 @@ function adjustModelPositionScale() {
 
   // Detect if it's iPad Pro in portrait mode
   const isIpadProPortrait = window.matchMedia(
-    "(device-width: 1024px) and (device-height: 1366px) and (orientation: portrait)"
+    "(device-width: 768px) and (device-height: 1366px) and (orientation: portrait)"
   ).matches;
 
   // If it is an iPad Pro Portrait Screening: 
