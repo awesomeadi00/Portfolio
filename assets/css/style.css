@@ -1084,7 +1084,7 @@ body.active { overflow: hidden; }
  
   .about .section-text {
     font-size: 1.3em;
-    padding: 0px 60px;
+    padding: 0px 20px;
     margin-bottom: 0px;
   }
  
@@ -1108,11 +1108,12 @@ body.active { overflow: hidden; }
   }
  
   .perk p {
-    font-size: 1.3em;
+    font-size: 1em;
   }
  
   .aboutImage {
-    max-width: 50%;
+    margin-bottom: 60px;
+    max-width: 45%;
   }
 
   /* Experience Settings ------------------------ */
@@ -1230,7 +1231,7 @@ body.active { overflow: hidden; }
 
   /* Font styling for text inside Perks */
   .perk h3 {
-    font-size: 1.em;
+    font-size: 1.3em;
   }
 
   .perk p {
