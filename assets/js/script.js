@@ -352,49 +352,61 @@ form.addEventListener("submit", function (e) {
 });
 
 // Word Centering for Subtitle on phone devices ========================================================================
-// Adjust subtitle position based on word length
-const subtitleBoxes = document.querySelectorAll("[data-letter-effect]");
-let currentSubtitleIndex = 0;
-let previousSubtitleIndex = 0;
-let animationDelayTotal = 0;
+// Check if the device is a phone (width <= 480px)
+const isPhone = window.matchMedia("(min-device-width: 320px) and (max-device-width: 480px)").matches;
 
-const updateSubtitlePosition = function (word) {
-  const subtitleElement = document.querySelector('.subTitle');
-  let calculatedLeft = 38 - word.length * 2; // Adjust this formula if needed
-  subtitleElement.style.left = `${calculatedLeft}%`;
-};
+if (isPhone) {
+  console.log("Is Phone!");
 
-const animateSubtitles = function () {
-  for (let i = 0; i < subtitleBoxes.length; i++) {
-    let charDelay = 0;
-    const word = subtitleBoxes[i].textContent.trim();
-    subtitleBoxes[i].textContent = "";
+  // Adjust subtitle position based on word length for phones only
+  const subtitleBoxes = document.querySelectorAll("[data-letter-effect]");
+  let currentSubtitleIndex = 0;
+  let previousSubtitleIndex = 0;
+  let animationDelayTotal = 0;
 
-    for (let j = 0; j < word.length; j++) {
-      const characterSpan = document.createElement("span");
-      characterSpan.style.animationDelay = `${charDelay}s`;
-      characterSpan.classList.add(i === currentSubtitleIndex ? "in" : "out");
-      characterSpan.textContent = word[j];
+  const updateSubtitlePosition = function (word) {
+    const subtitleElement = document.querySelector('.subTitle');
+    let calculatedLeft = 38 - word.length * 2; // Adjust the formula as needed
+    subtitleElement.style.left = `${calculatedLeft}%`;
+  };
 
-      if (word[j] === " ") characterSpan.classList.add("space");
+  const animateSubtitles = function () {
+    for (let i = 0; i < subtitleBoxes.length; i++) {
+      let charDelay = 0;
+      const word = subtitleBoxes[i].textContent.trim();
+      subtitleBoxes[i].textContent = "";
 
-      subtitleBoxes[i].appendChild(characterSpan);
-      if (j < word.length - 1) charDelay += 0.05;
+      for (let j = 0; j < word.length; j++) {
+        const characterSpan = document.createElement("span");
+        characterSpan.style.animationDelay = `${charDelay}s`;
+        characterSpan.classList.add(i === currentSubtitleIndex ? "in" : "out");
+        characterSpan.textContent = word[j];
+
+        if (word[j] === " ") characterSpan.classList.add("space");
+
+        subtitleBoxes[i].appendChild(characterSpan);
+        if (j < word.length - 1) charDelay += 0.05;
+      }
+
+      if (i === currentSubtitleIndex) {
+        animationDelayTotal = Number(charDelay.toFixed(2));
+        updateSubtitlePosition(word);
+      }
+
+      subtitleBoxes[i].classList.toggle("active", i === previousSubtitleIndex);
     }
 
-    if (i === currentSubtitleIndex) {
-      animationDelayTotal = Number(charDelay.toFixed(2));
-      updateSubtitlePosition(word);
-    }
+    setTimeout(function () {
+      previousSubtitleIndex = currentSubtitleIndex;
+      currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitleBoxes.length;
+      animateSubtitles();
+    }, (animationDelayTotal * 1000) + 3000);
+  };
 
-    subtitleBoxes[i].classList.toggle("active", i === previousSubtitleIndex);
-  }
+  // Call the subtitle animation function after window load, only for phones
+  window.addEventListener("load", animateSubtitles);
+}
 
-  setTimeout(function () {
-    previousSubtitleIndex = currentSubtitleIndex;
-    currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitleBoxes.length;
-    animateSubtitles();
-  }, (animationDelayTotal * 1000) + 3000);
-};
-
-window.addEventListener("load", animateSubtitles);
+else {
+  console.log("Not Phone!");
+}
