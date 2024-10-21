@@ -75,7 +75,6 @@ function adjustModelPositionScale() {
   if (!object) return; // Ensure the model is loaded
 
   const width = window.innerWidth;
-  console.log(width);
 
   // Different media screenings: 
   const isPhones = window.matchMedia(
@@ -96,8 +95,8 @@ function adjustModelPositionScale() {
 
   // Phones
   if (isPhones) { 
-    object.position.set(0, -1, 0);
-    object.scale.set(0.0012, 0.0012, 0.0012); 
+    object.position.set(0, -0.8, 0);
+    object.scale.set(0.0014, 0.0014, 0.0014); 
   } 
 
   // If it is an iPad Pro Portrait Screening: 

@@ -128,6 +128,7 @@ html {
   font-family: var(--ff-gordita);
   font-size: 10px;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -339,6 +340,49 @@ body.active { overflow: hidden; }
   color: var(--radical-red);
 }
 
+/* Hide Sidebar by Default */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;   /* Hidden off-screen */
+  width: 250px;
+  height: 100vh;
+  background-color: #111;
+  transition: right 0.4s ease-in-out;
+  padding: 20px;
+  z-index: 20;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Close Icon in Sidebar */
+#closeIcon {
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Sidebar Links */
+.sidebarNav a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 15px 0;
+  font-size: 1.5em;
+}
+
+.sidebarNav a:hover {
+  color: var(--radical-red);
+}
+
+/* Menu sidebars (hidden by default on larger devices) */
+#menuIcon {
+  display: none;
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+}
+
 /* Home Container ================================================================================================ */
 .home {
   position: relative;
@@ -364,10 +408,6 @@ body.active { overflow: hidden; }
   width: 100%;
   height: 100vh;
   padding: 20px;
-}
-
-.textContent {
-  flex: 1;
 }
 
 .nameTitle {
@@ -1051,6 +1091,10 @@ body.active { overflow: hidden; }
 
 /* For iPads (Portrait) */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: portrait) {
+  .cursor {
+    display: none;
+  }
+
   /* Header Settings ------------------------ */
   .navbar a {
     font-size: 1.8em;
@@ -1205,6 +1249,9 @@ body.active { overflow: hidden; }
 
 /* For iPads (Landscape) */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: landscape) {
+  .cursor {
+      display: none;
+  }
 
   /* Header Settings ------------------------ */
   .navbar a {
@@ -1305,20 +1352,47 @@ body.active { overflow: hidden; }
 
 /* For Phones */
 @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .cursor {
+    display: none;
+  }
 
   /* Header Settings ------------------------ */
-  .navbar a {
-    font-size: 0.9em;
-    margin: 0 9px;
+  /* Hide normal navbar on phones and show menuIcon */
+  .navbar {
+    display: none;
+  }
+
+  #menuIcon {
+    display: block;
   }
 
   /* Home Settings ------------------------ */
+  .home {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .homeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    padding: 0;
+  }
+  
   .nameTitle {
     font-size: 4em;
+    margin-left: 0px;
+    left: 0%;
+    top: 20%;
   }
 
   .subTitle {
-    font-size: 3em;
+    font-size: 2.5em;
+    left: 0%;
   }
 
   /* About Settings ------------------------ */

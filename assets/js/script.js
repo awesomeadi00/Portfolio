@@ -217,9 +217,7 @@ window.onload = function () {
     { imgSrc: '../assets/images/skills/csharp.png', name: 'C#' },
     { imgSrc: '../assets/images/skills/css.png', name: 'CSS' },
     { imgSrc: '../assets/images/skills/digitalocean.png', name: 'Digital Ocean' },
-    { imgSrc: '../assets/images/skills/python.png', name: 'Python' },
     { imgSrc: '../assets/images/skills/docker.png', name: 'Docker' },
-    { imgSrc: '../assets/images/skills/github.png', name: 'GitHub' },
     { imgSrc: '../assets/images/skills/html.png', name: 'HTML' },
     { imgSrc: '../assets/images/skills/github.png', name: 'GitHub' },
     { imgSrc: '../assets/images/skills/javascript.png', name: 'JavaScript' },
@@ -326,4 +324,20 @@ form.addEventListener("submit", function (e) {
   sendButton.textContent = "Sending... Please wait.";
   sendButton.disabled = true;
   sendButton.style.cursor = "not-allowed"; // Optional: change the cursor to indicate non-clickable state
+});
+
+
+// Phone screens navigation bar javascript: ========================================================
+const menuIcon = document.getElementById("menuIcon");
+const closeIcon = document.getElementById("closeIcon");
+const sidebar = document.getElementById("sidebar");
+
+// Open Sidebar on Bars Icon Click
+menuIcon.addEventListener("click", () => {
+  sidebar.style.right = "0"; // Slide sidebar in
+});
+
+// Close Sidebar on Close Icon Click
+closeIcon.addEventListener("click", () => {
+  sidebar.style.right = "-100%"; // Slide sidebar out
 });
