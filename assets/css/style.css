@@ -919,7 +919,7 @@ body.active { overflow: hidden; }
 /* Title and Socials */
 .contactTitleSection {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 120px;
 }
 
 .contactTitle {
@@ -935,12 +935,12 @@ body.active { overflow: hidden; }
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 10px;
+  margin-top: 40px;
 }
 
 .social-icon {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   transition: transform 0.3s ease;
 }
 
@@ -967,7 +967,7 @@ body.active { overflow: hidden; }
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 20px;
 }
 
 .contactForm label {
