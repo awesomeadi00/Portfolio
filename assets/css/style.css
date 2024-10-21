@@ -345,9 +345,9 @@ body.active { overflow: hidden; }
   position: fixed;
   top: 0;
   right: -100%;   /* Hidden off-screen */
-  width: 250px;
+  width: 200px;
   height: 100vh;
-  background-color: #111;
+  background-color: var(--eerie-black);
   transition: right 0.4s ease-in-out;
   padding: 20px;
   z-index: 20;
@@ -368,7 +368,7 @@ body.active { overflow: hidden; }
   color: white;
   text-decoration: none;
   margin: 15px 0;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .sidebarNav a:hover {
@@ -447,7 +447,7 @@ body.active { overflow: hidden; }
   font-weight: inherit;
   display: flex;
   top: 45%;
-  left: 35%;
+  left: 50%;
 }
 
 /* Animation for Text Wave CSS Properties: */
@@ -1392,12 +1392,14 @@ body.active { overflow: hidden; }
 
   .subTitle {
     font-size: 2.5em;
-    left: 0%;
+    top: 45%;
+    transition: left 0.5s ease-in-out;
+
   }
 
   /* About Settings ------------------------ */
  .aboutContainer {
-   margin-top: 90px;
+   margin-top: 70px;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -1439,14 +1441,18 @@ body.active { overflow: hidden; }
  }
 
  .aboutImage {
-   margin-top: 20px;
-   max-width: 200px;
+   max-width: 300px;
    display: flex;
    justify-content: center;
    align-items: center;
  }
 
   /* Experience Settings ---------------------- */
+  .experienceTitle {
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+
   .experienceCardContainer {
     display: flex;
     flex-direction: column;
@@ -1515,8 +1521,13 @@ body.active { overflow: hidden; }
 
   /* Project Settings ------------------------ */
   .projectCell {
-    font-size: 0.9em;
+    font-size: 0.75em;
     border-radius: 40px;
+    margin: 0px 0px;
+  }
+
+  .subProjectTitle {
+    font-size: 3em;
   }
 
   /* Skill Settings ------------------------- */

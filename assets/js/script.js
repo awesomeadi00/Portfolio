@@ -192,6 +192,21 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Phone screens navigation bar javascript: ========================================================
+  const menuIcon = document.getElementById("menuIcon");
+  const closeIcon = document.getElementById("closeIcon");
+  const sidebar = document.getElementById("sidebar");
+
+  // Open Sidebar on Bars Icon Click
+  menuIcon.addEventListener("click", () => {
+    sidebar.style.right = "0"; // Slide sidebar in
+  });
+
+  // Close Sidebar on Close Icon Click
+  closeIcon.addEventListener("click", () => {
+    sidebar.style.right = "-100%"; // Slide sidebar out
+  });
 });
 
 // Bouncing Balls for Skills Section: =======================================================================================================================
@@ -272,8 +287,18 @@ window.onload = function () {
   }
 
   function init() {
+    let radius;
+
     skills.forEach((skill) => {
-      const radius = 40;
+      // For phone devices make the width smaller
+      if(window.innerWidth <= 480){
+        radius = 20;
+      }
+
+      else {
+        radius = 40;
+      }
+
       const x = Math.random() * (canvas.width - radius * 2) + radius;
       const y = Math.random() * (canvas.height - radius * 2) + radius;
       const dx = (Math.random() - 0.5) * 2;
@@ -326,18 +351,50 @@ form.addEventListener("submit", function (e) {
   sendButton.style.cursor = "not-allowed"; // Optional: change the cursor to indicate non-clickable state
 });
 
+// Word Centering for Subtitle on phone devices ========================================================================
+// Adjust subtitle position based on word length
+const subtitleBoxes = document.querySelectorAll("[data-letter-effect]");
+let currentSubtitleIndex = 0;
+let previousSubtitleIndex = 0;
+let animationDelayTotal = 0;
 
-// Phone screens navigation bar javascript: ========================================================
-const menuIcon = document.getElementById("menuIcon");
-const closeIcon = document.getElementById("closeIcon");
-const sidebar = document.getElementById("sidebar");
+const updateSubtitlePosition = function (word) {
+  const subtitleElement = document.querySelector('.subTitle');
+  let calculatedLeft = 38 - word.length * 2; // Adjust this formula if needed
+  subtitleElement.style.left = `${calculatedLeft}%`;
+};
 
-// Open Sidebar on Bars Icon Click
-menuIcon.addEventListener("click", () => {
-  sidebar.style.right = "0"; // Slide sidebar in
-});
+const animateSubtitles = function () {
+  for (let i = 0; i < subtitleBoxes.length; i++) {
+    let charDelay = 0;
+    const word = subtitleBoxes[i].textContent.trim();
+    subtitleBoxes[i].textContent = "";
 
-// Close Sidebar on Close Icon Click
-closeIcon.addEventListener("click", () => {
-  sidebar.style.right = "-100%"; // Slide sidebar out
-});
+    for (let j = 0; j < word.length; j++) {
+      const characterSpan = document.createElement("span");
+      characterSpan.style.animationDelay = `${charDelay}s`;
+      characterSpan.classList.add(i === currentSubtitleIndex ? "in" : "out");
+      characterSpan.textContent = word[j];
+
+      if (word[j] === " ") characterSpan.classList.add("space");
+
+      subtitleBoxes[i].appendChild(characterSpan);
+      if (j < word.length - 1) charDelay += 0.05;
+    }
+
+    if (i === currentSubtitleIndex) {
+      animationDelayTotal = Number(charDelay.toFixed(2));
+      updateSubtitlePosition(word);
+    }
+
+    subtitleBoxes[i].classList.toggle("active", i === previousSubtitleIndex);
+  }
+
+  setTimeout(function () {
+    previousSubtitleIndex = currentSubtitleIndex;
+    currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitleBoxes.length;
+    animateSubtitles();
+  }, (animationDelayTotal * 1000) + 3000);
+};
+
+window.addEventListener("load", animateSubtitles);
