@@ -1416,14 +1416,77 @@ body.active { overflow: hidden; }
 
 /* Contact Section Stylings ========================================================================================================= */
 .contact {
-  height: 100vh; /* Full screen height */
+  padding: 100px 20px;
+  scroll-margin-top: 80px;
+}
+
+.contactContainer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-  scroll-margin-top: 80px; /* Add scroll margin to account for fixed header */
+  gap: 40px;
+}
+
+.contactTitle {
+  font-size: 5em;
+  color: var(--white);
+  text-align: center;
+  font-family: var(--ff-recoleta);
+  margin-bottom: 10px;
+}
+
+.contactSubtitle {
+  font-size: 2em;
+  color: var(--white_a70);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  background-color: var(--eerie-black);
+  border-radius: 15px;
+  text-decoration: none;
+  color: var(--white);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contactLink:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.contactIcon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.contactLink:hover .contactIcon {
+  transform: scale(1.1);
+}
+
+.contactText {
+  font-size: 1.3em;
+  font-weight: 500;
+  color: var(--white);
 }
 
 /* Title and Socials */
