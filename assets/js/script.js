@@ -287,3 +287,243 @@ window.addEventListener("resize", function() {
   updateSubtitlePosition();
 });
 
+
+// Project Carousel Controls ===================================================================================
+document.addEventListener('DOMContentLoaded', function() {
+  const carouselTrack = document.querySelector('.carouselTrack');
+  const leftBtn = document.getElementById('carouselBtnLeft');
+  const rightBtn = document.getElementById('carouselBtnRight');
+  
+  if (!carouselTrack || !leftBtn || !rightBtn) {
+    console.log('Carousel elements not found');
+    return;
+  }
+
+  let isLeftPressed = false;
+  let isRightPressed = false;
+  let animationId = null;
+  let currentSpeed = 0;
+  let defaultSpeed = 0.5; // Default auto-scroll speed
+  let maxSpeed = 3; // Maximum speed when button is held
+  let acceleration = 0.1; // Speed increase per frame when button is held
+  let deceleration = 0.05; // Speed decrease per frame when button is released
+  let autoScrollTimeout = null;
+
+  // Mouse events for left button
+  leftBtn.addEventListener('mousedown', () => startLeftScroll());
+  leftBtn.addEventListener('mouseup', () => stopLeftScroll());
+  leftBtn.addEventListener('mouseleave', () => stopLeftScroll());
+
+  // Mouse events for right button
+  rightBtn.addEventListener('mousedown', () => startRightScroll());
+  rightBtn.addEventListener('mouseup', () => stopRightScroll());
+  rightBtn.addEventListener('mouseleave', () => stopRightScroll());
+
+  // Touch events for left button
+  leftBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    startLeftScroll();
+  });
+  leftBtn.addEventListener('touchend', () => stopLeftScroll());
+
+  // Touch events for right button
+  rightBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    startRightScroll();
+  });
+  rightBtn.addEventListener('touchend', () => stopRightScroll());
+
+  // Keyboard events for arrow keys
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      startLeftScroll();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      startRightScroll();
+    }
+  });
+
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'ArrowLeft') {
+      stopLeftScroll();
+    } else if (e.key === 'ArrowRight') {
+      stopRightScroll();
+    }
+  });
+
+  function startLeftScroll() {
+    console.log('Left button pressed');
+    isLeftPressed = true;
+    isRightPressed = false;
+    startManualScroll();
+  }
+
+  function stopLeftScroll() {
+    isLeftPressed = false;
+  }
+
+  function startRightScroll() {
+    console.log('Right button pressed');
+    isRightPressed = true;
+    isLeftPressed = false;
+    startManualScroll();
+  }
+
+  function stopRightScroll() {
+    isRightPressed = false;
+  }
+
+  function startManualScroll() {
+    // Clear any pending auto-scroll timeout
+    if (autoScrollTimeout) {
+      clearTimeout(autoScrollTimeout);
+      autoScrollTimeout = null;
+    }
+    
+    // Stop any ongoing auto-scroll animation
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+    
+    // Completely disable the CSS animation
+    carouselTrack.style.animation = 'none';
+    
+    // Start manual scrolling
+    if (!animationId) {
+      animate();
+    }
+  }
+
+  function animate() {
+    // Determine scroll direction and speed
+    if (isLeftPressed) {
+      // Scroll left (positive speed)
+      currentSpeed = Math.min(currentSpeed + acceleration, maxSpeed);
+    } else if (isRightPressed) {
+      // Scroll right (negative speed)
+      currentSpeed = Math.max(currentSpeed - acceleration, -maxSpeed);
+    } else {
+      // No button pressed, return to default speed
+      if (currentSpeed > 0) {
+        currentSpeed = Math.max(currentSpeed - deceleration, 0);
+      } else if (currentSpeed < 0) {
+        currentSpeed = Math.min(currentSpeed + deceleration, 0);
+      }
+    }
+
+    // Apply the scroll
+    if (currentSpeed !== 0) {
+      const currentTransform = getCurrentTransform();
+      let newTransform = currentTransform + currentSpeed;
+      
+      // Handle infinite loop
+      const totalWidth = getTotalWidth();
+      if (totalWidth > 0) {
+        if (newTransform > 0) {
+          newTransform -= totalWidth;
+        } else if (newTransform < -totalWidth) {
+          newTransform += totalWidth;
+        }
+      }
+      
+      carouselTrack.style.transform = `translateX(${newTransform}px)`;
+      
+      console.log('Scrolling:', { 
+        isLeftPressed, 
+        isRightPressed, 
+        currentSpeed, 
+        currentTransform, 
+        newTransform,
+        totalWidth
+      });
+    }
+
+    // Continue animation if any button is pressed or speed is not zero
+    if (isLeftPressed || isRightPressed || Math.abs(currentSpeed) > 0.01) {
+      animationId = requestAnimationFrame(animate);
+    } else {
+      // Keep the carousel at its current position and start auto-scroll from there
+      animationId = null;
+      console.log('Stopping at current position');
+      
+      // Start auto-scroll from current position after a delay
+      if (autoScrollTimeout) {
+        clearTimeout(autoScrollTimeout);
+      }
+      autoScrollTimeout = setTimeout(() => {
+        startAutoScrollFromCurrentPosition();
+        console.log('Starting auto-scroll from current position');
+      }, 1000); // 1 second delay before starting auto-scroll
+    }
+  }
+
+  function getCurrentTransform() {
+    const transform = window.getComputedStyle(carouselTrack).transform;
+    if (transform === 'none') return 0;
+    
+    const matrix = new DOMMatrix(transform);
+    return matrix.m41; // translateX value
+  }
+
+  function getTotalWidth() {
+    // Calculate the total width of one complete set of cards
+    const cardWidth = 350 + 30; // card width + gap
+    const mobileCardWidth = window.innerWidth <= 768 ? (280 + 20) : cardWidth;
+    const phoneCardWidth = window.innerWidth <= 480 ? (250 + 15) : cardWidth;
+    const actualCardWidth = window.innerWidth <= 480 ? phoneCardWidth : 
+                           window.innerWidth <= 768 ? mobileCardWidth : cardWidth;
+    
+    const totalCards = carouselTrack.children.length;
+    const halfCards = Math.floor(totalCards / 2);
+    return halfCards * actualCardWidth;
+  }
+
+  function startAutoScrollFromCurrentPosition() {
+    let currentPosition = getCurrentTransform();
+    let autoScrollSpeed = 0.5; // Speed for auto-scroll
+    
+    function autoScroll() {
+      if (!isLeftPressed && !isRightPressed) {
+        currentPosition -= autoScrollSpeed;
+        
+        // Handle infinite loop
+        const totalWidth = getTotalWidth();
+        if (totalWidth > 0 && currentPosition < -totalWidth) {
+          currentPosition += totalWidth;
+        }
+        
+        carouselTrack.style.transform = `translateX(${currentPosition}px)`;
+        animationId = requestAnimationFrame(autoScroll);
+      }
+    }
+    
+    autoScroll();
+  }
+
+  // Initialize the carousel with manual control from the start
+  function initializeCarousel() {
+    // Disable CSS animation immediately
+    carouselTrack.style.animation = 'none';
+    
+    // Start auto-scroll from the beginning
+    startAutoScrollFromCurrentPosition();
+  }
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    // Reset carousel position on resize
+    if (!isLeftPressed && !isRightPressed) {
+      carouselTrack.style.transform = '';
+      carouselTrack.style.animation = '';
+    }
+  });
+
+  // Add grab cursor on hover
+  carouselTrack.style.cursor = 'grab';
+  
+  // Initialize the carousel
+  initializeCarousel();
+});
+

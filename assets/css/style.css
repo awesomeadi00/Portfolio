@@ -938,6 +938,45 @@ body.active { overflow: hidden; }
   padding: 20px 0;
 }
 
+/* Carousel Control Buttons */
+.carouselBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: var(--white);
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carouselBtn:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carouselBtnLeft {
+  left: 20px;
+}
+
+.carouselBtnRight {
+  right: 20px;
+}
+
 .carouselTrack {
   display: flex;
   gap: 30px;
@@ -1035,6 +1074,20 @@ body.active { overflow: hidden; }
 
 /* Responsive Design for Carousel */
 @media screen and (max-width: 768px) {
+  .carouselBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 1em;
+  }
+  
+  .carouselBtnLeft {
+    left: 10px;
+  }
+  
+  .carouselBtnRight {
+    right: 10px;
+  }
+  
   .projectCarousel .projectCard {
     width: 280px;
     min-width: 280px;
@@ -1064,6 +1117,20 @@ body.active { overflow: hidden; }
 }
 
 @media screen and (max-width: 480px) {
+  .carouselBtn {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9em;
+  }
+  
+  .carouselBtnLeft {
+    left: 5px;
+  }
+  
+  .carouselBtnRight {
+    right: 5px;
+  }
+  
   .projectCarousel .projectCard {
     width: 250px;
     min-width: 250px;
