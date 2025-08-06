@@ -1265,58 +1265,80 @@ body.active { overflow: hidden; }
 
 /* Skills Section ==================================================================================================== */
 .skills {
-  scroll-margin-top: 80px; /* Add scroll margin to account for fixed header */
+  scroll-margin-top: 80px;
 }
 
 .skillsContainer {
-  position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 20px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.skillsTitle {
+  color: var(--white);
+  margin-bottom: 20px;
+  font-family: var(--ff-recoleta);
+  font-size: 5em;
+}
+
+.skillsSubtitle {
+  color: var(--white_a70);
+  font-size: 1.1em;
+  margin-bottom: 50px;
+  opacity: 0.8;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 50px;
+  width: 100%;
+  justify-items: center;
+}
+
+.skillItem {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-/* Center Title Horizontally and Vertically */
-.skillsTitle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 5em;
-  color: var(--white);
-  text-align: center;
-  font-family: var(--ff-recoleta);
-  z-index: 2; /* Ensure it's above the canvas */
+.skillImage {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: brightness(0) invert(1) opacity(0.3); /* Make icons hollow/transparent */
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
 }
 
-/* Canvas Wrapper to Offset Canvas Area */
-.canvasWrapper {
-  position: absolute;
-  top: 80px; /* Height of the header */
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 80px); /* Remaining height after header */
-  overflow: hidden;
-  z-index: 1; /* Ensure it's behind the title */
-}
-
-/* Canvas Styling */
-#skillsCanvas {
-  width: 100%;
-  height: 100%;
-  display: block;
+.skillItem:hover .skillImage {
+  transform: scale(1.1);
+  filter: brightness(0) invert(1) opacity(1); /* Make icons fully white on hover */
 }
 
 .skillName {
-  font-size: 2em;
-  color: var(--white_a70);
-  font-family: var(--ff-recoleta);
-  margin-top: 160px;
+  color: var(--white);
+  font-size: 0.9em;
+  font-family: var(--ff-gordita);
+  font-weight: 500;
   text-align: center;
-  transition: opacity 0.3s ease-in-out;
-  z-index: 2;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.skillItem:hover .skillName {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Contact Section Stylings ========================================================================================================= */
@@ -1795,9 +1817,33 @@ body.active { overflow: hidden; }
 
   /* Skill Settings ------------------------- */
   .skillsTitle {
-    font-size: 4em;
+    font-size: 2.5em;
   }
-
+  
+  .skillsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
+  .skillImage {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .skillsGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+  }
+  
+  .skillItem {
+    padding: 15px;
+  }
+  
+  .skillImage {
+    width: 65px;
+    height: 65px;
+  }
+  
   .skillName {
     font-size: 1.5em;
   }

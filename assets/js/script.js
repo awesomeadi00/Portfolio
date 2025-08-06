@@ -527,3 +527,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeCarousel();
 });
 
+
+
+
