@@ -352,17 +352,7 @@ window.onload = function () {
   animate();
 };
 
-// Contact form JS for sending an email ================================================
-const form = document.getElementById("contactForm");
-const sendButton = document.getElementById("sendButton");
-
-// Add an event listener for form submission
-form.addEventListener("submit", function (e) {
-  // Change button text and disable it
-  sendButton.textContent = "Sending... Please wait.";
-  sendButton.disabled = true;
-  sendButton.style.cursor = "not-allowed"; // Optional: change the cursor to indicate non-clickable state
-});
+// Contact form JS removed - form elements don't exist in HTML
 
 // Dynamic Subtitle Centering for all devices ========================================================================
 const subtitleBoxes = document.querySelectorAll("[data-letter-effect]");
@@ -372,29 +362,18 @@ let animationDelayTotal = 0;
 
 const updateSubtitlePosition = function (word) {
   const subtitleElement = document.querySelector('.subTitle');
-  const container = document.querySelector('.homeContainer');
   
-  if (container && subtitleElement) {
-    // Create a temporary span to measure the text width
-    const tempSpan = document.createElement('span');
-    tempSpan.style.fontSize = window.getComputedStyle(subtitleElement).fontSize;
-    tempSpan.style.fontFamily = window.getComputedStyle(subtitleElement).fontFamily;
-    tempSpan.style.fontWeight = window.getComputedStyle(subtitleElement).fontWeight;
-    tempSpan.style.position = 'absolute';
-    tempSpan.style.visibility = 'hidden';
-    tempSpan.style.whiteSpace = 'nowrap';
-    tempSpan.textContent = word;
+  if (subtitleElement) {
+    // Clear any existing left positioning
+    subtitleElement.style.left = '';
     
-    document.body.appendChild(tempSpan);
-    const textWidth = tempSpan.offsetWidth;
-    document.body.removeChild(tempSpan);
-    
-    // Calculate the container width
-    const containerWidth = container.offsetWidth;
-    
-    // Center the text by adjusting the left position
-    const leftPosition = (containerWidth - textWidth) / 2;
-    subtitleElement.style.left = `${leftPosition}px`;
+    // The flexbox centering in CSS will handle the centering automatically
+    // We just need to ensure the text is properly set
+    const activeElement = subtitleElement.querySelector('.strong.active');
+    if (activeElement) {
+      // Force a reflow to ensure proper centering
+      activeElement.offsetHeight;
+    }
   }
 };
 
@@ -418,7 +397,7 @@ const animateSubtitles = function () {
 
     if (i === currentSubtitleIndex) {
       animationDelayTotal = Number(charDelay.toFixed(2));
-      updateSubtitlePosition(word);
+      updateSubtitlePosition();
     }
 
     subtitleBoxes[i].classList.toggle("active", i === previousSubtitleIndex);
@@ -436,10 +415,68 @@ window.addEventListener("load", animateSubtitles);
 
 // Update subtitle position on window resize
 window.addEventListener("resize", function() {
-  if (subtitleBoxes[currentSubtitleIndex]) {
-    const currentWord = subtitleBoxes[currentSubtitleIndex].textContent.trim();
-    updateSubtitlePosition(currentWord);
-  }
+  updateSubtitlePosition();
 });
+
+// Project Carousel Hover Pause Functionality =================================================
+const carouselTrack = document.querySelector('.carouselTrack');
+const projectCards = document.querySelectorAll('.projectCarousel .projectCard');
+
+if (carouselTrack && projectCards.length > 0) {
+  let isPaused = false;
+  let hoverTimeout = null;
+  
+  // Function to pause carousel
+  const pauseCarousel = () => {
+    if (!isPaused) {
+      carouselTrack.classList.add('paused');
+      isPaused = true;
+    }
+  };
+  
+  // Function to resume carousel
+  const resumeCarousel = () => {
+    if (isPaused) {
+      carouselTrack.classList.remove('paused');
+      isPaused = false;
+    }
+  };
+  
+  // Function to handle mouse enter with small delay for better UX
+  const handleMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = null;
+    }
+    pauseCarousel();
+  };
+  
+  // Function to handle mouse leave with small delay to prevent flickering
+  const handleMouseLeave = () => {
+    hoverTimeout = setTimeout(() => {
+      resumeCarousel();
+    }, 100); // Small delay to prevent flickering when moving between cards
+  };
+  
+  // Add hover event listeners to all project cards
+  projectCards.forEach(card => {
+    card.addEventListener('mouseenter', handleMouseEnter);
+    card.addEventListener('mouseleave', handleMouseLeave);
+  });
+  
+  // Also add hover events to the carousel container for better UX
+  const projectCarousel = document.querySelector('.projectCarousel');
+  if (projectCarousel) {
+    projectCarousel.addEventListener('mouseenter', handleMouseEnter);
+    projectCarousel.addEventListener('mouseleave', handleMouseLeave);
+  }
+  
+  // Ensure carousel resumes when page becomes visible (for better mobile experience)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && isPaused) {
+      resumeCarousel();
+    }
+  });
+}
 
 
