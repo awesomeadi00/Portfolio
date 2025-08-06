@@ -59,6 +59,7 @@
         <nav class="sidebarNav">
           <a href="#about">About</a>
           <a href="#experiences">Experiences</a>
+          <a href="#publications">Publications</a>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
           <a href="#contact">Contact</a>
@@ -111,7 +112,7 @@
             </div>
 
             <div class="resume-section" data-reveal="right">
-              <a href="./assets/resume.pdf" target="_blank" class="resume-button">
+              <a href="./assets/documents/resume.pdf" target="_blank" class="resume-button">
                 <span>Download Resume</span>
                 <ion-icon name="download-outline"></ion-icon>
               </a>
@@ -258,27 +259,190 @@
 
       <!-- Projects Section -->
       <section class="projects" id="projects" aria-label="projects">
-        
-        <div class="projectContainer">
-          <!-- Top Cells -->
-          <div class="projectCells topCells">
-            <a href="./project-pages/web-dev.html" class="projectCell" data-reveal>Web Development</a>
-            <a href="./project-pages/machine-learning.html" class="projectCell" data-reveal>Machine Learning Applications</a>
-            <a href="./project-pages/games.html" class="projectCell" data-reveal>Game Development</a>
+        <div class="projectsContainer">
+          <h2 class="h2 projectTitle" data-reveal="left">My Projects</h2>
+          
+          <div class="projectCarousel">
+            <div class="carouselTrack">
+              <!-- Project Cards - First Set -->
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/Machine_Translation_Transformer" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/transformers.png" alt="Transformer Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">Machine Translation Transformer</h3>
+                    <p class="projectDescription">A self-built transformer from scratch trained to translate sentences from English to Italian. Based on the Attention is all you need paper.</p>
+                    <div class="projectTags">
+                      <span>#Transformers</span>
+                      <span>#Self-Attention</span>
+                      <span>#Translation</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="projectCard" data-reveal>
+                <a href="./assets/documents/capstone.pdf" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/capstone.png" alt="Capstone Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">Real-time EEG Emotion Detection</h3>
+                    <p class="projectDescription">A real-time EEG-based system that detects emotions using deep learning and provides adaptive feedback in mixed reality to support emotion regulation.</p>
+                    <div class="projectTags">
+                      <span>#EEG</span>
+                      <span>#Deep Learning</span>
+                      <span>#Mixed Reality</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Machine Learning Projects -->
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/AI_HealthCare_Assistant" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/healthassistant.png" alt="Health Assistant Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">AI Health Assistant</h3>
+                    <p class="projectDescription">AI-powered health assistant using machine learning to provide personalized health recommendations.</p>
+                    <div class="projectTags">
+                      <span>#Healthcare</span>
+                      <span>#Conversational AI</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/PersonaVerse" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/personaverse.png" alt="Personaverse Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">PersonaVerse</h3>
+                    <p class="projectDescription">A machine learning project that creates personalized avatars and virtual personas.</p>
+                    <div class="projectTags">
+                      <span>#Chatbots</span>
+                      <span>#AI Agents</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/AuraVoice" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/auravoice.png" alt="AuraVoice Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">AuraVoice</h3>
+                    <p class="projectDescription">AuraVoice is a web application that utilizes machine learning to convert your voice into midi. Users can hum, sing or speak into your microphone and it convert your voice into a musical composition.</p>
+                    <div class="projectTags">
+                      <span>#Voice-MIDI</span>
+                      <span>#CREPE Model</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/Elemental_Mastery" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/elementalmastery.png" alt="Elemental Mastery Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">Elemental Mastery</h3>
+                    <p class="projectDescription">A machine learning (ml5) hand-detection creative installation inspired from Avatar the Last Airbender: control all the elements!</p>
+                    <div class="projectTags">
+                      <span>#ml5</span>
+                      <span>#Handpose Detection</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Project Cards - Duplicate Set for Seamless Loop -->
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/Machine_Translation_Transformer" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/transformers.png" alt="Transformer Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">Machine Translation Transformer</h3>
+                    <p class="projectDescription">A self-built transformer from scratch trained to translate sentences from English to Italian. Based on the Attention is all you need paper.</p>
+                    <div class="projectTags">
+                      <span>#Transformers</span>
+                      <span>#Self-Attention</span>
+                      <span>#Translation</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="projectCard" data-reveal>
+                <a href="./assets/documents/capstone.pdf" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/capstone.png" alt="Capstone Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">Real-time EEG Emotion Detection</h3>
+                    <p class="projectDescription">A real-time EEG-based system that detects emotions using deep learning and provides adaptive feedback in mixed reality to support emotion regulation.</p>
+                    <div class="projectTags">
+                      <span>#EEG</span>
+                      <span>#Deep Learning</span>
+                      <span>#Mixed Reality</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Machine Learning Projects -->
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/AI_HealthCare_Assistant" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/healthassistant.png" alt="Health Assistant Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">AI Health Assistant</h3>
+                    <p class="projectDescription">AI-powered health assistant using machine learning to provide personalized health recommendations.</p>
+                    <div class="projectTags">
+                      <span>#Healthcare</span>
+                      <span>#Conversational AI</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/PersonaVerse" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/personaverse.png" alt="Personaverse Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">PersonaVerse</h3>
+                    <p class="projectDescription">A machine learning project that creates personalized avatars and virtual personas.</p>
+                    <div class="projectTags">
+                      <span>#Chatbots</span>
+                      <span>#AI Agents</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/AuraVoice" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/auravoice.png" alt="AuraVoice Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">AuraVoice</h3>
+                    <p class="projectDescription">AuraVoice is a web application that utilizes machine learning to convert your voice into midi. Users can hum, sing or speak into your microphone and it convert your voice into a musical composition.</p>
+                    <div class="projectTags">
+                      <span>#Voice-MIDI</span>
+                      <span>#CREPE Model</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="projectCard" data-reveal>
+                <a href="https://github.com/awesomeadi00/Elemental_Mastery" target="_blank" class="projectLink">
+                  <img src="./assets/images/projects/elementalmastery.png" alt="Elemental Mastery Project" class="projectImage">
+                  <div class="projectInfo">
+                    <h3 class="projectCardTitle">Elemental Mastery</h3>
+                    <p class="projectDescription">A machine learning (ml5) hand-detection creative installation inspired from Avatar the Last Airbender: control all the elements!</p>
+                    <div class="projectTags">
+                      <span>#ml5</span>
+                      <span>#Handpose Detection</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+            </div>
           </div>
-
-          <!-- Title -->
-          <h2 class="h2 projectTitle">My Projects:</h2>
-
-          <!-- Bottom Cells -->
-          <div class="projectCells bottomCells">
-            <a href="./project-pages/xr-experiences.html" class="projectCell" data-reveal>XR Experiences</a>
-            <a href="./project-pages/3d-modeling.html" class="projectCell" data-reveal>3D Modeling</a>
-            <a href="./project-pages/hybrid.html" class="projectCell" data-reveal>Hybrid Projects</a>
-          </div>
-
         </div>
-        
       </section>
 
 

@@ -885,67 +885,188 @@ body.active { overflow: hidden; }
 
 /* Projects Section: ============================================================================================ */
 .projects {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 20px;
-  box-sizing: border-box;
+  background: var(--smokey-black);
+  position: relative;
+  overflow: hidden;
   scroll-margin-top: 80px; /* Add scroll margin to account for fixed header */
 }
 
-.projectContainer {
+.projectsContainer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 100%;
-  gap: 20px;
-  margin-top: 70px;
+  align-items: center;
+  gap: 40px;
 }
 
-/* Title Styling */
 .projectTitle {
-  font-size: 4em;
-  margin: 0;
+  font-size: 5em;
   color: var(--white);
-  font-family: var(--ff-recoleta);
   text-align: center;
-}
-
-/* Project Cells Container */
-.projectCells {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  gap: 20px;
-  flex: 1; /* Ensures the cells take up all available space */
-}
-
-/* Individual Project Cell */
-.projectCell {
-  flex: 1; /* Cells evenly split the width */
-  height: 60%; /* Make cells fill the available height */
-  margin: 0 10px; /* Slight horizontal padding between cells */
-  background-color: var(--jet-2);
-  color: var(--white);
-  border-radius: 100px;
-  text-decoration: none;
   font-family: var(--ff-recoleta);
-  font-size: 2.2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+  margin-bottom: 40px;
+  z-index: 2;
 }
 
-.projectCell:hover {
+/* Carousel Styles */
+.projectCarousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+}
+
+.carouselTrack {
+  display: flex;
+  gap: 30px;
+  animation: scroll 60s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+
+
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 15px));
+  }
+}
+
+/* Project Card Styling for Carousel */
+.projectCarousel .projectCard {
+  width: 350px;
+  min-width: 350px;
+  max-width: 350px;
+  margin: 0;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: var(--eerie-black);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.projectCarousel .projectCard:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
-  color: var(--radical-red); 
+}
+
+.projectCarousel .projectLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.projectCarousel .projectImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 3%;
+}
+
+.projectCarousel .projectInfo {
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectCarousel .projectCardTitle {
+  font-size: 1.3em;
+  font-family: var(--ff-recoleta);
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.projectCarousel .projectDescription {
+  font-size: 0.9em;
+  color: var(--white_a70);
+  margin-bottom: 15px;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.projectCarousel .projectTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.projectCarousel .projectTags span {
+  background: var(--radical-red);
+  color: var(--white);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-family: var(--ff-gordita);
+}
+
+/* Responsive Design for Carousel */
+@media screen and (max-width: 768px) {
+  .projectCarousel .projectCard {
+    width: 280px;
+    min-width: 280px;
+    max-width: 280px;
+  }
+  
+  .projectCarousel .projectCardTitle {
+    font-size: 1.1em;
+  }
+  
+  .projectCarousel .projectDescription {
+    font-size: 0.8em;
+  }
+  
+  .carouselTrack {
+    gap: 20px;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50% - 10px));
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .projectCarousel .projectCard {
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+  }
+  
+  .projectTitle {
+    font-size: 3em;
+  }
+  
+  .carouselTrack {
+    gap: 15px;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50% - 7.5px));
+    }
+  }
 }
 
 /* Sub-Pages Styling for Project Cards: ============================================================================================ */

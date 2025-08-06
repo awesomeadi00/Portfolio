@@ -441,3 +441,5 @@ window.addEventListener("resize", function() {
     updateSubtitlePosition(currentWord);
   }
 });
+
+
