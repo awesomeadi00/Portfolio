@@ -946,12 +946,6 @@ body.active { overflow: hidden; }
   will-change: transform;
 }
 
-.carouselTrack.paused {
-  animation-play-state: paused;
-}
-
-
-
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -982,14 +976,11 @@ body.active { overflow: hidden; }
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
 }
 
-/* Visual indicator when carousel is paused */
-.carouselTrack.paused .projectCard {
-  opacity: 0.9;
-}
 
-.carouselTrack.paused .projectCard:hover {
-  opacity: 1;
-}
+
+
+
+
 
 .projectCarousel .projectLink {
   text-decoration: none;
