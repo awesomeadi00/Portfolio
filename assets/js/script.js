@@ -167,6 +167,7 @@ document.body.addEventListener("mouseover", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const headerHeight = document.querySelector(".header").offsetHeight; // Get the header height
 
+  // Handle all navigation links with smooth scrolling
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault(); // Prevent default anchor behavior
@@ -177,13 +178,13 @@ document.addEventListener("DOMContentLoaded", function () {
       if (targetElement) {
         const targetPosition = targetElement.getBoundingClientRect().top; // Get target element position
 
-        // Adjust offset based on whether it's the about/projects section or not
-        // Reasoning for this is because when we want 100vh it takes the whole viewport without the header into account
-        // Hence if we want to use 100vh (starting off in the center), we shouldn't subtract the header
+        // Adjust offset based on whether it's the home section or not
+        // For home section, we want to scroll to the very top without header offset
+        // For other sections, we need to account for the fixed header height
         const offsetPosition =
-          targetId !== "#experiences" || targetId !== "#contact"
-            ? targetPosition + window.scrollY // No header height offset for #about
-            : targetPosition + window.scrollY - headerHeight; // Include header height offset for other sections
+          targetId === "#home"
+            ? 0 // Scroll to very top for home
+            : targetPosition + window.scrollY - (headerHeight * 0.35); // Reduce header offset for better visibility
 
         window.scrollTo({
           top: offsetPosition,
@@ -192,6 +193,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Special handler for logo to ensure it always scrolls to top
+  const logoLink = document.querySelector('.logo');
+  if (logoLink) {
+    logoLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
 
   // Phone screens navigation bar javascript: ========================================================
   const menuIcon = document.getElementById("menuIcon");
@@ -351,62 +364,80 @@ form.addEventListener("submit", function (e) {
   sendButton.style.cursor = "not-allowed"; // Optional: change the cursor to indicate non-clickable state
 });
 
-// Word Centering for Subtitle on phone devices ========================================================================
-// Check if the device is a phone (width <= 480px)
-const isPhone = window.matchMedia("(min-device-width: 320px) and (max-device-width: 480px)").matches;
+// Dynamic Subtitle Centering for all devices ========================================================================
+const subtitleBoxes = document.querySelectorAll("[data-letter-effect]");
+let currentSubtitleIndex = 0;
+let previousSubtitleIndex = 0;
+let animationDelayTotal = 0;
 
-if (isPhone) {
-  console.log("Is Phone!");
+const updateSubtitlePosition = function (word) {
+  const subtitleElement = document.querySelector('.subTitle');
+  const container = document.querySelector('.homeContainer');
+  
+  if (container && subtitleElement) {
+    // Create a temporary span to measure the text width
+    const tempSpan = document.createElement('span');
+    tempSpan.style.fontSize = window.getComputedStyle(subtitleElement).fontSize;
+    tempSpan.style.fontFamily = window.getComputedStyle(subtitleElement).fontFamily;
+    tempSpan.style.fontWeight = window.getComputedStyle(subtitleElement).fontWeight;
+    tempSpan.style.position = 'absolute';
+    tempSpan.style.visibility = 'hidden';
+    tempSpan.style.whiteSpace = 'nowrap';
+    tempSpan.textContent = word;
+    
+    document.body.appendChild(tempSpan);
+    const textWidth = tempSpan.offsetWidth;
+    document.body.removeChild(tempSpan);
+    
+    // Calculate the container width
+    const containerWidth = container.offsetWidth;
+    
+    // Center the text by adjusting the left position
+    const leftPosition = (containerWidth - textWidth) / 2;
+    subtitleElement.style.left = `${leftPosition}px`;
+  }
+};
 
-  // Adjust subtitle position based on word length for phones only
-  const subtitleBoxes = document.querySelectorAll("[data-letter-effect]");
-  let currentSubtitleIndex = 0;
-  let previousSubtitleIndex = 0;
-  let animationDelayTotal = 0;
+const animateSubtitles = function () {
+  for (let i = 0; i < subtitleBoxes.length; i++) {
+    let charDelay = 0;
+    const word = subtitleBoxes[i].textContent.trim();
+    subtitleBoxes[i].textContent = "";
 
-  const updateSubtitlePosition = function (word) {
-    const subtitleElement = document.querySelector('.subTitle');
-    let calculatedLeft = 38 - word.length * 2; // Adjust the formula as needed
-    subtitleElement.style.left = `${calculatedLeft}%`;
-  };
+    for (let j = 0; j < word.length; j++) {
+      const characterSpan = document.createElement("span");
+      characterSpan.style.animationDelay = `${charDelay}s`;
+      characterSpan.classList.add(i === currentSubtitleIndex ? "in" : "out");
+      characterSpan.textContent = word[j];
 
-  const animateSubtitles = function () {
-    for (let i = 0; i < subtitleBoxes.length; i++) {
-      let charDelay = 0;
-      const word = subtitleBoxes[i].textContent.trim();
-      subtitleBoxes[i].textContent = "";
+      if (word[j] === " ") characterSpan.classList.add("space");
 
-      for (let j = 0; j < word.length; j++) {
-        const characterSpan = document.createElement("span");
-        characterSpan.style.animationDelay = `${charDelay}s`;
-        characterSpan.classList.add(i === currentSubtitleIndex ? "in" : "out");
-        characterSpan.textContent = word[j];
-
-        if (word[j] === " ") characterSpan.classList.add("space");
-
-        subtitleBoxes[i].appendChild(characterSpan);
-        if (j < word.length - 1) charDelay += 0.05;
-      }
-
-      if (i === currentSubtitleIndex) {
-        animationDelayTotal = Number(charDelay.toFixed(2));
-        updateSubtitlePosition(word);
-      }
-
-      subtitleBoxes[i].classList.toggle("active", i === previousSubtitleIndex);
+      subtitleBoxes[i].appendChild(characterSpan);
+      if (j < word.length - 1) charDelay += 0.05;
     }
 
-    setTimeout(function () {
-      previousSubtitleIndex = currentSubtitleIndex;
-      currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitleBoxes.length;
-      animateSubtitles();
-    }, (animationDelayTotal * 1000) + 3000);
-  };
+    if (i === currentSubtitleIndex) {
+      animationDelayTotal = Number(charDelay.toFixed(2));
+      updateSubtitlePosition(word);
+    }
 
-  // Call the subtitle animation function after window load, only for phones
-  window.addEventListener("load", animateSubtitles);
-}
+    subtitleBoxes[i].classList.toggle("active", i === previousSubtitleIndex);
+  }
 
-else {
-  console.log("Not Phone!");
-}
+  setTimeout(function () {
+    previousSubtitleIndex = currentSubtitleIndex;
+    currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitleBoxes.length;
+    animateSubtitles();
+  }, (animationDelayTotal * 1000) + 3000);
+};
+
+// Call the subtitle animation function after window load
+window.addEventListener("load", animateSubtitles);
+
+// Update subtitle position on window resize
+window.addEventListener("resize", function() {
+  if (subtitleBoxes[currentSubtitleIndex]) {
+    const currentWord = subtitleBoxes[currentSubtitleIndex].textContent.trim();
+    updateSubtitlePosition(currentWord);
+  }
+});

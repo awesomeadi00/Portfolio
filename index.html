@@ -42,6 +42,7 @@
           <nav class="navbar" data-navbar>
             <a href="#about">About</a>
             <a href="#experiences">Experiences</a>
+            <a href="#publications">Publications</a>
             <a href="#projects">Projects</a>
             <a href="#skills">Skills</a>
             <a href="#about">Contact</a>
@@ -71,16 +72,13 @@
           <h1 class="h1 nameTitle">Aditya Pandhare</h1>
           <div class="wrapper h2 subTitle">
             <strong class="strong" data-letter-effect>Computer Scientist</strong>
-            <strong class="strong" data-letter-effect>Game Designer</strong>
-            <strong class="strong" data-letter-effect>3D Modeling</strong>
-            <strong class="strong" data-letter-effect>XR Experiences</strong>
             <strong class="strong" data-letter-effect>Machine Learning</strong>
+            <strong class="strong" data-letter-effect>Deep Learning</strong>
+            <strong class="strong" data-letter-effect>Data Analysis</strong>
+            <strong class="strong" data-letter-effect>Software Development</strong>
             <strong class="strong" data-letter-effect>Web Development</strong>
-            <strong class="strong" data-letter-effect>Physical Computing</strong>
           </div>
         </div>
-
-        <div id="container3D"></div>
       </section>  
 
       <!-- About Section -->
@@ -96,10 +94,30 @@
 
             <p class="section-text"  data-reveal="right">
               A passionate computer scientist specializing in <em class="em">AI, Machine Learning, Deep Learning Applications and Data Analysis</em>.
-              I've dedicated my craft towards developing projects as a passion for learning, education and learning about the world.<br><br>
-              Check out some of my projects and experiences and feel free to get in touch!
+              I've dedicated my craft towards developing projects as a passion for learning, education and learning about the world. Check out some of my projects and experiences and feel free to get in touch!
             </p>
 
+            <div class="education-section" data-reveal="right">
+              <h3>Education</h3>
+              <div class="education-details">
+                <div class="education-content">
+                  <p><strong>New York University Abu Dhabi</strong></p>
+                  <p>Bachelor of Science in Computer Science - CGPA: 3.92 / 4.00</p>
+                </div>
+                <div class="education-logo">
+                  <img src="./assets/images/experiences/nyuad.png" alt="NYU Abu Dhabi Logo">
+                </div>
+              </div>
+            </div>
+
+            <div class="resume-section" data-reveal="right">
+              <a href="./assets/resume.pdf" target="_blank" class="resume-button">
+                <span>Download Resume</span>
+                <ion-icon name="download-outline"></ion-icon>
+              </a>
+            </div>
+
+            <!-- Commented out social icons for now
             <div class="perks-container" data-reveal="right">
               <div class="perk">
                 <h3>Currently at:</h3>
@@ -109,7 +127,6 @@
               <div class="perk">
                 <h3>Get in touch!</h3>
               
-                <!-- Social Icons -->
                 <div class="socialIcons">
                   <a href="https://www.linkedin.com/in/adityaspandhare/" target="_blank" class="social-link">
                     <img src="./assets/images/skills/linkedin.png" alt="LinkedIn" class="social-icon">
@@ -123,12 +140,13 @@
                 </div>
               </div>
             </div>
+            -->
             
           </div>      
       
 
           <div class="aboutImage"  data-reveal="left">
-            <img src="./assets/images/pfp.jpeg" alt="Aditya Pandhare" class="myImage">
+            <img src="./assets/images/pfp.jpg" alt="Aditya Pandhare" class="myImage">
           </div>
 
         </div>
@@ -211,6 +229,33 @@
         </div>
       </section>
 
+      <!-- Publications Section -->
+      <section class="section publications" id="publications" aria-label="publications">
+        <div class="publicationsContainer">
+          <h2 class="h2 publicationTitle" data-reveal="left">Publications</h2>
+          
+          <div class="publicationCardContainer">
+            <!-- Publication Card 1 -->
+            <div class="publicationCard" data-reveal>
+              <div class="publicationInfo">
+                <h3 class="publicationTitle">vER: Virtual Human Companionship for Patients in Preoperative Care</h3>
+                <p class="publicationDuration">
+                  May 2025
+                  <span class="separator">|</span> 
+                  <a href="https://dl.acm.org/doi/abs/10.1145/3706370.3731639" target="_blank" class="publicationJournal">
+                    IMX - ACM Conference
+                  </a>
+                </p>
+                <p class="publicationDescription">
+                  Developed a VR application that uses AI-driven virtual agents to provide social support to pre-operative surgery patients. Unlike typical VR interventions focused on meditation or procedural info, our approach leverages virtual social presence to reduce stress.
+                </p>
+              </div>
+              <img src="./assets/images/projects/vER.png" alt="publication" class="publicationImage">
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Projects Section -->
       <section class="projects" id="projects" aria-label="projects">
         
@@ -255,7 +300,6 @@
   <!-- Cursor and the script -->
   <div class="cursor" data-cursor></div>
   <script src="./assets/js/script.js"></script>
-  <script type="module" src="./assets/js/model.js"></script>
 </body>
 
 </html>
