@@ -2468,6 +2468,8 @@ body.active { overflow: hidden; }
   .experienceTitle {
     font-size: 2.5em;
     margin-bottom: 25px;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 20px;
   }
 
   .experienceCardContainer {
@@ -2535,6 +2537,8 @@ body.active { overflow: hidden; }
   .publicationTitle {
     font-size: 2.5em;
     margin-bottom: 25px;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 20px;
   }
 
   .publicationCardContainer {
@@ -2590,6 +2594,8 @@ body.active { overflow: hidden; }
 
   .projectTitle {
     font-size: 2.5em;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 20px;
   }
 
   .carouselBtn {
@@ -2648,6 +2654,11 @@ body.active { overflow: hidden; }
 
   .skillsTitle {
     font-size: 2.5em;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 20px;
+    /* Ensure proper centering */
+    text-align: center;
+    width: 100%;
   }
 
   .skillsSubtitle {
@@ -2705,6 +2716,8 @@ body.active { overflow: hidden; }
   .contactTitle {
     font-size: 2.5em;
     margin-bottom: 10px;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 20px;
   }
 
   .contactSubTitle {
@@ -2842,6 +2855,8 @@ body.active { overflow: hidden; }
   /* Experience Settings */
   .experienceTitle {
     font-size: 2.2em;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 15px;
   }
 
   .experiencePosition {
@@ -2867,6 +2882,8 @@ body.active { overflow: hidden; }
   /* Publication Settings */
   .publicationTitle {
     font-size: 2.2em;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 15px;
   }
 
   .publicationInfo .publicationTitle {
@@ -2888,6 +2905,8 @@ body.active { overflow: hidden; }
   /* Project Settings */
   .projectTitle {
     font-size: 2.2em;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 15px;
   }
 
   .projectCarousel .projectCard {
@@ -2911,6 +2930,11 @@ body.active { overflow: hidden; }
   /* Skills Settings */
   .skillsTitle {
     font-size: 2.2em;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 15px;
+    /* Ensure proper centering */
+    text-align: center;
+    width: 100%;
   }
 
   .skillsGrid {
@@ -2930,6 +2954,8 @@ body.active { overflow: hidden; }
   /* Contact Settings */
   .contactTitle {
     font-size: 2.2em;
+    /* Add top padding for better navigation spacing on mobile */
+    padding-top: 15px;
   }
 
   .contactSubTitle {
@@ -3359,6 +3385,16 @@ body.active { overflow: hidden; }
   height: 35px;
 }
 
+.android-device .skillsTitle {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.android-device .skillsContainer {
+  text-align: center;
+}
+
 /* High-DPI Android devices (like Samsung Galaxy S21 Ultra) */
 .high-dpi-android .skillsGrid {
   grid-template-columns: repeat(2, 1fr);
@@ -3391,6 +3427,16 @@ body.active { overflow: hidden; }
   height: 30px;
 }
 
+.high-dpi-android .skillsTitle {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.high-dpi-android .skillsContainer {
+  text-align: center;
+}
+
 /* Samsung device specific overrides */
 .samsung-device .skillsGrid {
   grid-template-columns: repeat(3, 1fr);
@@ -3404,6 +3450,16 @@ body.active { overflow: hidden; }
 
 .samsung-device .skillName {
   font-size: 0.68em;
+}
+
+.samsung-device .skillsTitle {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.samsung-device .skillsContainer {
+  text-align: center;
 }
 
 .samsung-device .contactSubtitle {
