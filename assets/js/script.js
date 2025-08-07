@@ -8,6 +8,15 @@ window.addEventListener("load", function () {
 });
 
 
+// iOS Safari Dynamic Viewport Fix
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+window.addEventListener('resize', () => {
+  vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 // Header Javascript when the user scrolls down it adds some properties: =================================================
 const header = document.querySelector(".header");
 
