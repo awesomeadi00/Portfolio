@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (window.innerWidth <= 480) {
       // Small mobile phones
-      cardWidth = 250;
+      cardWidth = 240;
       gap = 15;
     } else if (window.innerWidth <= 767) {
       // Mobile devices
