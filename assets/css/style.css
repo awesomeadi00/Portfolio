@@ -508,7 +508,7 @@ body.active { overflow: hidden; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 5px;
+  gap: 40px;
   padding: 20px 70px;
 }
 
@@ -858,6 +858,7 @@ body.active { overflow: hidden; }
   font-size: 1.8em;
   font-weight: var(--fw-500);
   margin-bottom: 5px;
+  line-height: 1.4;
 }
 
 .publicationDuration {
@@ -1586,11 +1587,11 @@ body.active { overflow: hidden; }
 /* Large Desktop Screens (1600px and above) */
 @media screen and (min-width: 1600px) {
   .nameTitle {
-    font-size: 11em;
+    font-size: 9em;
   }
 
   .subTitle {
-    font-size: 8.5em;
+    font-size: 7em;
   }
 
   .aboutTitle {
@@ -1617,11 +1618,11 @@ body.active { overflow: hidden; }
   }
 
   .nameTitle {
-    font-size: 12em;
+    font-size: 10em;
   }
 
   .subTitle {
-    font-size: 9em;
+    font-size: 7.5em;
   }
 
   .aboutTitle {
@@ -1629,7 +1630,7 @@ body.active { overflow: hidden; }
   }
 
   .about .section-text {
-    font-size: 0.9em;
+    font-size: 1.1em;
   }
 
   .education-section h3 {
@@ -1637,7 +1638,7 @@ body.active { overflow: hidden; }
   }
 
   .education-details p {
-    font-size: 0.9em;
+    font-size: 1.1em;
   }
 
   .resume-button {
