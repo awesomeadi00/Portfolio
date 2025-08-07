@@ -2469,7 +2469,7 @@ body.active { overflow: hidden; }
     font-size: 2.5em;
     margin-bottom: 25px;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 30px;
+    padding-top: 50px;
   }
 
   .experienceCardContainer {
@@ -2538,7 +2538,7 @@ body.active { overflow: hidden; }
     font-size: 2.5em;
     margin-bottom: 25px;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 30px;
+    padding-top: 50px;
   }
 
   .publicationCardContainer {
@@ -2595,7 +2595,7 @@ body.active { overflow: hidden; }
   .projectTitle {
     font-size: 2.5em;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 40px;
+    padding-top: 70px;
   }
 
   .carouselBtn {
@@ -2655,7 +2655,7 @@ body.active { overflow: hidden; }
   .skillsTitle {
     font-size: 2.5em;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 30px;
+    padding-top: 40px;
     /* Ensure proper centering */
     text-align: center;
     width: 100%;
@@ -2717,7 +2717,7 @@ body.active { overflow: hidden; }
     font-size: 2.5em;
     margin-bottom: 10px;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 30px;
+    padding-top: 20px;
   }
 
   .contactSubTitle {
@@ -2856,7 +2856,7 @@ body.active { overflow: hidden; }
   .experienceTitle {
     font-size: 2.2em;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 25px;
+    padding-top: 35px;
   }
 
   .experiencePosition {
@@ -2883,7 +2883,7 @@ body.active { overflow: hidden; }
   .publicationTitle {
     font-size: 2.2em;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 25px;
+    padding-top: 35px;
   }
 
   .publicationInfo .publicationTitle {
@@ -2906,7 +2906,7 @@ body.active { overflow: hidden; }
   .projectTitle {
     font-size: 2.2em;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 35px;
+    padding-top: 55px;
   }
 
   .projectCarousel .projectCard {
@@ -2931,7 +2931,7 @@ body.active { overflow: hidden; }
   .skillsTitle {
     font-size: 2.2em;
     /* Add top padding for better navigation spacing on mobile */
-    padding-top: 25px;
+    padding-top: 35px;
     /* Ensure proper centering */
     text-align: center;
     width: 100%;
