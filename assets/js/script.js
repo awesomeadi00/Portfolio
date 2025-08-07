@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const rightBtn = document.getElementById('carouselBtnRight');
   
   if (!carouselTrack || !leftBtn || !rightBtn) {
-    console.log('Carousel elements not found');
+    // console.log('Carousel elements not found');
     return;
   }
 
@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function startLeftScroll() {
-    console.log('Left button pressed');
+    // console.log('Left button pressed');
     isLeftPressed = true;
     isRightPressed = false;
     currentSpeed = 0.7; // Start with slower speed
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function startRightScroll() {
-    console.log('Right button pressed');
+    // console.log('Right button pressed');
     isRightPressed = true;
     isLeftPressed = false;
     currentSpeed = -0.7; // Start with slower speed
@@ -499,14 +499,14 @@ document.addEventListener('DOMContentLoaded', function() {
       
       carouselTrack.style.transform = `translateX(${newTransform}px)`;
       
-      console.log('Scrolling:', { 
-        isLeftPressed, 
-        isRightPressed, 
-        currentSpeed, 
-        currentTransform, 
-        newTransform,
-        totalWidth
-      });
+      // console.log('Scrolling:', { 
+      //   isLeftPressed, 
+      //   isRightPressed, 
+      //   currentSpeed, 
+      //   currentTransform, 
+      //   newTransform,
+      //   totalWidth
+      // });
     }
 
     // Continue animation if any button is pressed or speed is not zero
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       // Carousel has stopped, start auto-scroll from current position
       animationId = null;
-      console.log('Stopping at current position');
+      // console.log('Stopping at current position');s
       
       // Start auto-scroll from current position after a delay
       if (autoScrollTimeout) {
@@ -523,7 +523,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       autoScrollTimeout = setTimeout(() => {
         startAutoScrollFromCurrentPosition();
-        console.log('Starting auto-scroll from current position');
+        // console.log('Starting auto-scroll from current position');
       }, 500); // Reduced delay to 0.5 seconds for smoother transition
     }
   }
@@ -541,15 +541,19 @@ document.addEventListener('DOMContentLoaded', function() {
     let cardWidth, gap;
     
     if (window.innerWidth <= 480) {
-      // Mobile phones
+      // Small mobile phones
       cardWidth = 250;
       gap = 15;
-    } else if (window.innerWidth <= 768) {
+    } else if (window.innerWidth <= 767) {
       // Mobile devices
+      cardWidth = 260;
+      gap = 15;
+    } else if (window.innerWidth <= 1023) {
+      // Portrait tablets
       cardWidth = 280;
       gap = 20;
     } else if (window.innerWidth <= 1199) {
-      // Tablets and small laptops
+      // Landscape tablets and small laptops
       cardWidth = 300;
       gap = 25;
     } else {

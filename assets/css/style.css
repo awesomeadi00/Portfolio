@@ -2018,11 +2018,11 @@ body.active { overflow: hidden; }
   }
 
   .about .section-text {
-    font-size: 1.1em;
+    font-size: 1em;
   }
 
   .aboutImage {
-    max-width: 42%;
+    max-width: 40%;
   }
 
   .education-section h3 {
@@ -2191,7 +2191,7 @@ body.active { overflow: hidden; }
   }
 
   .navContainer {
-    padding-inline: 15px;
+    padding-inline: 25px;
   }
 
   /* Sidebar Styling */
@@ -2199,7 +2199,7 @@ body.active { overflow: hidden; }
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
+    width: 220px;
     height: 100vh;
     background-color: var(--eerie-black-2);
     backdrop-filter: blur(10px);
@@ -2689,7 +2689,7 @@ body.active { overflow: hidden; }
 @media screen and (max-width: 480px) {
   /* Header Settings */
   .navContainer {
-    padding-inline: 10px;
+    padding-inline: 20px;
   }
 
   #menuIcon {
@@ -2697,7 +2697,7 @@ body.active { overflow: hidden; }
   }
 
   .sidebar {
-    width: 260px;
+    width: 200px;
     padding: 25px 15px;
   }
 
