@@ -466,11 +466,19 @@ document.addEventListener('DOMContentLoaded', function() {
       // Scroll right (negative speed)
       currentSpeed = Math.max(currentSpeed - acceleration, -maxSpeed);
     } else {
-      // No button pressed, return to default speed
-      if (currentSpeed > 0) {
-        currentSpeed = Math.max(currentSpeed - deceleration, 0);
-      } else if (currentSpeed < 0) {
-        currentSpeed = Math.min(currentSpeed + deceleration, 0);
+      // No button pressed, decelerate to default speed
+      if (currentSpeed > defaultSpeed) {
+        // Decelerate from positive speed to default
+        currentSpeed = Math.max(currentSpeed - deceleration, defaultSpeed);
+      } else if (currentSpeed < -defaultSpeed) {
+        // Decelerate from negative speed to default
+        currentSpeed = Math.min(currentSpeed + deceleration, -defaultSpeed);
+      } else if (currentSpeed > 0 && currentSpeed < defaultSpeed) {
+        // Accelerate from low positive speed to default
+        currentSpeed = Math.min(currentSpeed + deceleration, defaultSpeed);
+      } else if (currentSpeed < 0 && currentSpeed > -defaultSpeed) {
+        // Accelerate from low negative speed to default
+        currentSpeed = Math.max(currentSpeed - deceleration, -defaultSpeed);
       }
     }
 
@@ -505,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isLeftPressed || isRightPressed || Math.abs(currentSpeed) > 0.01) {
       animationId = requestAnimationFrame(animate);
     } else {
-      // Keep the carousel at its current position and start auto-scroll from there
+      // Carousel has stopped, start auto-scroll from current position
       animationId = null;
       console.log('Stopping at current position');
       
@@ -516,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
       autoScrollTimeout = setTimeout(() => {
         startAutoScrollFromCurrentPosition();
         console.log('Starting auto-scroll from current position');
-      }, 1000); // 1 second delay before starting auto-scroll
+      }, 500); // Reduced delay to 0.5 seconds for smoother transition
     }
   }
 
