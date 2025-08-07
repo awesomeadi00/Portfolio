@@ -138,8 +138,6 @@ html {
   font-size: 10px;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  /* iOS viewport fix */
-  height: -webkit-fill-available;
 }
 
 body {
@@ -149,10 +147,6 @@ body {
   font-weight: var(--fw-400);
   line-height: 2.15;
   overflow-x: hidden;
-  /* iOS viewport fix */
-  min-height: -webkit-fill-available;
-  /* Prevent bounce scrolling */
-  overscroll-behavior: none;
 }
 
 body.active { overflow: hidden; }
@@ -2897,55 +2891,6 @@ body.active { overflow: hidden; }
   .sendButton {
     padding: 10px;
     font-size: 0.85em;
-  }
-}
-
-/* iOS Safari Dynamic Viewport Fix */
-@supports (-webkit-touch-callout: none) {
-  /* iOS-specific fixes */
-  html {
-    height: -webkit-fill-available;
-  }
-  
-  body {
-    min-height: -webkit-fill-available;
-    /* Prevent bounce scrolling */
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Fix for dynamic viewport changes */
-  .home {
-    min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
-    min-height: -webkit-fill-available;
-  }
-  
-  .homeContainer {
-    min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
-    min-height: -webkit-fill-available;
-  }
-  
-  /* Prevent layout shifts on scroll */
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    /* Use safe area insets for iOS */
-    padding-top: env(safe-area-inset-top);
-  }
-  
-  /* Adjust main content for fixed header */
-  main {
-    padding-top: calc(80px + env(safe-area-inset-top));
-  }
-  
-  /* Fix for bottom safe area */
-  .contact {
-    padding-bottom: calc(60px + env(safe-area-inset-bottom));
   }
 }
 
