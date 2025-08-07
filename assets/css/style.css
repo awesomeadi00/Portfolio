@@ -147,6 +147,9 @@ html {
   -webkit-overflow-scrolling: touch;
   /* iOS viewport fix */
   height: -webkit-fill-available;
+  /* Prevent any default margins/padding */
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -160,6 +163,9 @@ body {
   min-height: -webkit-fill-available;
   /* Prevent bounce scrolling */
   overscroll-behavior: none;
+  /* Ensure no extra spacing */
+  margin: 0;
+  padding: 0;
 }
 
 body.active { overflow: hidden; }
@@ -324,6 +330,9 @@ body.active { overflow: hidden; }
   padding-block: 18px;
   transition: var(--transition-2);
   z-index: 4;
+  /* Ensure no extra spacing */
+  margin: 0;
+  background-color: transparent;
 }
 
 .header.active {
@@ -412,6 +421,10 @@ body.active { overflow: hidden; }
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* Ensure no gaps at top */
+  margin-top: 0;
+  padding-top: 0;
+  top: 0;
 }
 
 .home::after {
@@ -463,6 +476,9 @@ body.active { overflow: hidden; }
 .main {
   position: relative;
   text-align: left;
+  /* Ensure no extra spacing */
+  margin: 0;
+  padding: 0;
 }
 
 .wrapper .strong {
@@ -2312,6 +2328,11 @@ body.active { overflow: hidden; }
   .home {
     width: 100%;
     height: 100vh;
+    /* Remove any potential gaps */
+    padding-top: 0;
+    margin-top: 0;
+    position: relative;
+    top: 0;
   }
   
   .homeContainer {
@@ -2322,6 +2343,9 @@ body.active { overflow: hidden; }
     text-align: center;
     height: 100vh;
     padding: 0 20px;
+    /* Remove any potential gaps */
+    margin-top: 0;
+    padding-top: 0;
   }
   
   .nameTitle {
@@ -2957,6 +2981,17 @@ body.active { overflow: hidden; }
 
   /* iOS Safari Dynamic Viewport Fix */
   @supports (-webkit-touch-callout: none) {
+    /* Set CSS custom property for viewport height */
+    :root {
+      --vh: 1vh;
+    }
+    
+    /* Update viewport height on resize */
+    @media screen and (max-width: 767px) {
+      :root {
+        --vh: calc(var(--vh, 1vh));
+      }
+    }
     /* iOS-specific fixes */
     html {
       height: -webkit-fill-available;
@@ -2982,17 +3017,23 @@ body.active { overflow: hidden; }
   
   /* Fix for dynamic viewport changes */
   .home {
-    min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     min-height: -webkit-fill-available;
     /* Remove extra top space on iOS */
     padding-top: 0;
     margin-top: 0;
+    /* Ensure no gap at top */
+    position: relative;
+    top: 0;
+    /* Ensure full viewport coverage */
+    width: 100%;
+    overflow: hidden;
   }
   
   .homeContainer {
-    min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     min-height: -webkit-fill-available;
     /* Remove extra top space on iOS */
     padding-top: 0;
@@ -3000,6 +3041,11 @@ body.active { overflow: hidden; }
     /* Ensure proper centering */
     justify-content: center;
     align-items: center;
+    /* Remove any default padding */
+    padding: 0 20px;
+    /* Ensure full height */
+    display: flex;
+    flex-direction: column;
   }
   
   /* Prevent layout shifts on scroll */
@@ -3011,11 +3057,20 @@ body.active { overflow: hidden; }
     z-index: 1000;
     /* Use safe area insets for iOS */
     padding-top: env(safe-area-inset-top);
+    /* Ensure header doesn't create extra space */
+    margin: 0;
   }
   
-  /* Adjust main content for fixed header */
+  /* Remove any main padding that might cause gaps */
   main {
-    padding-top: calc(80px + env(safe-area-inset-top));
+    padding-top: 0;
+    margin-top: 0;
+  }
+  
+  /* Ensure article has no extra spacing */
+  article {
+    padding-top: 0;
+    margin-top: 0;
   }
   
   /* Fix for bottom safe area */
@@ -3123,6 +3178,244 @@ body.active { overflow: hidden; }
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
   }
+}
+
+/* Samsung Galaxy S21 Ultra and similar high-DPI Android devices */
+@media screen and (min-width: 768px) and (max-width: 1199px) and (-webkit-min-device-pixel-ratio: 2) {
+  /* Skills Grid Fix for high-DPI devices */
+  .skillsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  
+  .skillImage {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .skillName {
+    font-size: 0.8em;
+  }
+  
+  /* Contact Section Fix for high-DPI devices */
+  .contactSubtitle {
+    font-size: 1.5em;
+  }
+  
+  .contactSubTitle {
+    font-size: 1.6em;
+  }
+  
+  .contactLink {
+    padding: 18px 20px;
+    gap: 15px;
+  }
+  
+  .contactText {
+    font-size: 1em;
+    /* Ensure text fits properly */
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  
+  .contactIcon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  
+  .social-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Additional fix for very high-DPI devices (like Samsung Galaxy S21 Ultra) */
+@media screen and (min-width: 768px) and (max-width: 1199px) and (-webkit-min-device-pixel-ratio: 3) {
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .skillImage {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .skillName {
+    font-size: 0.75em;
+  }
+  
+  .contactSubtitle {
+    font-size: 1.3em;
+  }
+  
+  .contactSubTitle {
+    font-size: 1.4em;
+  }
+  
+  .contactText {
+    font-size: 0.9em;
+  }
+}
+
+/* Comprehensive Android device fixes */
+@media screen and (min-width: 768px) and (max-width: 1199px) and (max-height: 800px) {
+  /* Target devices with high resolution but smaller height (like many Android phones) */
+  .skillsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .skillImage {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .skillName {
+    font-size: 0.7em;
+  }
+  
+  .contactSubtitle {
+    font-size: 1.2em;
+  }
+  
+  .contactSubTitle {
+    font-size: 1.3em;
+  }
+  
+  .contactText {
+    font-size: 0.85em;
+  }
+  
+  .contactIcon {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Specific fix for Samsung Galaxy S21 Ultra dimensions */
+@media screen and (min-width: 768px) and (max-width: 1199px) and (min-height: 800px) and (max-height: 900px) {
+  .skillsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+  
+  .skillImage {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .skillName {
+    font-size: 0.65em;
+  }
+  
+  .contactSubtitle {
+    font-size: 1.1em;
+  }
+  
+  .contactSubTitle {
+    font-size: 1.2em;
+  }
+  
+  .contactText {
+    font-size: 0.8em;
+  }
+}
+
+/* Android device specific fixes using JavaScript-added classes */
+.android-device .skillsGrid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.android-device .skillImage {
+  width: 50px;
+  height: 50px;
+}
+
+.android-device .skillName {
+  font-size: 0.7em;
+}
+
+.android-device .contactSubtitle {
+  font-size: 1.2em;
+}
+
+.android-device .contactSubTitle {
+  font-size: 1.3em;
+}
+
+.android-device .contactText {
+  font-size: 0.85em;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.3;
+}
+
+.android-device .contactIcon {
+  width: 35px;
+  height: 35px;
+}
+
+/* High-DPI Android devices (like Samsung Galaxy S21 Ultra) */
+.high-dpi-android .skillsGrid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.high-dpi-android .skillImage {
+  width: 45px;
+  height: 45px;
+}
+
+.high-dpi-android .skillName {
+  font-size: 0.65em;
+}
+
+.high-dpi-android .contactSubtitle {
+  font-size: 1em;
+}
+
+.high-dpi-android .contactSubTitle {
+  font-size: 1.1em;
+}
+
+.high-dpi-android .contactText {
+  font-size: 0.75em;
+}
+
+.high-dpi-android .contactIcon {
+  width: 30px;
+  height: 30px;
+}
+
+/* Samsung device specific overrides */
+.samsung-device .skillsGrid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.samsung-device .skillImage {
+  width: 48px;
+  height: 48px;
+}
+
+.samsung-device .skillName {
+  font-size: 0.68em;
+}
+
+.samsung-device .contactSubtitle {
+  font-size: 1.15em;
+}
+
+.samsung-device .contactSubTitle {
+  font-size: 1.25em;
+}
+
+.samsung-device .contactText {
+  font-size: 0.8em;
 }
 
 /* Reduced Motion for Accessibility */
