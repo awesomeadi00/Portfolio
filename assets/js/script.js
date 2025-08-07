@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // console.log('Left button pressed');
     isLeftPressed = true;
     isRightPressed = false;
-    currentSpeed = 0.7; // Start with slower speed
+    currentSpeed = -0.7; // Move left (negative speed)
     startManualScroll();
   }
 
@@ -427,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // console.log('Right button pressed');
     isRightPressed = true;
     isLeftPressed = false;
-    currentSpeed = -0.7; // Start with slower speed
+    currentSpeed = 0.7; // Move right (positive speed)
     startManualScroll();
   }
 
@@ -460,11 +460,11 @@ document.addEventListener('DOMContentLoaded', function() {
   function animate() {
     // Determine scroll direction and speed
     if (isLeftPressed) {
-      // Scroll left (positive speed)
-      currentSpeed = Math.min(currentSpeed + acceleration, maxSpeed);
-    } else if (isRightPressed) {
-      // Scroll right (negative speed)
+      // Scroll left (negative speed)
       currentSpeed = Math.max(currentSpeed - acceleration, -maxSpeed);
+    } else if (isRightPressed) {
+      // Scroll right (positive speed)
+      currentSpeed = Math.min(currentSpeed + acceleration, maxSpeed);
     } else {
       // No button pressed, decelerate to default speed
       if (currentSpeed > defaultSpeed) {
