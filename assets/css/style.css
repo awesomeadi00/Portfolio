@@ -427,14 +427,14 @@ body.active { overflow: hidden; }
 
 .nameTitle {
   position: relative;
-  font-size: 12em;
+  font-size: 11em;
   margin-bottom: 20px;
   text-align: center;
 }
 
 .subTitle {
   position: relative;
-  font-size: 9em;
+  font-size: 8.5em;
   text-align: center;
   width: 100%;
   display: flex;
@@ -532,11 +532,7 @@ body.active { overflow: hidden; }
 }
 
 .aboutTitle {
-  font-size: 5em;
-}
-
-.about .section-text {
-  font-size: 1em;
+  font-size: 4em;
 }
 
 .about .section-text .em {
@@ -550,7 +546,7 @@ body.active { overflow: hidden; }
 }
 
 .about .section-text {
-  font-size: var(--fs-5);
+  font-size: 1.1em;
   color: var(--white_a70);
   font-weight: var(--fw-300);
   line-height: 2;
@@ -563,7 +559,7 @@ body.active { overflow: hidden; }
 }
 
 .education-section h3 {
-  font-size: 2em;
+  font-size: 1.8em;
   color: var(--white);
   margin-block-end: 15px;
   font-weight: var(--fw-600);
@@ -592,7 +588,7 @@ body.active { overflow: hidden; }
 }
 
 .education-details p {
-  font-size: 1em;
+  font-size: 1.1em;
   color: var(--white_a70);
   margin-block-end: 8px;
   line-height: 1.6;
@@ -1586,30 +1582,54 @@ body.active { overflow: hidden; }
 }
 
 /* Media Screens Section: ==================================================================================== */
-/* For Standard Macbooks (1440px - 900px) with max-width of 1600px*/
-@media screen and (min-width: 1200px) and (max-width: 1600px) {
 
-  /* Header Settings ------------------------ */
-  .navbar a {
-    font-size: 1.4em;
-  }
-
-  /* Home Settings ------------------------ */
+/* Large Desktop Screens (1600px and above) */
+@media screen and (min-width: 1600px) {
   .nameTitle {
-    font-size: 10em;
+    font-size: 11em;
   }
 
   .subTitle {
-    font-size: 7em;
+    font-size: 8.5em;
   }
 
-  /* About Settings ------------------------ */
+  .aboutTitle {
+    font-size: 4em;
+  }
+
+  .projectTitle {
+    font-size: 5em;
+  }
+
+  .skillsTitle {
+    font-size: 5em;
+  }
+
+  .contactTitle {
+    font-size: 5em;
+  }
+}
+
+/* Standard Desktop and MacBook Screens (1200px - 1599px) */
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+  .navbar a {
+    font-size: 1.8em;
+  }
+
+  .nameTitle {
+    font-size: 12em;
+  }
+
+  .subTitle {
+    font-size: 9em;
+  }
+
   .aboutTitle {
     font-size: 4em;
   }
 
   .about .section-text {
-    font-size: 1.1em;
+    font-size: 0.9em;
   }
 
   .education-section h3 {
@@ -1617,33 +1637,28 @@ body.active { overflow: hidden; }
   }
 
   .education-details p {
-    font-size: 1.1em;
+    font-size: 0.9em;
   }
 
   .resume-button {
-    padding: 15px 25px;
+    padding: 10px 25px;
     font-size: 1.1em;
   }
 
-  /* Project Settings ------------------------ */
-  .projectCell {
-    font-size: 1.6em;
+  .projectTitle {
+    font-size: 5em;
   }
 
-  /* Contact Settings ------------------------ */
+  .skillsTitle {
+    font-size: 5em;
+  }
+
   .contactTitle {
-    font-size: 4em;
-    margin-bottom: 0px;
+    font-size: 5em;
   }
 
   .contactSubTitle {
-    font-size: 1.9em;
-    margin-bottom: 0px;
-  }
-
-  .socialIcons {
-    margin-top: 0px;
-    margin-bottom: 20px;
+    font-size: 3em;
   }
 
   .contactForm {
@@ -1652,17 +1667,14 @@ body.active { overflow: hidden; }
   }
 
   .contactForm label {
-    font-size: 0.9em;
+    font-size: 1.2em;
     margin-bottom: 5px;
   }
 
   .contactForm input,
   .contactForm textarea {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 0.9em;
-    width: 100%;
+    font-size: 1em;
   }
 
   .contactForm textarea {
@@ -1670,54 +1682,65 @@ body.active { overflow: hidden; }
   }
 }
 
-/* For iPads (Portrait) */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: portrait) {
+/* Tablet Landscape and Small Laptops (768px - 1199px) */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
   .cursor {
     display: none;
   }
 
-  /* Header Settings ------------------------ */
+  /* Header Settings */
   .navbar a {
-    font-size: 1.8em;
+    font-size: 1.2em;
+    margin: 0 8px;
   }
 
-  /* Home Settings ------------------------ */
+  .navContainer {
+    padding-inline: 20px;
+  }
+
+  /* Home Settings */
   .nameTitle {
-    font-size: 8em; 
+    font-size: 7em;
   }
 
   .subTitle {
-    font-size: 6em; 
+    font-size: 5em;
   }
 
-  /* About Settings ------------------------ */
-  .aboutContainer {
-    margin-top: 90px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 10px;
+  .homeContainer {
+    padding-top: 20vh;
   }
- 
+
+  /* About Settings */
+  .aboutContainer {
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px 40px;
+    margin-top: 80px;
+  }
+
   .aboutTitle {
-    font-size: 4em;
+    font-size: 3.5em;
     text-align: center;
   }
- 
+
   .about .section-text {
-    font-size: 1.3em;
-    padding: 0px 20px;
-    margin-bottom: 20px;
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .aboutImage {
+    max-width: 50%;
+    order: -1;
   }
 
   .education-section {
     margin-block-end: 25px;
-    padding: 0px 20px;
   }
 
   .education-section h3 {
-    font-size: 1.8em;
+    font-size: 1.6em;
     text-align: center;
   }
 
@@ -1725,191 +1748,11 @@ body.active { overflow: hidden; }
     padding: 15px;
     flex-direction: column;
     text-align: center;
+    gap: 15px;
   }
 
   .education-details p {
-    font-size: 1.1em;
-    text-align: center;
-  }
-
-  .education-logo {
-    width: 60px;
-    height: 60px;
-    margin-top: 10px;
-  }
-
-  .resume-section {
-    margin-block-end: 25px;
-    text-align: center;
-    padding: 0px 20px;
-  }
-
-  .resume-button {
-    padding: 12px 20px;
-    font-size: 1.1em;
-  }
- 
-  .perks-container {
-    width: 100%;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    padding: 20px;
-    margin-top: 0px;
-  }
- 
-  .perk {
-    width: 90%;
-    min-height: 130px;
-    text-align: center;
-  }
- 
-  .perk h3 {
-    font-size: 1.3em;
-  }
- 
-  .perk p {
     font-size: 1em;
-  }
- 
-  .aboutImage {
-    margin-bottom: 60px;
-    max-width: 45%;
-  }
-
-  /* Experience Settings ------------------------ */
-  .experiencesContainer {
-    margin-top: 20px;
-  }
-
-  .experienceDescription {
-    font-size: 1.1em;
-  }
-
-  .descriptionList {
-    font-size: 1.1em;
-  }
-
-  /* Publication Settings ------------------------ */
-  .publicationsContainer {
-    margin-top: 20px;
-  }
-
-  .publicationDescription {
-    font-size: 1.1em;
-  }
-
-
-
-  /* Project Settings ------------------------ */
-  .projectCell {
-    font-size: 1.9em;
-  }
-
-  /* Contact Settings ------------------------ */
-  .contactTitle {
-    font-size: 6em;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-
-  .contactSubTitle {
-    font-size: 2.5em;
-    margin-bottom: 15px;
-  }
-
-  /* Social Icons Styling */
-  .socialIcons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-
-  .socialIcons img {
-    width: 90px;
-    height: 90px;
-    transition: transform 0.3s;
-  }
-
-  .socialIcons img:hover {
-    transform: scale(1.2);
-  }
-
-  /* Contact Form Styling */
-  .contactForm {
-    width: 100%;
-    margin: 0 auto;
-    padding: 40px;
-  }
-
-  .contactForm label {
-    font-size: 1.5em;
-    margin-bottom: 5px;
-  }
-
-  .contactForm input[type="text"],
-  .contactForm textarea {
-    width: 100%;
-    padding: 20px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1.5em;
-  }
-
-  .contactForm textarea {
-    height: 100px;
-  }
-
-  .sendButton {
-    width: 100%;
-    padding: 12px;
-    background-color: #222222;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 1.5em;
-  }
-}
-
-/* For iPads (Landscape) */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: landscape) {
-  .cursor {
-      display: none;
-  }
-
-  /* Header Settings ------------------------ */
-  .navbar a {
-    font-size: 1.4em;
-  }
-
-  /* Home Settings ------------------------ */
-  .nameTitle {
-    font-size: 8em;
-  }
-
-  .subTitle {
-    font-size: 6em;
-  }
-
-  /* About Settings ------------------------ */
-  .aboutTitle {
-    font-size: 3em;
-  }
-
-  .about .section-text {
-    font-size: 1em;
-  }
-
-  .education-section h3 {
-    font-size: 1.6em;
-  }
-
-  .education-details p {
-    font-size: 0.9em;
   }
 
   .education-logo {
@@ -1917,86 +1760,383 @@ body.active { overflow: hidden; }
     height: 70px;
   }
 
-  .resume-button {
-    padding: 12px 20px;
-    font-size: 0.9em;
+  .resume-section {
+    text-align: center;
   }
 
-  /* Font styling for text inside Perks */
+  .resume-button {
+    padding: 12px 20px;
+    font-size: 1em;
+  }
+
+  .perks-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 20px;
+  }
+
+  .perk {
+    min-height: 120px;
+  }
+
   .perk h3 {
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   .perk p {
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 
-  /* Experience Settings ---------------------- */
+  /* Experience Settings */
+  .experiencesContainer {
+    padding: 15px 30px;
+    margin-top: 30px;
+  }
+
+  .experienceTitle {
+    font-size: 3.5em;
+    margin-bottom: 30px;
+  }
+
+  .experienceCardContainer {
+    gap: 25px;
+  }
+
+  .experienceCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .experienceInfo {
+    padding-right: 0;
+  }
+
   .experiencePosition {
     font-size: 1.6em;
+  }
+
+  .experienceDuration {
+    font-size: 1em;
+  }
+
+  .experienceDescription {
+    font-size: 1em;
+  }
+
+  .experienceImage {
+    width: 200px;
+    height: 150px;
+    margin-left: 0;
+  }
+
+  /* Publication Settings */
+  .publicationsContainer {
+    padding: 15px 30px;
+    margin-top: 30px;
+  }
+
+  .publicationTitle {
+    font-size: 3em;
+  }
+
+  .publicationCardContainer {
+    gap: 25px;
+  }
+
+  .publicationCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .publicationInfo {
+    padding-right: 0;
+  }
+
+  .publicationInfo .publicationTitle {
+    font-size: 1.6em;
+  }
+
+  .publicationDuration {
+    font-size: 1em;
+  }
+
+  .publicationDescription {
+    font-size: 1em;
+  }
+
+  .publicationImage {
+    width: 200px;
+    height: 150px;
+    margin-left: 0;
+  }
+
+  /* Project Settings */
+  .projectsContainer {
+    padding: 15px;
+  }
+
+  .projectTitle {
+    font-size: 3.5em;
+  }
+
+  .carouselBtn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1em;
+  }
+
+  .carouselBtnLeft {
+    left: 15px;
+  }
+
+  .carouselBtnRight {
+    right: 15px;
+  }
+
+  .projectCarousel .projectCard {
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+  }
+
+  .carouselTrack {
+    gap: 25px;
+  }
+
+  /* Skills Settings */
+  .skillsContainer {
+    padding: 80px 20px;
+  }
+
+  .skillsTitle {
+    font-size: 3.5em;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+
+  .skillImage {
+    width: 70px;
+    height: 70px;
+  }
+
+  .skillName {
+    font-size: 0.9em;
+  }
+
+  .certificationCardContainer {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  /* Contact Settings */
+  .contact {
+    padding: 80px 20px;
+  }
+
+  .contactTitle {
+    font-size: 3.5em;
+  }
+
+  .contactSubTitle {
+    font-size: 2em;
+  }
+
+  .socialIcons {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .social-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .contactForm {
+    width: 80%;
+    padding: 30px;
+  }
+
+  .contactForm label {
+    font-size: 1.1em;
+  }
+
+  .contactForm input,
+  .contactForm textarea {
+    padding: 12px;
+    font-size: 1em;
+  }
+
+  .contactForm textarea {
+    height: 80px;
+  }
+
+  .sendButton {
+    padding: 12px;
+    font-size: 1em;
+  }
+}
+
+/* Tablet Portrait (768px - 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+  .cursor {
+    display: none;
+  }
+
+  /* Header Settings */
+  .navbar a {
+    font-size: 1.1em;
+    margin: 0 6px;
+  }
+
+  /* Home Settings */
+  .nameTitle {
+    font-size: 6em;
+  }
+
+  .subTitle {
+    font-size: 4em;
+  }
+
+  .homeContainer {
+    padding-top: 18vh;
+  }
+
+  /* About Settings */
+  .aboutContainer {
+    padding: 15px 30px;
+    margin-top: 70px;
+  }
+
+  .aboutTitle {
+    font-size: 3em;
+  }
+
+  .about .section-text {
+    font-size: 1.1em;
+  }
+
+  .aboutImage {
+    max-width: 45%;
+  }
+
+  .education-section h3 {
+    font-size: 1.5em;
+  }
+
+  .education-details p {
+    font-size: 0.95em;
+  }
+
+  .education-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .perks-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .perk {
+    min-height: 110px;
+  }
+
+  .perk h3 {
+    font-size: 1em;
+  }
+
+  .perk p {
+    font-size: 0.85em;
+  }
+
+  /* Experience Settings */
+  .experiencesContainer {
+    padding: 15px 30px;
+  }
+
+  .experienceTitle {
+    font-size: 3em;
+  }
+
+  .experiencePosition {
+    font-size: 1.4em;
   }
 
   .experienceDuration {
     font-size: 0.9em;
   }
 
-  .experienceCompany {
-    font-size: 1em;
+  .experienceDescription {
+    font-size: 0.95em;
   }
 
-  .publicationJournal {
-    font-size: 1em;
+  .experienceImage {
+    width: 180px;
+    height: 130px;
   }
 
-  /* Project Settings ------------------------ */
-  .projectCell {
+  /* Publication Settings */
+  .publicationsContainer {
+    padding: 15px 30px;
+  }
+
+  .publicationTitle {
+    font-size: 3em;
+  }
+
+  .publicationInfo .publicationTitle {
     font-size: 1.4em;
   }
 
-  /* Skill Settings ------------------------- */
-  .skillsTitle {
-    font-size: 2.5em;
+  .publicationDuration {
+    font-size: 0.9em;
   }
-  
+
+  .publicationDescription {
+    font-size: 0.95em;
+  }
+
+  .publicationImage {
+    width: 180px;
+    height: 130px;
+  }
+
+  /* Project Settings */
+  .projectTitle {
+    font-size: 3em;
+  }
+
+  .projectCarousel .projectCard {
+    width: 280px;
+    min-width: 280px;
+    max-width: 280px;
+  }
+
+  .carouselTrack {
+    gap: 20px;
+  }
+
+  /* Skills Settings */
+  .skillsTitle {
+    font-size: 3em;
+  }
+
   .skillsGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 35px;
   }
 
-  .certificationCardContainer {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  
-  .skillImage {
-    width: 55px;
-    height: 55px;
-  }
-  
-  .skillsGrid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 40px;
-  }
-
-  .certificationCardContainer {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  
-  .skillItem {
-    padding: 15px;
-  }
-  
   .skillImage {
     width: 65px;
     height: 65px;
   }
-  
-  .skillName {
-    font-size: 1.5em;
-  }
 
-  /* Contact Settings ------------------------ */
+  /* Contact Settings */
   .contactTitle {
     font-size: 3em;
   }
@@ -2005,52 +2145,111 @@ body.active { overflow: hidden; }
     font-size: 1.8em;
   }
 
-  .socialIcons {
-    margin-top: 0px;
-    margin-bottom: 10px;
+  .social-icon {
+    width: 65px;
+    height: 65px;
   }
 
-  .social-icon {
-    width: 50px;
-    height: 50px;
+  .contactForm {
+    width: 85%;
+    padding: 25px;
   }
 
   .contactForm label {
-    font-size: 0.8em;
+    font-size: 1em;
   }
 
   .contactForm input,
   .contactForm textarea {
-    font-size: 0.8em;
-  }
-
-  .contactForm textarea {
-    height: 50px;
-    resize: none;
-  }
-
-  .sendButton {
-    padding: 8px;
+    padding: 10px;
+    font-size: 0.95em;
   }
 }
 
-/* For Phones */
-@media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+/* Mobile Devices (320px - 767px) */
+@media screen and (max-width: 767px) {
   .cursor {
     display: none;
   }
 
-  /* Header Settings ------------------------ */
-  /* Hide normal navbar on phones and show menuIcon */
+  /* Header Settings */
   .navbar {
     display: none;
   }
 
   #menuIcon {
     display: block;
+    font-size: 1.8em;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
   }
 
-  /* Home Settings ------------------------ */
+  #menuIcon:hover {
+    color: var(--radical-red);
+  }
+
+  .navContainer {
+    padding-inline: 15px;
+  }
+
+  /* Sidebar Styling */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--eerie-black-2);
+    backdrop-filter: blur(10px);
+    transition: right 0.3s ease-in-out;
+    padding: 30px 20px;
+    z-index: 1000;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .sidebar.active {
+    right: 0;
+  }
+
+  #closeIcon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  #closeIcon:hover {
+    color: var(--radical-red);
+  }
+
+  .sidebarNav {
+    margin-top: 60px;
+  }
+
+  .sidebarNav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 20px 0;
+    font-size: 1.3em;
+    font-family: var(--ff-recoleta);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .sidebarNav a:hover {
+    color: var(--radical-red);
+    padding-left: 10px;
+    border-bottom-color: var(--radical-red);
+  }
+
+  /* Home Settings */
   .home {
     width: 100%;
     height: 100vh;
@@ -2063,336 +2262,1054 @@ body.active { overflow: hidden; }
     align-items: center;
     text-align: center;
     height: 100vh;
-    padding: 0;
+    padding: 0 20px;
   }
   
   .nameTitle {
-    font-size: 5em;
+    font-size: 4em;
+    margin-bottom: 15px;
   }
 
   .subTitle {
-    font-size: 3.5em;
-    transition: left 0.5s ease-in-out;
+    font-size: 2.8em;
   }
 
-  /* About Settings ------------------------ */
- .aboutContainer {
-   margin-top: 70px;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 20px;
-   padding: 10px;
- }
-
- .aboutTitle {
-   font-size: 2em;
-   text-align: center;
- }
-
- .about .section-text {
-   font-size: 0.9em;
-   text-align: center;
-   margin-bottom: 15px;
- }
-
- .education-section {
-   margin-block-end: 20px;
-   text-align: center;
- }
-
- .education-section h3 {
-   font-size: 1.4em;
-   margin-block-end: 10px;
- }
-
- .education-details {
-   padding: 12px;
-   margin: 0 10px;
-   flex-direction: column;
-   text-align: center;
- }
-
- .education-details p {
-   font-size: 0.9em;
-   margin-block-end: 5px;
- }
-
- .education-logo {
-   width: 50px;
-   height: 50px;
-   margin-top: 8px;
- }
-
- .resume-section {
-   margin-block-end: 20px;
-   text-align: center;
- }
-
- .resume-button {
-   padding: 10px 18px;
-   font-size: 1em;
-   gap: 8px;
- }
-
- .resume-button ion-icon {
-   font-size: 1.1em;
- }
-
- .perks-container {
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-   gap: 10px;
-   align-items: center;
- }
-
- .perk {
-   width: 90%;
-   min-height: 50px;
-   text-align: center;
- }
-
- .perk h3 {
-   font-size: 0.8em;
- }
-
- .perk p {
-   font-size: 0.8em;
- }
-
- .aboutImage {
-   max-width: 300px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
- }
-
-  /* Experience Settings ---------------------- */
-  .experienceTitle {
-    font-size: 3em;
-    margin-bottom: 20px;
-  }
-
-  .experienceCardContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-  }
-
-  /* Experience Card Styling */
-  .experienceCard {
+  /* About Settings */
+  .aboutContainer {
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--eerie-black);
+    gap: 25px;
     padding: 15px;
+  }
+
+  .aboutTitle {
+    font-size: 2.5em;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .about .section-text {
+    font-size: 1em;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .aboutImage {
+    max-width: 280px;
+    order: -1;
+  }
+
+  .aboutImage img {
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
   }
 
-  /* Adjust Image Styling */
-  .experienceImage {
+  .education-section {
+    margin-block-end: 25px;
+    text-align: center;
+  }
+
+  .education-section h3 {
+    font-size: 1.4em;
+    margin-block-end: 15px;
+  }
+
+  .education-details {
+    padding: 15px;
+    margin: 0 10px;
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .education-details p {
+    font-size: 0.9em;
+    margin-block-end: 8px;
+  }
+
+  .education-logo {
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+  }
+
+  .resume-section {
+    margin-block-end: 25px;
+    text-align: center;
+  }
+
+  .resume-button {
+    padding: 12px 20px;
+    font-size: 1em;
+    gap: 8px;
+  }
+
+  .resume-button ion-icon {
+    font-size: 1.1em;
+  }
+
+  .perks-container {
     width: 100%;
-    max-width: 250px;
-    height: auto;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 10px;
-  }
-
-  /* Text Content Styling */
-  .experienceInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
     padding: 0 10px;
   }
 
-  .experiencePosition {
-    font-size: 1.5em;
+  .perk {
+    width: 100%;
+    min-height: 80px;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .perk h3 {
+    font-size: 1em;
     margin-bottom: 5px;
+  }
+
+  .perk p {
+    font-size: 0.85em;
+    line-height: 1.4;
+  }
+
+  /* Experience Settings */
+  .experiencesContainer {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  .experienceTitle {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+  }
+
+  .experienceCardContainer {
+    gap: 20px;
+  }
+
+  .experienceCard {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .experienceInfo {
+    padding: 0;
+    text-align: center;
+  }
+
+  .experiencePosition {
+    font-size: 1.4em;
+    margin-bottom: 8px;
   }
 
   .experienceDuration {
-    font-size: 0.8em;
-    color: var(--white_a70);
-    margin-bottom: 5px;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .separator {
+    display: none;
   }
 
   .experienceCompany {
-    font-size: 1em;
-    color: var(--radical-red);
-    text-decoration: underline;
+    font-size: 0.95em;
     margin-bottom: 10px;
   }
 
   .experienceDescription {
     font-size: 0.9em;
-    color: var(--white_a50);
     line-height: 1.5;
-    margin-bottom: 10px;
   }
 
   .descriptionList {
     font-size: 0.85em;
-    color: var(--white_a50);
-    padding-left: 20px;
-    margin-bottom: 10px;
+    padding-left: 15px;
+    text-align: left;
   }
 
-  /* Publication Settings ------------------------ */
-  .publicationTitle {
-    font-size: 3em;
-    margin-bottom: 20px;
-  }
-
-  .publicationCardContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-  }
-
-  /* Publication Card Styling */
-  .publicationCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--eerie-black);
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-
-  /* Adjust Publication Image Styling */
-  .publicationImage {
+  .experienceImage {
     width: 100%;
     max-width: 250px;
     height: auto;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 10px;
+    aspect-ratio: 16/9;
+    margin: 0;
   }
 
-  /* Publication Text Content Styling */
+  /* Publication Settings */
+  .publicationsContainer {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  .publicationTitle {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+  }
+
+  .publicationCardContainer {
+    gap: 20px;
+  }
+
+  .publicationCard {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    gap: 15px;
+  }
+
   .publicationInfo {
-    padding: 0 10px;
+    padding: 0;
+    text-align: center;
   }
 
   .publicationInfo .publicationTitle {
-    font-size: 1.5em;
-    margin-bottom: 5px;
+    font-size: 1.4em;
+    margin-bottom: 8px;
   }
 
   .publicationDuration {
-    font-size: 0.8em;
-    color: var(--white_a70);
-    margin-bottom: 5px;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .publicationJournal {
-    font-size: 1em;
-    color: var(--radical-red);
-    text-decoration: underline;
+    font-size: 0.95em;
     margin-bottom: 10px;
   }
 
   .publicationDescription {
     font-size: 0.9em;
-    color: var(--white_a50);
     line-height: 1.5;
-    margin-bottom: 10px;
   }
 
-
-
-  /* Project Settings ------------------------ */
-  .projectCell {
-    font-size: 0.75em;
-    border-radius: 40px;
-    margin: 0px 0px;
+  .publicationImage {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    aspect-ratio: 16/9;
+    margin: 0;
   }
 
-  .subProjectTitle {
-    font-size: 3em;
+  /* Project Settings */
+  .projectsContainer {
+    padding: 15px;
   }
 
-  /* Skill Settings ------------------------- */
-  .skillsTitle {
-    font-size: 2em;
+  .projectTitle {
+    font-size: 2.5em;
   }
 
-  .skillName {
-    margin-top: 60px;
+  .carouselBtn {
+    width: 40px;
+    height: 40px;
     font-size: 1em;
   }
 
-  /* Contact Settings ------------------------ */
+  .carouselBtnLeft {
+    left: 10px;
+  }
+
+  .carouselBtnRight {
+    right: 10px;
+  }
+
+  .projectCarousel .projectCard {
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
+  }
+
+  .projectCarousel .projectCardTitle {
+    font-size: 1em;
+  }
+
+  .projectCarousel .projectDescription {
+    font-size: 0.8em;
+  }
+
+  .carouselTrack {
+    gap: 15px;
+  }
+
+  .subProjectTitle {
+    font-size: 2.5em;
+  }
+
+  .projectsCardsContainer {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 15px;
+  }
+
+  .projectCard {
+    max-width: 100%;
+  }
+
+  /* Skills Settings */
+  .skillsContainer {
+    padding: 60px 15px;
+  }
+
+  .skillsTitle {
+    font-size: 2.5em;
+  }
+
+  .skillsSubtitle {
+    font-size: 1em;
+    margin-bottom: 40px;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+
+  .skillItem {
+    padding: 15px;
+  }
+
+  .skillImage {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
+  }
+
+  .skillName {
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+
+  .certificationCardContainer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .certificationCard {
+    padding: 12px 15px;
+  }
+
+  .certificationName {
+    font-size: 1em;
+  }
+
+  .certificationSubtitle {
+    font-size: 0.8em;
+  }
+
+  .certificationImage {
+    width: 45px;
+    height: 45px;
+  }
+
+  /* Contact Settings */
+  .contact {
+    padding: 60px 15px;
+  }
+
   .contactTitle {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-bottom: 10px;
   }
 
   .contactSubTitle {
-    font-size: 1.2em;
-    margin-bottom: 15px;
+    font-size: 1.4em;
+    margin-bottom: 20px;
   }
 
-  /* Social Icons Styling */
   .socialIcons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 15px;
+    margin-bottom: 20px;
   }
 
-  .socialIcons img {
+  .social-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .contactLinks {
+    gap: 15px;
+  }
+
+  .contactLink {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .contactIcon {
     width: 40px;
     height: 40px;
-    transition: transform 0.3s;
   }
 
-  .socialIcons img:hover {
-    transform: scale(1.2);
+  .contactText {
+    font-size: 1.1em;
   }
 
-  /* Contact Form Styling */
   .contactForm {
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 10px;
+    padding: 20px;
+    gap: 8px;
   }
 
   .contactForm label {
-    font-size: 0.8em;
+    font-size: 0.9em;
     margin-bottom: 5px;
   }
 
-  .contactForm input[type="text"],
+  .contactForm input,
   .contactForm textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px;
     font-size: 0.9em;
+    border-radius: 8px;
   }
 
   .contactForm textarea {
-    height: 80px;
+    height: 100px;
     resize: vertical;
   }
 
   .sendButton {
-    width: 100%;
     padding: 12px;
-    background-color: #222222;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 0.9em;
+    border-radius: 8px;
   }
+}
+
+/* Small Mobile Devices (320px - 480px) */
+@media screen and (max-width: 480px) {
+  /* Header Settings */
+  .navContainer {
+    padding-inline: 10px;
+  }
+
+  #menuIcon {
+    font-size: 1.6em;
+  }
+
+  .sidebar {
+    width: 260px;
+    padding: 25px 15px;
+  }
+
+  /* Home Settings */
+  .nameTitle {
+    font-size: 3.5em;
+  }
+
+  .subTitle {
+    font-size: 2.4em;
+  }
+
+  /* About Settings */
+  .aboutTitle {
+    font-size: 2.2em;
+  }
+
+  .about .section-text {
+    font-size: 0.95em;
+  }
+
+  .aboutImage {
+    max-width: 250px;
+  }
+
+  .education-section h3 {
+    font-size: 1.3em;
+  }
+
+  .education-details p {
+    font-size: 0.85em;
+  }
+
+  .education-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .resume-button {
+    padding: 10px 18px;
+    font-size: 0.9em;
+  }
+
+  .perk {
+    min-height: 70px;
+    padding: 10px;
+  }
+
+  .perk h3 {
+    font-size: 0.9em;
+  }
+
+  .perk p {
+    font-size: 0.8em;
+  }
+
+  /* Experience Settings */
+  .experienceTitle {
+    font-size: 2.2em;
+  }
+
+  .experiencePosition {
+    font-size: 1.3em;
+  }
+
+  .experienceDuration {
+    font-size: 0.85em;
+  }
+
+  .experienceDescription {
+    font-size: 0.85em;
+  }
+
+  .descriptionList {
+    font-size: 0.8em;
+  }
+
+  .experienceImage {
+    max-width: 220px;
+  }
+
+  /* Publication Settings */
+  .publicationTitle {
+    font-size: 2.2em;
+  }
+
+  .publicationInfo .publicationTitle {
+    font-size: 1.3em;
+  }
+
+  .publicationDuration {
+    font-size: 0.85em;
+  }
+
+  .publicationDescription {
+    font-size: 0.85em;
+  }
+
+  .publicationImage {
+    max-width: 220px;
+  }
+
+  /* Project Settings */
+  .projectTitle {
+    font-size: 2.2em;
+  }
+
+  .projectCarousel .projectCard {
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .projectCarousel .projectCardTitle {
+    font-size: 1em;
+  }
+
+  .projectCarousel .projectDescription {
+    font-size: 0.8em;
+  }
+
+  .subProjectTitle {
+    font-size: 2.2em;
+  }
+
+  /* Skills Settings */
+  .skillsTitle {
+    font-size: 2.2em;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .skillImage {
+    width: 45px;
+    height: 45px;
+  }
+
+  .skillName {
+    font-size: 0.75em;
+  }
+
+  /* Contact Settings */
+  .contactTitle {
+    font-size: 2.2em;
+  }
+
+  .contactSubTitle {
+    font-size: 1.2em;
+  }
+
+  .social-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .contactLink {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .contactIcon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .contactText {
+    font-size: 1em;
+  }
+
+  .contactForm {
+    padding: 15px;
+  }
+
+  .contactForm label {
+    font-size: 0.85em;
+  }
+
+  .contactForm input,
+  .contactForm textarea {
+    padding: 10px;
+    font-size: 0.85em;
+  }
+
+  .contactForm textarea {
+    height: 80px;
+  }
+
+  .sendButton {
+    padding: 10px;
+    font-size: 0.85em;
+  }
+}
+
+/* Extra Small Mobile Devices (320px and below) */
+@media screen and (max-width: 320px) {
+  .nameTitle {
+    font-size: 3em;
+  }
+
+  .subTitle {
+    font-size: 2em;
+  }
+
+  .aboutTitle {
+    font-size: 2em;
+  }
+
+  .experienceTitle,
+  .publicationTitle,
+  .projectTitle,
+  .skillsTitle,
+  .contactTitle {
+    font-size: 2em;
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .sidebar {
+    width: 240px;
+  }
+
+  .sidebarNav a {
+    font-size: 1.1em;
+    margin: 15px 0;
+  }
+}
+
+/* Landscape Orientation for Mobile */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .homeContainer {
+    padding-top: 10vh;
+  }
+
+  .nameTitle {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+
+  .subTitle {
+    font-size: 2.2em;
+  }
+
+  .aboutContainer {
+    margin-top: 40px;
+    gap: 15px;
+  }
+
+  .aboutTitle {
+    font-size: 2em;
+  }
+
+  .about .section-text {
+    font-size: 0.9em;
+    margin-bottom: 15px;
+  }
+
+  .aboutImage {
+    max-width: 200px;
+  }
+
+  .perks-container {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .perk {
+    min-height: 60px;
+    padding: 8px;
+  }
+
+  .perk h3 {
+    font-size: 0.8em;
+  }
+
+  .perk p {
+    font-size: 0.7em;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .skillImage,
+  .contactIcon,
+  .social-icon,
+  .education-logo,
+  .certificationImage {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .carouselTrack {
+    animation: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --smokey-black: hsl(0, 0%, 7%);
+    --eerie-black: hsl(0, 0%, 9%);
+    --eerie-black-2: hsl(0, 0%, 11%);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .header,
+  .sidebar,
+  .carouselBtn,
+  .cursor {
+    display: none !important;
+  }
+
+  .home {
+    height: auto;
+    min-height: auto;
+  }
+
+  .homeContainer {
+    padding: 20px;
+  }
+
+  .nameTitle {
+    font-size: 2em;
+  }
+
+  .subTitle {
+    font-size: 1.5em;
+  }
+
+  .aboutContainer,
+  .experiencesContainer,
+  .publicationsContainer,
+  .projectsContainer,
+  .skillsContainer,
+  .contact {
+    padding: 20px;
+    margin: 0;
+  }
+
+  .projectCarousel {
+    display: none;
+  }
+
+  .projectsCardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Touch-friendly improvements and visual feedback */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch targets for mobile devices */
+  .navbar a,
+  .sidebarNav a,
+  .resume-button,
+  .carouselBtn,
+  .contactLink,
+  .sendButton {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Improve button feedback */
+  .resume-button:active,
+  .carouselBtn:active,
+  .sendButton:active {
+    transform: scale(0.95);
+  }
+
+  /* Better touch feedback for cards */
+  .experienceCard:active,
+  .publicationCard:active,
+  .projectCard:active,
+  .certificationCard:active {
+    transform: scale(0.98);
+  }
+
+  /* Improve form inputs for touch */
+  .contactForm input,
+  .contactForm textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 12px;
+  }
+}
+
+/* Improved focus states for accessibility */
+.resume-button:focus,
+.carouselBtn:focus,
+.contactLink:focus,
+.sendButton:focus {
+  outline: 2px solid var(--radical-red);
+  outline-offset: 2px;
+}
+
+/* Better loading states */
+.loading {
+  background: linear-gradient(135deg, var(--smokey-black), var(--eerie-black));
+}
+
+/* Improved scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--eerie-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--radical-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(346, 100%, 65%);
+}
+
+/* Smooth transitions for all interactive elements */
+.navbar a,
+.sidebarNav a,
+.resume-button,
+.carouselBtn,
+.contactLink,
+.sendButton,
+.experienceCard,
+.publicationCard,
+.projectCard,
+.certificationCard,
+.perk,
+.skillItem {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Improved hover effects for desktop */
+@media (hover: hover) {
+  .navbar a:hover,
+  .sidebarNav a:hover {
+    color: var(--radical-red);
+    transform: translateY(-2px);
+  }
+
+  .resume-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5);
+  }
+
+  .carouselBtn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .contactLink:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+  }
+
+  .experienceCard:hover,
+  .publicationCard:hover,
+  .projectCard:hover,
+  .certificationCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+  }
+
+  .perk:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .skillItem:hover .skillImage {
+    transform: scale(1.15);
+    filter: brightness(0) invert(1) opacity(1);
+  }
+
+  .skillItem:hover .skillName {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Better visual hierarchy for mobile */
+@media screen and (max-width: 767px) {
+  .section {
+    scroll-margin-top: 100px;
+  }
+
+  /* Improved spacing for mobile */
+  .aboutContainer,
+  .experiencesContainer,
+  .publicationsContainer,
+  .projectsContainer,
+  .skillsContainer,
+  .contact {
+    margin-top: 20px;
+  }
+
+  /* Better card shadows for mobile */
+  .experienceCard,
+  .publicationCard,
+  .projectCard,
+  .certificationCard {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Improved button styling for mobile */
+  .resume-button {
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+  }
+
+  .sendButton {
+    background: linear-gradient(135deg, var(--radical-red), #ff6b6b);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+  }
+
+  /* Better form styling */
+  .contactForm {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .contactForm input,
+  .contactForm textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+  }
+
+  .contactForm input:focus,
+  .contactForm textarea:focus {
+    outline: none;
+    border-color: var(--radical-red);
+    box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+  }
+
+  .contactForm input::placeholder,
+  .contactForm textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Improved sidebar backdrop */
+.sidebar::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.sidebar.active::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Better animation performance */
+.carouselTrack,
+.projectCard,
+.experienceCard,
+.publicationCard {
+  will-change: transform;
+}
+
+/* Improved text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Better image loading */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Improved focus management */
+.sidebar.active {
+  outline: none;
+}
+
+/* Better keyboard navigation */
+.resume-button:focus-visible,
+.carouselBtn:focus-visible,
+.contactLink:focus-visible,
+.sendButton:focus-visible {
+  outline: 2px solid var(--radical-red);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

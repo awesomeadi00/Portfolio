@@ -214,12 +214,71 @@ document.addEventListener("DOMContentLoaded", function () {
   // Open Sidebar on Bars Icon Click
   menuIcon.addEventListener("click", () => {
     sidebar.style.right = "0"; // Slide sidebar in
+    sidebar.classList.add("active");
+    document.body.style.overflow = "hidden"; // Prevent background scrolling
   });
 
   // Close Sidebar on Close Icon Click
   closeIcon.addEventListener("click", () => {
     sidebar.style.right = "-100%"; // Slide sidebar out
+    sidebar.classList.remove("active");
+    document.body.style.overflow = ""; // Restore scrolling
   });
+
+  // Close sidebar when clicking on a navigation link
+  const sidebarLinks = document.querySelectorAll(".sidebarNav a");
+  sidebarLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      sidebar.style.right = "-100%";
+      sidebar.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+  });
+
+  // Close sidebar when clicking outside of it
+  document.addEventListener("click", (e) => {
+    if (sidebar.classList.contains("active") && 
+        !sidebar.contains(e.target) && 
+        !menuIcon.contains(e.target)) {
+      sidebar.style.right = "-100%";
+      sidebar.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+
+  // Close sidebar on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && sidebar.classList.contains("active")) {
+      sidebar.style.right = "-100%";
+      sidebar.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+
+  // Add touch swipe to close sidebar (for mobile)
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  sidebar.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  sidebar.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const swipeDistance = touchEndX - touchStartX;
+    
+    // If swiping right (positive distance) and sidebar is open, close it
+    if (swipeDistance > swipeThreshold && sidebar.classList.contains("active")) {
+      sidebar.style.right = "-100%";
+      sidebar.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  }
 });
 
 
