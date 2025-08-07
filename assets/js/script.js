@@ -362,10 +362,10 @@ document.addEventListener('DOMContentLoaded', function() {
   let isRightPressed = false;
   let animationId = null;
   let currentSpeed = 0;
-  let defaultSpeed = 0.5; // Default auto-scroll speed
-  let maxSpeed = 3; // Maximum speed when button is held
-  let acceleration = 0.1; // Speed increase per frame when button is held
-  let deceleration = 0.05; // Speed decrease per frame when button is released
+  let defaultSpeed = 0.7; // Default auto-scroll speed (slower)
+  let maxSpeed = 3; // Maximum speed when button is held (slower max)
+  let acceleration = 0.1; // Speed increase per frame when button is held (slower acceleration)
+  let deceleration = 0.05; // Speed decrease per frame when button is released (slower deceleration)
   let autoScrollTimeout = null;
 
   // Mouse events for left button
@@ -415,6 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Left button pressed');
     isLeftPressed = true;
     isRightPressed = false;
+    currentSpeed = 0.7; // Start with slower speed
     startManualScroll();
   }
 
@@ -426,6 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Right button pressed');
     isRightPressed = true;
     isLeftPressed = false;
+    currentSpeed = -0.7; // Start with slower speed
     startManualScroll();
   }
 
@@ -541,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function startAutoScrollFromCurrentPosition() {
     let currentPosition = getCurrentTransform();
-    let autoScrollSpeed = 0.5; // Speed for auto-scroll
+    let autoScrollSpeed = 0.7; // Speed for auto-scroll (slower)
     
     function autoScroll() {
       if (!isLeftPressed && !isRightPressed) {
