@@ -103,6 +103,13 @@
 /* Prevent horizontal scrolling globally */
 html, body {
   max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure all containers respect viewport width */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 
@@ -138,6 +145,8 @@ html {
   font-size: 10px;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  /* iOS viewport fix */
+  height: -webkit-fill-available;
 }
 
 body {
@@ -147,6 +156,10 @@ body {
   font-weight: var(--fw-400);
   line-height: 2.15;
   overflow-x: hidden;
+  /* iOS viewport fix */
+  min-height: -webkit-fill-available;
+  /* Prevent bounce scrolling */
+  overscroll-behavior: none;
 }
 
 body.active { overflow: hidden; }
@@ -933,6 +946,9 @@ body.active { overflow: hidden; }
   overflow: hidden;
   position: relative;
   padding: 20px 0;
+  /* Ensure no horizontal overflow */
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 /* Carousel Control Buttons */
@@ -1140,6 +1156,9 @@ body.active { overflow: hidden; }
   
   .carouselTrack {
     gap: 15px;
+    /* Prevent horizontal overflow on mobile */
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   @keyframes scroll {
@@ -1718,12 +1737,12 @@ body.active { overflow: hidden; }
     padding: 20px 40px;
     margin-top: 80px;
   }
-
+ 
   .aboutTitle {
     font-size: 3.5em;
     text-align: center;
   }
-
+ 
   .about .section-text {
     font-size: 1.1em;
     text-align: center;
@@ -1768,21 +1787,21 @@ body.active { overflow: hidden; }
     padding: 12px 20px;
     font-size: 1em;
   }
-
+ 
   .perks-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     padding: 0 20px;
   }
-
+ 
   .perk {
     min-height: 120px;
   }
-
+ 
   .perk h3 {
     font-size: 1.1em;
   }
-
+ 
   .perk p {
     font-size: 0.9em;
   }
@@ -1984,7 +2003,7 @@ body.active { overflow: hidden; }
 /* Tablet Portrait (768px - 1023px) */
 @media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
   .cursor {
-    display: none;
+      display: none;
   }
 
   /* Header Settings */
@@ -2131,12 +2150,12 @@ body.active { overflow: hidden; }
     grid-template-columns: repeat(3, 1fr);
     gap: 35px;
   }
-
+  
   .skillImage {
     width: 65px;
     height: 65px;
   }
-
+  
   /* Contact Settings */
   .contactTitle {
     font-size: 3em;
@@ -2276,24 +2295,24 @@ body.active { overflow: hidden; }
   }
 
   /* About Settings */
-  .aboutContainer {
+ .aboutContainer {
     margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
     gap: 25px;
     padding: 15px;
-  }
+ }
 
-  .aboutTitle {
+ .aboutTitle {
     font-size: 2.5em;
-    text-align: center;
+   text-align: center;
     line-height: 1.2;
-  }
+ }
 
-  .about .section-text {
+ .about .section-text {
     font-size: 1em;
-    text-align: center;
+   text-align: center;
     margin-bottom: 20px;
     line-height: 1.6;
   }
@@ -2305,74 +2324,74 @@ body.active { overflow: hidden; }
 
   .aboutImage img {
     border-radius: 15px;
-  }
+ }
 
-  .education-section {
+ .education-section {
     margin-block-end: 25px;
-    text-align: center;
-  }
+   text-align: center;
+ }
 
-  .education-section h3 {
-    font-size: 1.4em;
+ .education-section h3 {
+   font-size: 1.4em;
     margin-block-end: 15px;
-  }
+ }
 
-  .education-details {
+ .education-details {
     padding: 15px;
-    margin: 0 10px;
-    flex-direction: column;
-    text-align: center;
+   margin: 0 10px;
+   flex-direction: column;
+   text-align: center;
     gap: 15px;
-  }
+ }
 
-  .education-details p {
-    font-size: 0.9em;
+ .education-details p {
+   font-size: 0.9em;
     margin-block-end: 8px;
-  }
+ }
 
-  .education-logo {
+ .education-logo {
     width: 60px;
     height: 60px;
     margin-top: 5px;
-  }
+ }
 
-  .resume-section {
+ .resume-section {
     margin-block-end: 25px;
-    text-align: center;
-  }
+   text-align: center;
+ }
 
-  .resume-button {
+ .resume-button {
     padding: 12px 20px;
-    font-size: 1em;
-    gap: 8px;
-  }
+   font-size: 1em;
+   gap: 8px;
+ }
 
-  .resume-button ion-icon {
-    font-size: 1.1em;
-  }
+ .resume-button ion-icon {
+   font-size: 1.1em;
+ }
 
-  .perks-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+ .perks-container {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
     gap: 12px;
-    align-items: center;
+   align-items: center;
     padding: 0 10px;
-  }
+ }
 
-  .perk {
+ .perk {
     width: 100%;
     min-height: 80px;
-    text-align: center;
+   text-align: center;
     padding: 12px;
-  }
+ }
 
-  .perk h3 {
+ .perk h3 {
     font-size: 1em;
     margin-bottom: 5px;
-  }
+ }
 
-  .perk p {
+ .perk p {
     font-size: 0.85em;
     line-height: 1.4;
   }
@@ -2540,6 +2559,9 @@ body.active { overflow: hidden; }
 
   .carouselTrack {
     gap: 15px;
+    /* Prevent horizontal overflow on mobile */
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .subProjectTitle {
@@ -2894,6 +2916,55 @@ body.active { overflow: hidden; }
   }
 }
 
+/* iOS Safari Dynamic Viewport Fix */
+@supports (-webkit-touch-callout: none) {
+  /* iOS-specific fixes */
+  html {
+    height: -webkit-fill-available;
+  }
+  
+  body {
+    min-height: -webkit-fill-available;
+    /* Prevent bounce scrolling */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Fix for dynamic viewport changes */
+  .home {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-fill-available;
+  }
+  
+  .homeContainer {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Prevent layout shifts on scroll */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    /* Use safe area insets for iOS */
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  /* Adjust main content for fixed header */
+  main {
+    padding-top: calc(80px + env(safe-area-inset-top));
+  }
+  
+  /* Fix for bottom safe area */
+  .contact {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  }
+}
+
 /* Extra Small Mobile Devices (320px and below) */
 @media screen and (max-width: 320px) {
   .nameTitle {
@@ -3128,7 +3199,7 @@ body.active { overflow: hidden; }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--radical-red);
-  border-radius: 4px;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
