@@ -1707,7 +1707,8 @@ body.active { overflow: hidden; }
   }
 
   .homeContainer {
-    padding-top: 20vh;
+    padding-top: 0;
+    justify-content: center;
   }
 
   /* About Settings */
@@ -1724,13 +1725,13 @@ body.active { overflow: hidden; }
   }
 
   .about .section-text {
-    font-size: 1.2em;
+    font-size: 1.1em;
     text-align: center;
     margin-bottom: 25px;
   }
 
   .aboutImage {
-    max-width: 50%;
+    max-width: 42%;
     order: -1;
   }
 
@@ -1789,7 +1790,7 @@ body.active { overflow: hidden; }
   /* Experience Settings */
   .experiencesContainer {
     padding: 15px 30px;
-    margin-top: 30px;
+    margin-top: 60px;
   }
 
   .experienceTitle {
@@ -1832,7 +1833,7 @@ body.active { overflow: hidden; }
   /* Publication Settings */
   .publicationsContainer {
     padding: 15px 30px;
-    margin-top: 30px;
+    margin-top: 80px;
   }
 
   .publicationTitle {
@@ -2002,7 +2003,8 @@ body.active { overflow: hidden; }
   }
 
   .homeContainer {
-    padding-top: 18vh;
+    padding-top: 0;
+    justify-content: center;
   }
 
   /* About Settings */
@@ -2020,7 +2022,7 @@ body.active { overflow: hidden; }
   }
 
   .aboutImage {
-    max-width: 45%;
+    max-width: 42%;
   }
 
   .education-section h3 {

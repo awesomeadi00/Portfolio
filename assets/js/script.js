@@ -529,13 +529,28 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function getTotalWidth() {
-    // Calculate the total width of one complete set of cards
-    const cardWidth = 350 + 30; // card width + gap
-    const mobileCardWidth = window.innerWidth <= 768 ? (280 + 20) : cardWidth;
-    const phoneCardWidth = window.innerWidth <= 480 ? (250 + 15) : cardWidth;
-    const actualCardWidth = window.innerWidth <= 480 ? phoneCardWidth : 
-                           window.innerWidth <= 768 ? mobileCardWidth : cardWidth;
+    // Calculate the total width of one complete set of cards based on screen size
+    let cardWidth, gap;
     
+    if (window.innerWidth <= 480) {
+      // Mobile phones
+      cardWidth = 250;
+      gap = 15;
+    } else if (window.innerWidth <= 768) {
+      // Mobile devices
+      cardWidth = 280;
+      gap = 20;
+    } else if (window.innerWidth <= 1199) {
+      // Tablets and small laptops
+      cardWidth = 300;
+      gap = 25;
+    } else {
+      // Desktop and larger screens
+      cardWidth = 350;
+      gap = 30;
+    }
+    
+    const actualCardWidth = cardWidth + gap;
     const totalCards = carouselTrack.children.length;
     const halfCards = Math.floor(totalCards / 2);
     return halfCards * actualCardWidth;
