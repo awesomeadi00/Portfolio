@@ -8,37 +8,120 @@ window.addEventListener("load", function () {
 });
 
 
-// iOS Safari Dynamic Viewport Fix
+// iOS Safari Dynamic Viewport Fix - Enhanced for iPhone
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 // Enhanced iOS viewport handling
 function updateViewportHeight() {
-  vh = window.innerHeight * 0.01;
+  // Get the actual viewport height
+  const actualHeight = window.innerHeight;
+  const visualHeight = window.visualViewport ? window.visualViewport.height : actualHeight;
+  
+  // Use the smaller of the two to prevent layout shifts
+  const height = Math.min(actualHeight, visualHeight);
+  vh = height * 0.01;
+  
   document.documentElement.style.setProperty('--vh', `${vh}px`);
+  document.documentElement.style.setProperty('--window-height', `${height}px`);
+  
+  // Force a reflow to ensure the changes take effect
+  document.body.offsetHeight;
 }
 
-// Handle viewport changes more robustly
+// Update viewport on various events
 window.addEventListener('resize', updateViewportHeight);
-window.addEventListener('orientationchange', updateViewportHeight);
+window.addEventListener('orientationchange', () => {
+  // Delay the update to allow orientation change to complete
+  setTimeout(updateViewportHeight, 100);
+});
 
-// iOS-specific viewport handling
+// Handle visual viewport changes (iOS Safari)
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', updateViewportHeight);
+  window.visualViewport.addEventListener('scroll', updateViewportHeight);
+}
+
+// Initial setup
+updateViewportHeight();
+
+// iOS-specific scroll handling
 if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-  // Update viewport on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    updateViewportHeight();
-    
-    // Prevent any initial viewport shifts
+  // Additional iOS viewport stabilization
+  let lastViewportHeight = window.innerHeight;
+  let viewportChangeTimeout;
+  
+  function checkViewportChange() {
+    const currentHeight = window.innerHeight;
+    if (Math.abs(currentHeight - lastViewportHeight) > 10) {
+      lastViewportHeight = currentHeight;
+      updateViewportHeight();
+      
+      // Force a reflow to ensure all elements update
+      document.body.style.transform = 'translateZ(0)';
+      requestAnimationFrame(() => {
+        document.body.style.transform = '';
+      });
+    }
+  }
+  
+  // Check for viewport changes more frequently on iOS
+  setInterval(checkViewportChange, 100);
+  
+  // Handle focus events (when user returns to the app)
+  window.addEventListener('focus', () => {
     setTimeout(updateViewportHeight, 100);
-    setTimeout(updateViewportHeight, 500);
   });
   
-  // Handle visual viewport changes (iOS Safari specific)
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', () => {
-      updateViewportHeight();
-    });
+  // Handle visibility change events
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      setTimeout(updateViewportHeight, 100);
+    }
+  });
+  // Prevent bounce scrolling on iOS
+  document.addEventListener('touchmove', function(e) {
+    if (e.target.closest('.carouselTrack')) {
+      // Allow scrolling in carousel
+      return;
+    }
+    
+    // Prevent overscroll behavior
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    
+    if (scrollTop <= 0 && e.touches[0].clientY > 0) {
+      e.preventDefault();
+    }
+    
+    if (scrollTop + clientHeight >= scrollHeight && e.touches[0].clientY < 0) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+  
+  // Handle iOS Safari address bar show/hide
+  let lastScrollTop = 0;
+  let ticking = false;
+  
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // If scroll position changed significantly, update viewport
+        if (Math.abs(currentScrollTop - lastScrollTop) > 10) {
+          updateViewportHeight();
+          lastScrollTop = currentScrollTop;
+        }
+        
+        ticking = false;
+      });
+      ticking = true;
+    }
   }
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
 // Header Javascript when the user scrolls down it adds some properties: =================================================
