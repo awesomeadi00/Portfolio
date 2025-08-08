@@ -12,10 +12,58 @@ window.addEventListener("load", function () {
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-window.addEventListener('resize', () => {
+// Enhanced iOS viewport handling
+function updateViewportHeight() {
   vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
+}
+
+// Handle viewport changes more robustly
+window.addEventListener('resize', updateViewportHeight);
+window.addEventListener('orientationchange', updateViewportHeight);
+
+// iOS-specific viewport locking
+if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+  // Prevent viewport changes on scroll
+  let lastScrollTop = 0;
+  let ticking = false;
+  
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // If scroll position hasn't changed significantly, maintain viewport
+        if (Math.abs(currentScrollTop - lastScrollTop) < 10) {
+          updateViewportHeight();
+        }
+        
+        lastScrollTop = currentScrollTop;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  
+  // Throttle scroll events to prevent excessive updates
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Lock viewport on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    updateViewportHeight();
+    
+    // Prevent any initial viewport shifts
+    setTimeout(updateViewportHeight, 100);
+    setTimeout(updateViewportHeight, 500);
+  });
+  
+  // Handle visual viewport changes (iOS Safari specific)
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+      updateViewportHeight();
+    });
+  }
+}
 
 // Header Javascript when the user scrolls down it adds some properties: =================================================
 const header = document.querySelector(".header");
