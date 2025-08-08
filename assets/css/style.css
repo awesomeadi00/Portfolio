@@ -3018,6 +3018,8 @@ body.active { overflow: hidden; }
     /* Prevent any default margins/padding */
     margin: 0;
     padding: 0;
+    /* Ensure proper scrolling */
+    overflow-x: hidden;
   }
   
   body {
@@ -3028,6 +3030,8 @@ body.active { overflow: hidden; }
     /* Ensure no extra spacing */
     margin: 0;
     padding: 0;
+    /* Ensure proper scrolling */
+    overflow-x: hidden;
   }
   
   /* Ensure loading screen covers everything on iOS */
@@ -3093,8 +3097,7 @@ body.active { overflow: hidden; }
   
   /* Prevent any section from causing layout shifts */
   .section {
-    /* Ensure sections don't cause viewport changes */
-    transform: translateZ(0);
+    /* Ensure sections don't cause viewport changes - handled above */
   }
   
   /* Ensure all containers respect the fixed viewport */
@@ -3103,8 +3106,7 @@ body.active { overflow: hidden; }
   .publicationsContainer,
   .projectsContainer,
   .skillsContainer {
-    /* Prevent any layout shifts */
-    transform: translateZ(0);
+    /* Prevent any layout shifts - handled above */
   }
   
   /* Lock sidebar position */
@@ -3125,10 +3127,22 @@ body.active { overflow: hidden; }
   }
   
   /* Prevent any element from causing viewport changes */
-  * {
+  /* Only apply hardware acceleration to specific elements that need it */
+  .header,
+  .sidebar,
+  .loading,
+  .section,
+  .aboutContainer,
+  .experiencesContainer,
+  .publicationsContainer,
+  .projectsContainer,
+  .skillsContainer {
     /* Force hardware acceleration to prevent layout shifts */
     transform: translateZ(0);
-    /* Prevent any margin/padding issues */
+  }
+  
+  /* Ensure proper box-sizing for all elements */
+  * {
     box-sizing: border-box;
   }
   
@@ -3143,8 +3157,7 @@ body.active { overflow: hidden; }
   .loading {
     /* Prevent any transform changes that might cause viewport shifts */
     will-change: auto;
-    /* Force hardware acceleration */
-    transform: translateZ(0);
+    /* Force hardware acceleration - handled above */
   }
   
   /* Ensure all sections maintain their position */
@@ -3153,8 +3166,7 @@ body.active { overflow: hidden; }
     display: block;
     /* Ensure proper stacking */
     position: relative;
-    /* Prevent any transform issues */
-    transform: translateZ(0);
+    /* Prevent any transform issues - handled above */
   }
   
   /* Prevent any padding/margin issues on mobile */
@@ -3168,8 +3180,7 @@ body.active { overflow: hidden; }
       /* Ensure consistent spacing */
       margin: 0;
       padding: 20px;
-      /* Prevent any layout shifts */
-      transform: translateZ(0);
+      /* Prevent any layout shifts - handled above */
     }
   }
 }
