@@ -3018,11 +3018,6 @@ body.active { overflow: hidden; }
     /* Prevent any default margins/padding */
     margin: 0;
     padding: 0;
-    /* Lock viewport to prevent dynamic changes */
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
   }
   
   body {
@@ -3030,40 +3025,9 @@ body.active { overflow: hidden; }
     /* Prevent bounce scrolling */
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
-    /* Lock body to prevent dynamic changes */
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
     /* Ensure no extra spacing */
     margin: 0;
     padding: 0;
-  }
-  
-  /* Create a scrollable container for the main content */
-  main {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    /* Use momentum scrolling for smooth experience */
-    -webkit-overflow-scrolling: touch;
-    /* Prevent any default margins/padding */
-    margin: 0;
-    padding: 0;
-    /* Ensure proper z-index */
-    z-index: 1;
-  }
-  
-  /* Ensure article has no extra spacing */
-  article {
-    padding-top: 0;
-    margin-top: 0;
-    /* Ensure full height */
-    min-height: 100%;
   }
   
   /* Ensure loading screen covers everything on iOS */
@@ -3090,7 +3054,6 @@ body.active { overflow: hidden; }
     top: 0;
     /* Ensure full viewport coverage */
     width: 100%;
-    overflow: hidden;
   }
   
   .homeContainer {
@@ -3121,8 +3084,6 @@ body.active { overflow: hidden; }
     padding-top: env(safe-area-inset-top);
     /* Ensure header doesn't create extra space */
     margin: 0;
-    /* Lock header position */
-    transform: translateZ(0);
   }
   
   /* Fix for bottom safe area */
@@ -3134,9 +3095,6 @@ body.active { overflow: hidden; }
   .section {
     /* Ensure sections don't cause viewport changes */
     transform: translateZ(0);
-    /* Prevent any margin/padding issues */
-    margin: 0;
-    padding: 0;
   }
   
   /* Ensure all containers respect the fixed viewport */
@@ -3212,62 +3170,6 @@ body.active { overflow: hidden; }
       padding: 20px;
       /* Prevent any layout shifts */
       transform: translateZ(0);
-    }
-  }
-  
-  /* Additional iOS Safari specific fixes */
-  @supports (-webkit-touch-callout: none) and (max-width: 767px) {
-    /* Prevent address bar from affecting viewport */
-    body {
-      /* Use viewport units that account for dynamic UI */
-      height: 100vh;
-      height: -webkit-fill-available;
-      /* Prevent any overflow */
-      overflow: hidden;
-      /* Lock position */
-      position: fixed;
-      width: 100%;
-    }
-    
-    /* Ensure main content is scrollable */
-    main {
-      /* Use viewport units that account for dynamic UI */
-      height: 100vh;
-      height: -webkit-fill-available;
-      /* Enable scrolling */
-      overflow-y: auto;
-      overflow-x: hidden;
-      /* Use momentum scrolling */
-      -webkit-overflow-scrolling: touch;
-      /* Prevent any margin/padding */
-      margin: 0;
-      padding: 0;
-    }
-    
-    /* Prevent any element from causing viewport changes */
-    .home,
-    .homeContainer {
-      /* Use viewport units that account for dynamic UI */
-      height: 100vh;
-      height: -webkit-fill-available;
-      /* Prevent any overflow */
-      overflow: hidden;
-      /* Remove any margin/padding */
-      margin: 0;
-      padding: 0;
-    }
-    
-    /* Ensure header stays fixed */
-    .header {
-      /* Use safe area insets */
-      padding-top: env(safe-area-inset-top);
-      /* Ensure it stays on top */
-      z-index: 1000;
-      /* Lock position */
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
     }
   }
 }

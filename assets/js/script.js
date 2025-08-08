@@ -22,33 +22,9 @@ function updateViewportHeight() {
 window.addEventListener('resize', updateViewportHeight);
 window.addEventListener('orientationchange', updateViewportHeight);
 
-// iOS-specific viewport locking
+// iOS-specific viewport handling
 if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-  // Prevent viewport changes on scroll
-  let lastScrollTop = 0;
-  let ticking = false;
-  
-  function handleScroll() {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // If scroll position hasn't changed significantly, maintain viewport
-        if (Math.abs(currentScrollTop - lastScrollTop) < 10) {
-          updateViewportHeight();
-        }
-        
-        lastScrollTop = currentScrollTop;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-  
-  // Throttle scroll events to prevent excessive updates
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  
-  // Lock viewport on page load
+  // Update viewport on page load
   document.addEventListener('DOMContentLoaded', () => {
     updateViewportHeight();
     
