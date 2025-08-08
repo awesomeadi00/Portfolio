@@ -1009,18 +1009,10 @@ body.active { overflow: hidden; }
 .carouselTrack {
   display: flex;
   gap: 30px;
-  animation: scroll 60s linear infinite;
   width: max-content;
   will-change: transform;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-50% - 15px));
-  }
+  /* Remove the CSS animation - let JavaScript handle it entirely */
+  transform: translate3d(0, 0, 0); /* Use transform3d for better hardware acceleration on mobile */
 }
 
 /* Project Card Styling for Carousel */
@@ -1135,14 +1127,7 @@ body.active { overflow: hidden; }
     gap: 20px;
   }
   
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-50% - 10px));
-    }
-  }
+  /* CSS animation removed - handled by JavaScript */
 }
 
 @media screen and (max-width: 480px) {
@@ -1177,14 +1162,7 @@ body.active { overflow: hidden; }
     box-sizing: border-box;
   }
   
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-50% - 7.5px));
-    }
-  }
+  /* CSS animation removed - handled by JavaScript */
 }
 
 /* Sub-Pages Styling for Project Cards: ============================================================================================ */

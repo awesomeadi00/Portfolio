@@ -357,7 +357,8 @@ window.addEventListener("resize", function() {
 
 
 // Project Carousel Controls ===================================================================================
-document.addEventListener('DOMContentLoaded', function() {
+// Start carousel initialization as soon as possible
+function initCarousel() {
   const carouselTrack = document.querySelector('.carouselTrack');
   const leftBtn = document.getElementById('carouselBtnLeft');
   const rightBtn = document.getElementById('carouselBtnRight');
@@ -371,10 +372,12 @@ document.addEventListener('DOMContentLoaded', function() {
   let isRightPressed = false;
   let animationId = null;
   let currentSpeed = 0;
-  let defaultSpeed = 0.7; // Default auto-scroll speed (slower)
-  let maxSpeed = 3; // Maximum speed when button is held (slower max)
-  let acceleration = 0.1; // Speed increase per frame when button is held (slower acceleration)
-  let deceleration = 0.05; // Speed decrease per frame when button is released (slower deceleration)
+  // Optimize speeds for mobile devices
+  const isMobile = window.innerWidth <= 768;
+  let defaultSpeed = isMobile ? 0.5 : 0.7; // Slightly slower on mobile for better performance
+  let maxSpeed = isMobile ? 2 : 3; // Lower max speed on mobile
+  let acceleration = isMobile ? 0.08 : 0.1; // Slower acceleration on mobile
+  let deceleration = isMobile ? 0.04 : 0.05; // Slower deceleration on mobile
   let autoScrollTimeout = null;
 
   // Mouse events for left button
@@ -393,6 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
     startLeftScroll();
   });
   leftBtn.addEventListener('touchend', () => stopLeftScroll());
+  leftBtn.addEventListener('touchcancel', () => stopLeftScroll());
 
   // Touch events for right button
   rightBtn.addEventListener('touchstart', (e) => {
@@ -400,6 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
     startRightScroll();
   });
   rightBtn.addEventListener('touchend', () => stopRightScroll());
+  rightBtn.addEventListener('touchcancel', () => stopRightScroll());
 
   // Keyboard events for arrow keys
   document.addEventListener('keydown', (e) => {
@@ -457,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
       animationId = null;
     }
     
-    // Completely disable the CSS animation
+    // Ensure CSS animation is disabled and get current position
     carouselTrack.style.animation = 'none';
     
     // Start manual scrolling
@@ -506,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
       
-      carouselTrack.style.transform = `translateX(${newTransform}px)`;
+      carouselTrack.style.transform = `translate3d(${newTransform}px, 0, 0)`;
       
       // console.log('Scrolling:', { 
       //   isLeftPressed, 
@@ -579,7 +584,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function startAutoScrollFromCurrentPosition() {
     let currentPosition = getCurrentTransform();
-    let autoScrollSpeed = 0.7; // Speed for auto-scroll (slower)
+    let autoScrollSpeed = defaultSpeed; // Use the same speed as default for consistency
     
     function autoScroll() {
       if (!isLeftPressed && !isRightPressed) {
@@ -591,7 +596,7 @@ document.addEventListener('DOMContentLoaded', function() {
           currentPosition += totalWidth;
         }
         
-        carouselTrack.style.transform = `translateX(${currentPosition}px)`;
+        carouselTrack.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
         animationId = requestAnimationFrame(autoScroll);
       }
     }
@@ -601,10 +606,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize the carousel with manual control from the start
   function initializeCarousel() {
-    // Disable CSS animation immediately
+    // Ensure no CSS animation is running
     carouselTrack.style.animation = 'none';
+    carouselTrack.style.transform = 'translate3d(0, 0, 0)';
     
-    // Start auto-scroll from the beginning
+    // Start auto-scroll from the beginning immediately
     startAutoScrollFromCurrentPosition();
   }
 
@@ -612,17 +618,31 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', () => {
     // Reset carousel position on resize
     if (!isLeftPressed && !isRightPressed) {
-      carouselTrack.style.transform = '';
-      carouselTrack.style.animation = '';
+      carouselTrack.style.transform = 'translate3d(0, 0, 0)';
+      carouselTrack.style.animation = 'none';
+      // Restart auto-scroll after resize
+      setTimeout(() => {
+        startAutoScrollFromCurrentPosition();
+      }, 100);
     }
   });
 
   // Add grab cursor on hover
   carouselTrack.style.cursor = 'grab';
   
-  // Initialize the carousel
-  initializeCarousel();
-});
+  // Initialize the carousel with a small delay to ensure smooth start on mobile
+  setTimeout(() => {
+    initializeCarousel();
+  }, 100);
+}
+
+// Initialize carousel as soon as possible
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCarousel);
+} else {
+  // DOM is already loaded
+  initCarousel();
+}
 
 
 
