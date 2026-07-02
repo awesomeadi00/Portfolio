@@ -2,9 +2,22 @@
 'use strict';
 const loadingElement = document.querySelector("[data-loading]");
 
-window.addEventListener("load", function () {
-  loadingElement.classList.add("loaded");
+// Reveals the page: hides the loading overlay and removes `active` (which sets
+// `overflow: hidden` on the body). This is idempotent so it's safe to call more
+// than once.
+const revealPage = function () {
+  if (loadingElement) loadingElement.classList.add("loaded");
   document.body.classList.remove("active");
+};
+
+// Primary trigger: everything finished loading.
+window.addEventListener("load", revealPage);
+
+// Safety net: if `load` is delayed or blocked by a slow/failed external resource
+// (e.g. the Font Awesome kit or an image), never leave the page stuck with
+// `overflow: hidden` — reveal it shortly after the DOM is ready regardless.
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(revealPage, 2000);
 });
 
 

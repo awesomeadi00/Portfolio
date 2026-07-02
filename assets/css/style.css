@@ -69,6 +69,10 @@
   --radius-5: 5px;
   --radius-25: 25px;
 
+/* Image aspect ratios (keep photo cropping consistent across devices) */
+  --img-ratio-side: 4 / 3;   /* experience & publication side photos */
+  --img-ratio-card: 16 / 9;  /* project card cover photos */
+
 /* Transitions */
   --transition-1: 0.25s ease;
   --transition-2: 0.5s ease;
@@ -112,10 +116,15 @@
   box-sizing: border-box;
 }
 
-/* Prevent horizontal scrolling globally */
+/* Prevent horizontal scrolling globally.
+   NOTE: use `overflow-x: clip`, NOT `hidden`. `hidden` forces `overflow-y` to
+   compute to `auto`, turning html/body into nested scroll containers that trap
+   the wheel/trackpad and break vertical page scrolling (especially once the
+   `body.active` load lock is removed). `clip` prevents horizontal overflow
+   without creating a scroll container, so normal page scrolling is preserved. */
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Ensure all containers respect viewport width */
@@ -156,8 +165,11 @@ html {
   font-family: var(--ff-gordita);
   font-size: 10px;
   -webkit-overflow-scrolling: touch;
-  /* iOS viewport fix */
-  height: -webkit-fill-available;
+  /* NOTE: `height: -webkit-fill-available` was removed here. On desktop it
+     pins <html> to the viewport height and, together with overflow-x: hidden,
+     turns the root into a fixed-height box that clips content and prevents
+     the page from scrolling. The iOS viewport fix that actually needs it is
+     scoped to the `@supports (-webkit-touch-callout: none)` block below. */
   /* Prevent any default margins/padding */
   margin: 0;
   padding: 0;
@@ -169,7 +181,7 @@ body {
   font-size: 1.6rem;
   font-weight: var(--fw-400);
   line-height: 2.15;
-  overflow-x: hidden;
+  overflow-x: clip;
   /* iOS viewport fix */
   min-height: -webkit-fill-available;
   /* Prevent bounce scrolling */
@@ -447,7 +459,7 @@ body.active { overflow: hidden; }
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image: linear-gradient(to bottom, transparent, transparent 40%, hsl(0, 0%, 7%) 100%);
   z-index: 2;
 }
@@ -455,7 +467,12 @@ body.active { overflow: hidden; }
 .homeContainer {
   position: relative;
   width: 100%;
+  /* Use svh (small viewport height) so the hero stays a fixed size when mobile
+     browsers show/hide their toolbar. Plain vh reacts to the toolbar and makes
+     the hero + background visibly grow/shrink on every scroll. vh is the
+     fallback for browsers without svh support. */
   height: 100vh;
+  height: 100svh;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -463,6 +480,7 @@ body.active { overflow: hidden; }
   align-items: center;
   text-align: center;
   padding-top: 25vh;
+  padding-top: 25svh;
 }
 
 .nameTitle {
@@ -548,6 +566,7 @@ body.active { overflow: hidden; }
 .aboutContainer {
   width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -834,12 +853,15 @@ body.active { overflow: hidden; }
 
 /* Image Styling */
 .experienceImage {
-  width: 180px; 
-  height: 140px;
+  width: clamp(150px, 15vw, 190px);
+  aspect-ratio: var(--img-ratio-side);
+  height: auto;
   object-fit: cover;
+  object-position: center;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-left: 10px; 
+  margin-left: 10px;
+  flex-shrink: 0;
 }
 
 /* Publications Section: ============================================================================================ */
@@ -936,17 +958,21 @@ body.active { overflow: hidden; }
 }
 
 .publicationImage {
-  width: 180px; 
-  height: 140px;
+  width: clamp(150px, 15vw, 190px);
+  aspect-ratio: var(--img-ratio-side);
+  height: auto;
   object-fit: cover;
+  object-position: center;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-left: 10px; 
+  margin-left: 10px;
+  flex-shrink: 0;
 }
 
 /* Projects Section: ============================================================================================ */
 .projects {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1072,9 +1098,11 @@ body.active { overflow: hidden; }
 
 .projectCarousel .projectImage {
   width: 100%;
-  height: 200px;
+  aspect-ratio: var(--img-ratio-card);
+  height: auto;
   object-fit: cover;
-  border-radius: 3%;
+  object-position: center;
+  border-radius: 0;
 }
 
 .projectCarousel .projectInfo {
@@ -1269,9 +1297,11 @@ body.active { overflow: hidden; }
 
 .projectImage {
   width: 100%;
-  height: 200px;
+  aspect-ratio: var(--img-ratio-card);
+  height: auto;
   object-fit: cover;
-  border-radius: 3%;
+  object-position: center;
+  border-radius: 0;
 }
 
 .projectInfo {
@@ -1905,8 +1935,7 @@ body.active { overflow: hidden; }
   }
 
   .experienceImage {
-    width: 200px;
-    height: 150px;
+    width: min(60%, 320px);
     margin-left: 0;
   }
 
@@ -1947,8 +1976,7 @@ body.active { overflow: hidden; }
   }
 
   .publicationImage {
-    width: 200px;
-    height: 150px;
+    width: min(60%, 320px);
     margin-left: 0;
   }
 
@@ -2157,8 +2185,7 @@ body.active { overflow: hidden; }
   }
 
   .experienceImage {
-    width: 180px;
-    height: 130px;
+    width: min(55%, 300px);
   }
 
   /* Publication Settings */
@@ -2183,8 +2210,7 @@ body.active { overflow: hidden; }
   }
 
   .publicationImage {
-    width: 180px;
-    height: 130px;
+    width: min(55%, 300px);
   }
 
   /* Project Settings */
@@ -2348,6 +2374,7 @@ body.active { overflow: hidden; }
   .home {
     width: 100%;
     height: 100vh;
+    height: 100svh;
     /* Remove any potential gaps */
     padding-top: 0;
     margin-top: 0;
@@ -2362,6 +2389,7 @@ body.active { overflow: hidden; }
     align-items: center;
     text-align: center;
     height: 100vh;
+    height: 100svh;
     padding: 0 20px;
     /* Remove any potential gaps */
     margin-top: 0;
@@ -2542,22 +2570,11 @@ body.active { overflow: hidden; }
 
   .experienceImage {
     width: 100%;
-    max-width: 250px;
+    max-width: 280px;
     height: auto;
-    aspect-ratio: 16/9;
     margin: 0;
-    /* Improve image quality on mobile */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-    /* Better scaling for mobile */
     object-fit: cover;
     object-position: center;
-    /* Prevent blurry images on high-DPI displays */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    /* Optimize for mobile performance */
-    will-change: transform;
   }
 
   /* Publication Settings */
@@ -2613,22 +2630,11 @@ body.active { overflow: hidden; }
 
   .publicationImage {
     width: 100%;
-    max-width: 250px;
+    max-width: 280px;
     height: auto;
-    aspect-ratio: 16/9;
     margin: 0;
-    /* Improve image quality on mobile */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-    /* Better scaling for mobile */
     object-fit: cover;
     object-position: center;
-    /* Prevent blurry images on high-DPI displays */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    /* Optimize for mobile performance */
-    will-change: transform;
   }
 
   /* Project Settings */
@@ -2926,14 +2932,7 @@ body.active { overflow: hidden; }
   }
 
   .experienceImage {
-    max-width: 220px;
-    /* Improve image quality on small mobile devices */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    object-fit: cover;
-    object-position: center;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    max-width: 240px;
   }
 
   /* Publication Settings */
@@ -2956,14 +2955,7 @@ body.active { overflow: hidden; }
   }
 
   .publicationImage {
-    max-width: 220px;
-    /* Improve image quality on small mobile devices */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    object-fit: cover;
-    object-position: center;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    max-width: 240px;
   }
 
   /* Project Settings */
@@ -3105,11 +3097,14 @@ body.active { overflow: hidden; }
       height: -webkit-fill-available !important;
     }
   
-  /* Fix for dynamic viewport changes */
+  /* Keep the hero a fixed size while the mobile toolbar shows/hides.
+     Previously this used `calc(var(--vh) * 100)`, which was updated by JS on
+     every resize (i.e. every toolbar animation) and caused the hero and its
+     background to visibly grow/shrink. `svh` is the stable small-viewport
+     height and needs no JS. */
   .home {
     height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: -webkit-fill-available;
+    height: 100svh;
     /* Remove extra top space on iOS */
     padding-top: 0;
     margin-top: 0;
@@ -3123,8 +3118,7 @@ body.active { overflow: hidden; }
   
   .homeContainer {
     height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: -webkit-fill-available;
+    height: 100svh;
     /* Remove extra top space on iOS */
     padding-top: 0;
     margin-top: 0;
