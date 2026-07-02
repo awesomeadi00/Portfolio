@@ -58,7 +58,12 @@
 
       <!-- Sidebar (For Phones) -->
       <div class="sidebar" id="sidebar">
-        <i class="fa-solid fa-x" id="closeIcon"></i>
+        <div class="sidebarHeader">
+          <span class="sidebarTitle">Menu</span>
+          <button type="button" class="sidebarClose" id="closeIcon" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
         <nav class="sidebarNav">
           <a href="#about">About</a>
           <a href="#experiences">Experiences</a>
@@ -98,8 +103,8 @@
             <br>
 
             <p class="section-text"  data-reveal="right">
-              A passionate computer scientist specializing in <em class="em">AI, Machine Learning, Deep Learning Applications and Data Analysis</em>.
-              I've dedicated my craft towards developing projects as a passion for learning about the world. Check out some of my projects and feel free to get in touch!
+              A passionate computer scientist specializing in <em class="em">AI, Machine/Deep Learning, Software Engineering and Data Analysis</em>.
+              I dedicate my craft to developing projects which have impact and solve real world problems. Check out some of my projects and feel free to get in touch!
             </p>
 
             <div class="education-section" data-reveal="right">
@@ -139,6 +144,7 @@
           <div class="experienceCardContainer">
             <div class="experienceCard" data-reveal>
               <div class="experienceInfo">
+                <div class="experienceHeading">
                 <h3 class="experiencePosition">AI Trainer | Model Validation Expert Fellowship</h3>
                 <p class="experienceDuration">
                   Aug 2025 - Oct 2025
@@ -147,20 +153,22 @@
                     Handshake AI - OpenAI
                   </a>
                 </p>
-                <p class="experienceDescription">
+                </div>
+                <div class="experienceDescription">
                   <ul class="descriptionList">
-                    <li>Partnered with leading AI research labs to evaluate and train cutting-edge LLMs. </li>
-                    <li>Assessed 1,000+ QA LLM outputs based on reasoning, summarization, and dialogue benchmarks.</li>
-                    <li>Reviewed 100+ GenAI images to identify visual inconsistencies and enhance GenAI models.</li>
-                    <li>Delivered evaluations reports with cross-functional teams, directly influencing model retraining.</li>
+                    <li>Evaluated &amp; trained cutting-edge <span class="hl">LLMs</span> with leading AI research labs.</li>
+                    <li>Assessed <span class="hl">1,000+ LLM outputs</span> on reasoning, summarization &amp; dialogue.</li>
+                    <li>Reviewed <span class="hl">100+ GenAI images</span> to fix visual inconsistencies.</li>
+                    <li>Delivered evaluation reports that directly shaped <span class="hl">model retraining</span>.</li>
                   </ul>
-                </p>
+                </div>
               </div>
               <img src="./assets/images/experiences/handshake.png" alt="handshake" class="experienceImage">
             </div>
 
             <div class="experienceCard" data-reveal>
               <div class="experienceInfo">
+                <div class="experienceHeading">
                 <h3 class="experiencePosition">Laboratory Assistant</h3>
                 <p class="experienceDuration">
                   Sep 2024 - Dec 2024
@@ -169,42 +177,46 @@
                     New York University Abu Dhabi - Interactive Media Department
                   </a>
                 </p>
-                <p class="experienceDescription">
+                </div>
+                <div class="experienceDescription">
                   <ul class="descriptionList">
-                    <li>Trained and assisted 50+ students and faculty in using 3D modeling tools, printers, soldering equipment, and laser cutters. </li>
-                    <li>Delivered 5+ structured tool trainings for fabrication and general equipment usage.</li>
-                    <li>Improved student access and efficiency by helping build an automated inventory database, reducing material lookup time by ~45%.</li>
-                    <li>Provided hands-on guidance for physical computing and technical projects, helping students debug and refine interactive prototypes.</li>
-                    <li>Acted as a general technical support point for all classes within the lab, ensuring tools were operational, safe, and accessible.</li>
+                    <li>Trained <span class="hl">50+ students &amp; faculty</span> on 3D printers, soldering &amp; laser cutters.</li>
+                    <li>Ran <span class="hl">5+ tool trainings</span> for fabrication equipment.</li>
+                    <li>Built an automated inventory database, cutting lookup time by <span class="hl">~45%</span>.</li>
+                    <li>Guided physical computing projects, debugging interactive prototypes.</li>
+                    <li>Acted as lead technical support, keeping all lab tools operational &amp; safe.</li>
                   </ul>
-                </p>
+                </div>
               </div>
               <img src="./assets/images/experiences/nyuad.png" alt="nyuad" class="experienceImage">
             </div>
 
             <div class="experienceCard" data-reveal>
               <div class="experienceInfo">
+                <div class="experienceHeading">
                 <h3 class="experiencePosition">GenAI | Backend Software Engineer Intern</h3>
                 <p class="experienceDuration">
                   Jun 2024 - Aug 2024 
                   <span class="separator">|</span> 
                   <a href="https://aistra.com/" target="_blank" class="experienceCompany">Aistra Labs</a>
                 </p>
-                <p class="experienceDescription">
+                </div>
+                <div class="experienceDescription">
                   <ul class="descriptionList">
-                    <li>Developed two LLM-powered chatbots (Unit Planner, IEP Assistant) using prompt engineering and custom interfaces, cutting teachers’ planning workload by ~20%.</li>
-                    <li>Designed and deployed teacher-facing interfaces for curriculum inputs (grades, objectives), generating structured, tailored lesson plans.</li>
-                    <li>Built multilingual support in 40+ languages by integrating translation pipelines, improving classroom accessibility.</li>
-                    <li>Engineered export features (PDF, Word, Google Docs) and authored open-source package MarkGDoc, reducing doc creation time by 70%.</li>
-                    <li>Refactored backend systems to cut duplication and enable faster prototyping through reusable, modular routes and functions.</li>
+                    <li>Built two <span class="hl">LLM-powered chatbots</span>, cutting planning workload by <span class="hl">~20%</span>.</li>
+                    <li>Designed teacher-facing interfaces generating tailored lesson plans.</li>
+                    <li>Added <span class="hl">multilingual support in 40+ languages</span> via translation pipelines.</li>
+                    <li>Built PDF/Word/Docs export &amp; authored open-source <span class="hl">MarkGDoc</span> (<span class="hl">&minus;70%</span> doc time).</li>
+                    <li>Refactored backend into reusable, modular routes for faster prototyping.</li>
                   </ul>
-                </p>
+                </div>
               </div>
               <img src="./assets/images/experiences/aistra.jpeg" alt="aistra" class="experienceImage">
             </div>
 
             <div class="experienceCard" data-reveal>
               <div class="experienceInfo">
+                <div class="experienceHeading">
                 <h3 class="experiencePosition">Equipment Data Management Assistant</h3>
                 <p class="experienceDuration">
                   Jan 2023 - May 2023
@@ -213,20 +225,22 @@
                     New York University Abu Dhabi - Arts Center
                   </a>
                 </p>
-                <p class="experienceDescription">
+                </div>
+                <div class="experienceDescription">
                   <ul class="descriptionList">
-                    <li>Oversaw the booking, tracking, and upkeep of 300+ film, audio, and media devices, including cameras, mics, lighting, and VR gear.</li>
-                    <li>Maintained and improved the central inventory database, enhancing equipment accessibility and reducing booking friction.</li>
-                    <li>Assisted with equipment setup and teardown; conducted hardware repairs like soldering, rewiring, diagnostics to minimize downtime.</li>
-                    <li>Optimized check-in/out workflows and ensured all gear was prepped for upcoming bookings, improving turnaround and accountability.</li>
+                    <li>Managed <span class="hl">300+ film, audio &amp; media devices</span> (cameras, mics, lighting, VR).</li>
+                    <li>Improved the central inventory database, reducing booking friction.</li>
+                    <li>Performed hardware repairs &mdash; soldering, rewiring &amp; diagnostics &mdash; to cut downtime.</li>
+                    <li>Streamlined check-in/out workflows for faster turnaround.</li>
                   </ul>
-                </p>
+                </div>
               </div>
               <img src="./assets/images/experiences/nyuad.png" alt="nyuad" class="experienceImage">
             </div>
 
             <div class="experienceCard" data-reveal>
               <div class="experienceInfo">
+                <div class="experienceHeading">
                 <h3 class="experiencePosition">Job Shadow Intern</h3>
                 <p class="experienceDuration">
                   Jan 2019 - Feb 2019
@@ -235,13 +249,14 @@
                     3M LTD. Gulf
                   </a>
                 </p>
-                <p class="experienceDescription">
+                </div>
+                <div class="experienceDescription">
                   <ul class="descriptionList">
-                    <li>Observed workflows across Finance, Marketing, HR, and R&D to understand core functions and interdependencies.</li>
-                    <li>Conducted primary and secondary research on selected product lines and competitors in the Gulf region.</li>
-                    <li>Delivered presentations to department leads, showcasing competitive analyses and improvement strategies based on observations and market insights</li>
+                    <li>Shadowed workflows across <span class="hl">Finance, Marketing, HR &amp; R&amp;D</span>.</li>
+                    <li>Researched product lines &amp; competitors in the <span class="hl">Gulf region</span>.</li>
+                    <li>Presented competitive analyses &amp; strategies to department leads.</li>
                   </ul>
-                </p>
+                </div>
               </div>
               <img src="./assets/images/experiences/3m.jpg" alt="3m" class="experienceImage">
             </div>
@@ -260,6 +275,7 @@
             <!-- Publication Card 1 -->
             <div class="publicationCard" data-reveal>
               <div class="publicationInfo">
+                <div class="publicationHeading">
                 <h3 class="publicationTitle">vER: Virtual Human Companionship for Patients in Preoperative Care</h3>
                 <p class="publicationDuration">
                   May 2025
@@ -268,6 +284,7 @@
                     IMX - ACM Conference
                   </a>
                 </p>
+                </div>
                 <p class="publicationDescription">
                   Developed a VR application that uses AI-driven virtual agents to provide social support to pre-operative surgery patients. Unlike typical VR interventions focused on meditation or procedural info, our approach leverages virtual social presence to reduce stress.
                 </p>

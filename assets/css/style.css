@@ -402,34 +402,100 @@ body.active { overflow: hidden; }
   position: fixed;
   top: 0;
   right: -100%;   /* Hidden off-screen */
-  width: 200px;
+  width: min(82vw, 340px);
   height: 100vh;
-  background-color: var(--eerie-black);
-  transition: right 0.4s ease-in-out;
-  padding: 20px;
-  z-index: 20;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  height: 100svh;
+  background-color: hsla(0, 0%, 7%, 0.92);
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+  border-left: 1px solid var(--card-line);
+  box-shadow: -24px 0 60px hsla(0, 0%, 0%, 0.55);
+  transition: right 0.42s var(--cubic-out);
+  padding: calc(28px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom));
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Close Icon in Sidebar */
-#closeIcon {
-  font-size: 2em;
-  color: white;
+.sidebar.active { right: 0; }
+
+/* Sidebar Header (title + close button) */
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--card-line);
+}
+
+.sidebarTitle {
+  font-family: var(--ff-recoleta);
+  font-size: 1.2em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white_a50);
+}
+
+.sidebarClose {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-content: center;
+  border-radius: var(--radius-circle);
+  background: var(--card-line);
+  color: var(--white);
+  font-size: 1.15em;
   cursor: pointer;
-  margin-bottom: 20px;
+  transition: background 0.25s ease, transform 0.35s var(--cubic-out);
+}
+
+.sidebarClose:hover,
+.sidebarClose:focus-visible {
+  background: var(--radical-red);
+  transform: rotate(90deg);
 }
 
 /* Sidebar Links */
-.sidebarNav a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  margin: 15px 0;
-  font-size: 1.2em;
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 20px;
 }
 
-.sidebarNav a:hover {
-  color: var(--radical-red);
+.sidebarNav a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--ff-recoleta);
+  font-size: 1.4em;
+  color: var(--white_a70);
+  text-decoration: none;
+  padding: 14px 16px;
+  border-radius: 14px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.sidebarNav a::before {
+  content: "";
+  width: 0;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--radical-red);
+  transition: width 0.25s var(--cubic-out);
+}
+
+.sidebarNav a:hover,
+.sidebarNav a:focus-visible {
+  color: var(--white);
+  background: var(--card-line);
+  transform: translateX(6px);
+}
+
+.sidebarNav a:hover::before,
+.sidebarNav a:focus-visible::before {
+  width: 4px;
 }
 
 /* Menu sidebars (hidden by default on larger devices) */
@@ -608,7 +674,7 @@ body.active { overflow: hidden; }
 }
 
 .about .section-text {
-  font-size: 1.1em;
+  font-size: 1.5em;
   color: var(--white_a70);
   font-weight: var(--fw-300);
   line-height: 2;
@@ -781,6 +847,7 @@ body.active { overflow: hidden; }
 
   /* Adjust Experience Card Styles */
 .experienceCard {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -792,6 +859,15 @@ body.active { overflow: hidden; }
   box-shadow: var(--shadow-card);
   cursor: pointer;
   gap: 15px;
+}
+
+/* Make the whole card clickable: stretch the company link over the entire card.
+   Any other real links inside the card must sit above this via a higher z-index. */
+.experienceCompany::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .experienceCard:hover {
@@ -851,6 +927,13 @@ body.active { overflow: hidden; }
   margin-top: 5px;
 }
 
+/* Subtle highlight for key metrics / buzzwords inside the grey bullet text */
+.descriptionList .hl {
+  display: inline;
+  color: var(--white);
+  font-weight: var(--fw-500);
+}
+
 /* Image Styling */
 .experienceImage {
   width: clamp(150px, 15vw, 190px);
@@ -897,6 +980,7 @@ body.active { overflow: hidden; }
 
   /* Adjust Publication Card Styles */
 .publicationCard {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -908,6 +992,14 @@ body.active { overflow: hidden; }
   box-shadow: var(--shadow-card);
   cursor: pointer;
   gap: 15px;
+}
+
+/* Make the whole card clickable via the journal link (stretched over the card). */
+.publicationJournal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .publicationCard:hover {
@@ -1699,7 +1791,7 @@ body.active { overflow: hidden; }
   }
 
   .about .section-text {
-    font-size: 1em;
+    font-size: 1.2em;
   }
 
   .education-section h3 {
@@ -2300,10 +2392,11 @@ body.active { overflow: hidden; }
     padding-inline: 25px;
   }
 
-  /* Add top padding to header on mobile to prevent touching top of page */
+  /* Add top padding to header on mobile to prevent touching top of page.
+     env(safe-area-inset-top) adds clearance under notches / the browser UI. */
   .header {
-    padding-top: 20px;
-    padding-bottom: 18px;
+    padding-top: calc(32px + env(safe-area-inset-top, 0px));
+    padding-bottom: 16px;
   }
 
   /* General image quality improvements for mobile devices */
@@ -2314,61 +2407,7 @@ body.active { overflow: hidden; }
     backface-visibility: hidden;
   }
 
-  /* Sidebar Styling */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 220px;
-    height: 100vh;
-    background-color: var(--eerie-black-2);
-    backdrop-filter: blur(10px);
-    transition: right 0.3s ease-in-out;
-    padding: 30px 20px;
-    z-index: 1000;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .sidebar.active {
-    right: 0;
-  }
-
-  #closeIcon {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 1.5em;
-    color: white;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-
-  #closeIcon:hover {
-    color: var(--radical-red);
-  }
-
-  .sidebarNav {
-    margin-top: 60px;
-  }
-
-  .sidebarNav a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    margin: 20px 0;
-    font-size: 1.3em;
-    font-family: var(--ff-recoleta);
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-  }
-
-  .sidebarNav a:hover {
-    color: var(--radical-red);
-    padding-left: 10px;
-    border-bottom-color: var(--radical-red);
-  }
+  /* Sidebar sizing handled by the base modern styles; nothing extra needed here. */
 
   /* Home Settings */
   .home {
@@ -2521,31 +2560,59 @@ body.active { overflow: hidden; }
   }
 
   .experienceCardContainer {
-    gap: 20px;
+    gap: 12px;
   }
 
+  /* Experience cards become compact, tap-to-expand accordions on phones so the
+     whole section can be scanned at a glance instead of being a long wall of
+     text. The header (logo + role + company + date) stays visible; the bullet
+     details expand only when the card is tapped (handled in script.js). */
   .experienceCard {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 58px 1fr 18px;
+    grid-template-areas:
+      "logo heading chevron"
+      "desc desc    desc";
     align-items: center;
-    padding: 15px;
-    gap: 15px;
+    column-gap: 12px;
+    row-gap: 0;
+    padding: 14px 16px;
+    text-align: left;
   }
 
+  /* Flatten .experienceInfo so its children (heading + description) join the
+     card's grid directly. */
   .experienceInfo {
-    padding: 0;
-    text-align: center;
+    display: contents;
+  }
+
+  .experienceImage {
+    grid-area: logo;
+    width: 58px;
+    height: 46px;
+    margin: 0;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .experienceHeading {
+    grid-area: heading;
+    min-width: 0;
   }
 
   .experiencePosition {
-    font-size: 1.4em;
-    margin-bottom: 8px;
+    font-size: 1.05em;
+    line-height: 1.25;
+    margin-bottom: 3px;
   }
 
   .experienceDuration {
-    font-size: 0.9em;
-    margin-bottom: 8px;
+    font-size: 0.78em;
+    margin: 0;
     flex-direction: column;
-    gap: 5px;
+    align-items: flex-start;
+    gap: 1px;
   }
 
   .separator {
@@ -2553,28 +2620,60 @@ body.active { overflow: hidden; }
   }
 
   .experienceCompany {
-    font-size: 0.95em;
-    margin-bottom: 10px;
+    font-size: 1em;
+    margin: 0;
   }
 
+  /* On phones the card is a tap-to-expand accordion, so disable the whole-card
+     link overlay (the company name itself is still tappable). */
+  .experienceCompany::after {
+    display: none;
+  }
+
+  /* Chevron indicator (points down when collapsed, up when expanded) */
+  .experienceCard::after {
+    grid-area: chevron;
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--white_a50);
+    border-bottom: 2px solid var(--white_a50);
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.3s ease;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .experienceCard.expanded::after {
+    transform: rotate(-135deg);
+  }
+
+  /* Collapsible details */
   .experienceDescription {
+    grid-area: desc;
     font-size: 0.9em;
     line-height: 1.5;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  }
+
+  .experienceCard.expanded .experienceDescription {
+    max-height: 900px;
+    opacity: 1;
+    margin-top: 12px;
   }
 
   .descriptionList {
-    font-size: 0.85em;
-    padding-left: 15px;
+    font-size: 0.9em;
+    padding-left: 18px;
     text-align: left;
   }
 
-  .experienceImage {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    margin: 0;
-    object-fit: cover;
-    object-position: center;
+  .descriptionList li {
+    margin-bottom: 5px;
   }
 
   /* Publication Settings */
@@ -2594,47 +2693,98 @@ body.active { overflow: hidden; }
     gap: 20px;
   }
 
+  /* Publication cards use the same compact tap-to-expand accordion as the
+     experience cards on phones (logo + title + journal/date header, details
+     collapse behind a tap). */
   .publicationCard {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 58px 1fr 18px;
+    grid-template-areas:
+      "logo heading chevron"
+      "desc desc    desc";
     align-items: center;
-    padding: 20px;
-    gap: 15px;
+    column-gap: 12px;
+    row-gap: 0;
+    padding: 14px 16px;
+    text-align: left;
   }
 
   .publicationInfo {
-    padding: 0;
-    text-align: center;
-  }
-
-  .publicationInfo .publicationTitle {
-    font-size: 1.4em;
-    margin-bottom: 8px;
-  }
-
-  .publicationDuration {
-    font-size: 0.9em;
-    margin-bottom: 8px;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .publicationJournal {
-    font-size: 0.95em;
-    margin-bottom: 10px;
-  }
-
-  .publicationDescription {
-    font-size: 0.9em;
-    line-height: 1.5;
+    display: contents;
   }
 
   .publicationImage {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
+    grid-area: logo;
+    width: 58px;
+    height: 46px;
     margin: 0;
+    border-radius: 8px;
     object-fit: cover;
     object-position: center;
+  }
+
+  .publicationHeading {
+    grid-area: heading;
+    min-width: 0;
+  }
+
+  .publicationInfo .publicationTitle {
+    font-size: 1.05em;
+    line-height: 1.25;
+    margin-bottom: 3px;
+  }
+
+  .publicationDuration {
+    font-size: 0.78em;
+    margin: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+  }
+
+  .publicationJournal {
+    font-size: 1em;
+    margin: 0;
+  }
+
+  /* On phones the card is a tap-to-expand accordion, so disable the whole-card
+     link overlay (the journal name itself is still tappable). */
+  .publicationJournal::after {
+    display: none;
+  }
+
+  .publicationCard::after {
+    grid-area: chevron;
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--white_a50);
+    border-bottom: 2px solid var(--white_a50);
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.3s ease;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .publicationCard.expanded::after {
+    transform: rotate(-135deg);
+  }
+
+  .publicationDescription {
+    grid-area: desc;
+    font-size: 0.9em;
+    line-height: 1.5;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  }
+
+  .publicationCard.expanded .publicationDescription {
+    max-height: 900px;
+    opacity: 1;
+    margin-top: 12px;
   }
 
   /* Project Settings */
@@ -2846,13 +2996,12 @@ body.active { overflow: hidden; }
 
   /* Ensure header has proper top spacing on small mobile devices */
   .header {
-    padding-top: 20px;
-    padding-bottom: 18px;
+    padding-top: calc(30px + env(safe-area-inset-top, 0px));
+    padding-bottom: 16px;
   }
 
   .sidebar {
-    width: 200px;
-    padding: 25px 15px;
+    width: min(86vw, 300px);
   }
 
   /* Home Settings */
@@ -2916,11 +3065,11 @@ body.active { overflow: hidden; }
   }
 
   .experiencePosition {
-    font-size: 1.3em;
+    font-size: 1em;
   }
 
   .experienceDuration {
-    font-size: 0.85em;
+    font-size: 0.75em;
   }
 
   .experienceDescription {
@@ -2928,11 +3077,7 @@ body.active { overflow: hidden; }
   }
 
   .descriptionList {
-    font-size: 0.8em;
-  }
-
-  .experienceImage {
-    max-width: 240px;
+    font-size: 0.85em;
   }
 
   /* Publication Settings */
@@ -2943,19 +3088,15 @@ body.active { overflow: hidden; }
   }
 
   .publicationInfo .publicationTitle {
-    font-size: 1.3em;
+    font-size: 1em;
   }
 
   .publicationDuration {
-    font-size: 0.85em;
+    font-size: 0.75em;
   }
 
   .publicationDescription {
     font-size: 0.85em;
-  }
-
-  .publicationImage {
-    max-width: 240px;
   }
 
   /* Project Settings */
@@ -3139,8 +3280,9 @@ body.active { overflow: hidden; }
     left: 0;
     right: 0;
     z-index: 1000;
-    /* Use safe area insets for iOS */
-    padding-top: env(safe-area-inset-top);
+    /* Breathing room at the top + safe-area inset for notches/browser UI so
+       the logo isn't jammed against the address bar on mobile. */
+    padding-top: calc(32px + env(safe-area-inset-top, 0px));
     /* Ensure header doesn't create extra space */
     margin: 0;
   }
@@ -3167,8 +3309,8 @@ body.active { overflow: hidden; }
 @media screen and (max-width: 320px) {
   /* Ensure header has proper top spacing on extra small mobile devices */
   .header {
-    padding-top: 20px;
-    padding-bottom: 18px;
+    padding-top: calc(28px + env(safe-area-inset-top, 0px));
+    padding-bottom: 16px;
   }
 
   .nameTitle {
@@ -3197,12 +3339,11 @@ body.active { overflow: hidden; }
   }
 
   .sidebar {
-    width: 240px;
+    width: min(88vw, 270px);
   }
 
   .sidebarNav a {
-    font-size: 1.1em;
-    margin: 15px 0;
+    font-size: 1.25em;
   }
 }
 
@@ -3696,6 +3837,51 @@ body.active { overflow: hidden; }
   .projectCarousel .projectCard:active {
     transform: scale(0.98);
   }
+
+  /* ----------------------------------------------------------------
+     Skills as always-visible labeled chips on touch screens.
+     The desktop grid relies on hover to reveal each skill's name and
+     brighten its icon, which is impossible on touch. Instead we show
+     every skill as a self-explanatory pill (icon + name always on),
+     wrapping fluidly so the whole stack can be scanned at a glance.
+     `.skills` prefix bumps specificity above the device-specific
+     (.android-device / .samsung-device) grid overrides.
+     ---------------------------------------------------------------- */
+  .skills .skillsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .skills .skillItem {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    background-color: var(--eerie-black);
+    border: 1px solid var(--card-line);
+    border-radius: 999px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .skills .skillItem:active {
+    transform: scale(0.96);
+  }
+
+  .skills .skillImage {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    filter: brightness(0) invert(1) opacity(1);
+  }
+
+  .skills .skillName {
+    opacity: 1;
+    transform: none;
+    font-size: 0.85em;
+    white-space: nowrap;
+  }
 }
 
 /* Improved focus states for accessibility */
@@ -3864,10 +4050,13 @@ body.active { overflow: hidden; }
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  height: 100svh;
+  background: hsla(0, 0%, 0%, 0.55);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
   z-index: -1;
 }
 

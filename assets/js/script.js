@@ -690,5 +690,43 @@ if (document.readyState === 'loading') {
 }
 
 
+/**
+ * Mobile card accordion (experience + publications)
+ * On phones each card collapses to a compact header so the section is quick to
+ * scan; tapping a card expands its details. On larger screens this does nothing
+ * (the whole card is a link handled via CSS). `linkSelector` is the inner link
+ * that should still navigate normally instead of toggling the card.
+ */
+function initCardAccordion(cardSelector, linkSelector) {
+  const cards = document.querySelectorAll(cardSelector);
+  if (!cards.length) return;
+
+  const mobileMQ = window.matchMedia('(max-width: 767px)');
+
+  cards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      if (!mobileMQ.matches) return;
+      // Let the company/journal link navigate normally.
+      if (e.target.closest(linkSelector)) return;
+      card.classList.toggle('expanded');
+    });
+  });
+
+  // Expand the first card by default so the tap-to-expand pattern is obvious.
+  cards[0].classList.add('expanded');
+}
+
+function initAccordions() {
+  initCardAccordion('.experienceCard', '.experienceCompany');
+  initCardAccordion('.publicationCard', '.publicationJournal');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAccordions);
+} else {
+  initAccordions();
+}
+
+
 
 
