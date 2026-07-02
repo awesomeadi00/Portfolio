@@ -425,6 +425,23 @@ function initCarousel() {
   let deceleration = isMobile ? 0.04 : 0.05; // Slower deceleration on mobile
   let autoScrollTimeout = null;
 
+  // --- Frame-rate independent movement --------------------------------------
+  // requestAnimationFrame fires at the display's refresh rate (60/90/120/144Hz),
+  // so moving a fixed amount per frame makes the carousel faster on high-refresh
+  // screens (e.g. ProMotion MacBooks, gaming laptops) and slower on any device
+  // dropping frames. All the speed values above were tuned assuming 60fps, so we
+  // scale each frame's movement by how many 60fps-frames actually elapsed. This
+  // keeps the speed identical everywhere (matching a 60Hz MacBook baseline).
+  const FRAME_MS = 1000 / 60; // duration of one 60fps frame
+  let animateLastTime = null;
+
+  // Elapsed 60fps-frames since the previous animation callback, clamped so a
+  // backgrounded/janky tab can't produce a huge jump on the next frame.
+  function frameScale(timestamp, lastTime) {
+    if (lastTime == null) return 1;
+    return Math.min((timestamp - lastTime) / FRAME_MS, 4);
+  }
+
   // Mouse events for left button
   leftBtn.addEventListener('mousedown', () => startLeftScroll());
   leftBtn.addEventListener('mouseup', () => stopLeftScroll());
@@ -512,39 +529,45 @@ function initCarousel() {
     
     // Start manual scrolling
     if (!animationId) {
-      animate();
+      animateLastTime = null; // reset delta-time tracking for a clean first frame
+      animationId = requestAnimationFrame(animate);
     }
   }
 
-  function animate() {
-    // Determine scroll direction and speed
+  function animate(timestamp) {
+    // How many 60fps-frames elapsed since the last callback (frame-rate safe).
+    const frames = frameScale(timestamp, animateLastTime);
+    animateLastTime = timestamp;
+
+    // Determine scroll direction and speed (acceleration scaled by elapsed frames)
     if (isLeftPressed) {
       // Scroll left (negative speed)
-      currentSpeed = Math.max(currentSpeed - acceleration, -maxSpeed);
+      currentSpeed = Math.max(currentSpeed - acceleration * frames, -maxSpeed);
     } else if (isRightPressed) {
       // Scroll right (positive speed)
-      currentSpeed = Math.min(currentSpeed + acceleration, maxSpeed);
+      currentSpeed = Math.min(currentSpeed + acceleration * frames, maxSpeed);
     } else {
       // No button pressed, decelerate to default speed
+      const decel = deceleration * frames;
       if (currentSpeed > defaultSpeed) {
         // Decelerate from positive speed to default
-        currentSpeed = Math.max(currentSpeed - deceleration, defaultSpeed);
+        currentSpeed = Math.max(currentSpeed - decel, defaultSpeed);
       } else if (currentSpeed < -defaultSpeed) {
         // Decelerate from negative speed to default
-        currentSpeed = Math.min(currentSpeed + deceleration, -defaultSpeed);
+        currentSpeed = Math.min(currentSpeed + decel, -defaultSpeed);
       } else if (currentSpeed > 0 && currentSpeed < defaultSpeed) {
         // Accelerate from low positive speed to default
-        currentSpeed = Math.min(currentSpeed + deceleration, defaultSpeed);
+        currentSpeed = Math.min(currentSpeed + decel, defaultSpeed);
       } else if (currentSpeed < 0 && currentSpeed > -defaultSpeed) {
         // Accelerate from low negative speed to default
-        currentSpeed = Math.max(currentSpeed - deceleration, -defaultSpeed);
+        currentSpeed = Math.max(currentSpeed - decel, -defaultSpeed);
       }
     }
 
-    // Apply the scroll
+    // Apply the scroll (distance scaled by elapsed frames = constant px/second)
     if (currentSpeed !== 0) {
       const currentTransform = getCurrentTransform();
-      let newTransform = currentTransform + currentSpeed;
+      let newTransform = currentTransform + currentSpeed * frames;
       
       // Handle infinite loop
       const totalWidth = getTotalWidth();
@@ -557,15 +580,6 @@ function initCarousel() {
       }
       
       carouselTrack.style.transform = `translate3d(${newTransform}px, 0, 0)`;
-      
-      // console.log('Scrolling:', { 
-      //   isLeftPressed, 
-      //   isRightPressed, 
-      //   currentSpeed, 
-      //   currentTransform, 
-      //   newTransform,
-      //   totalWidth
-      // });
     }
 
     // Continue animation if any button is pressed or speed is not zero
@@ -629,11 +643,16 @@ function initCarousel() {
 
   function startAutoScrollFromCurrentPosition() {
     let currentPosition = getCurrentTransform();
-    let autoScrollSpeed = defaultSpeed; // Use the same speed as default for consistency
+    let autoScrollSpeed = defaultSpeed; // px per 60fps-frame (same as default)
+    let lastTime = null;
     
-    function autoScroll() {
+    function autoScroll(timestamp) {
       if (!isLeftPressed && !isRightPressed) {
-        currentPosition -= autoScrollSpeed;
+        // Distance scaled by elapsed 60fps-frames => constant px/second on any
+        // refresh rate.
+        const frames = frameScale(timestamp, lastTime);
+        lastTime = timestamp;
+        currentPosition -= autoScrollSpeed * frames;
         
         // Handle infinite loop
         const totalWidth = getTotalWidth();
@@ -646,7 +665,7 @@ function initCarousel() {
       }
     }
     
-    autoScroll();
+    animationId = requestAnimationFrame(autoScroll);
   }
 
   // Initialize the carousel with manual control from the start

@@ -389,7 +389,7 @@ body.active { overflow: hidden; }
   font-size: 1.8em;
   color: white;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 16px;
   transition: color 0.3s ease-in-out; 
 }
 
@@ -530,6 +530,67 @@ body.active { overflow: hidden; }
   z-index: 2;
 }
 
+/* Animated "scroll down" cue pinned to the bottom-center of the hero.
+   A minimalist mouse outline with a dropping wheel dot + a soft bouncing
+   chevron underneath. Sits above the .home::after gradient overlay. */
+.scrollCue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(22px, 5vh, 46px);
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--white_a70);
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.scrollCue:hover {
+  color: var(--white);
+}
+
+.scrollCueMouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid currentColor;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  box-sizing: border-box;
+}
+
+.scrollCueWheel {
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  background-color: currentColor;
+  animation: scrollCueWheel 1.8s ease-in-out infinite;
+}
+
+.scrollCueArrow {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: scrollCueArrow 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollCueWheel {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  60% { opacity: 1; transform: translateY(10px); }
+  100% { opacity: 0; transform: translateY(12px); }
+}
+
+@keyframes scrollCueArrow {
+  0%, 100% { opacity: 0.4; transform: rotate(45deg) translate(0, 0); }
+  50% { opacity: 1; transform: rotate(45deg) translate(3px, 3px); }
+}
+
 .homeContainer {
   position: relative;
   width: 100%;
@@ -631,8 +692,12 @@ body.active { overflow: hidden; }
 
 .aboutContainer {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
+  /* Subtract the scroll offset (scroll-margin-top 80px + section padding 20px)
+     so the centered content sits fully within the visible area below the fixed
+     header. Without this, the full-height container is pushed ~100px past the
+     viewport bottom, dropping the resume button below the fold on landing. */
+  min-height: calc(100vh - 100px);
+  min-height: calc(100svh - 100px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -677,26 +742,26 @@ body.active { overflow: hidden; }
   font-size: 1.5em;
   color: var(--white_a70);
   font-weight: var(--fw-300);
-  line-height: 2;
-  margin-block-end: 35px;
+  line-height: 1.7;
+  margin-block-end: 22px;
 }
 
 /* Education Section Styling */
 .education-section {
-  margin-block-end: 30px;
+  margin-block-end: 18px;
 }
 
 .education-section h3 {
   font-size: 1.8em;
   color: var(--white);
-  margin-block-end: 15px;
+  margin-block-end: 10px;
   font-weight: var(--fw-600);
 }
 
 .education-details {
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
-  padding: 20px;
+  padding: 16px 20px;
   border: 1px solid var(--card-line);
   display: flex;
   justify-content: space-between;
@@ -750,7 +815,8 @@ body.active { overflow: hidden; }
 
 /* Resume Button Styling */
 .resume-section {
-  margin-block-end: 30px;
+  margin-block-start: 24px;
+  margin-block-end: 0;
 }
 
 .resume-button {
@@ -888,6 +954,7 @@ body.active { overflow: hidden; }
   font-size: 1.8em;
   font-weight: var(--fw-500);
   margin-bottom: 5px;
+  line-height: 1.4;
 }
 
 .experienceDuration {
@@ -905,7 +972,7 @@ body.active { overflow: hidden; }
 
 .experienceCompany {
   color: var(--white);
-  text-decoration: underline;
+  text-decoration: none;
   transition: color 0.3s;
 }
 
@@ -1033,7 +1100,7 @@ body.active { overflow: hidden; }
 
 .publicationJournal {
   color: var(--white);
-  text-decoration: underline;
+  text-decoration: none;
   transition: color 0.3s;
 }
 
