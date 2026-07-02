@@ -20,15 +20,22 @@ window.addEventListener('resize', () => {
 // Header Javascript when the user scrolls down it adds some properties: =================================================
 const header = document.querySelector(".header");
 
+// Throttle with requestAnimationFrame so we don't do work on every scroll event
+let headerScrollTicking = false;
 const activeElementOnScroll = function () {
-  if (window.scrollY > 50) {
-    header.classList.add("active");
-  } else {
-    header.classList.remove("active");
-  }
+  if (headerScrollTicking) return;
+  headerScrollTicking = true;
+  requestAnimationFrame(function () {
+    if (window.scrollY > 50) {
+      header.classList.add("active");
+    } else {
+      header.classList.remove("active");
+    }
+    headerScrollTicking = false;
+  });
 }
 
-window.addEventListener("scroll", activeElementOnScroll);
+window.addEventListener("scroll", activeElementOnScroll, { passive: true });
 
 // Sub-title Wave Effect Animation for each letter: =====================================================================
 const letterBoxes = document.querySelectorAll("[data-letter-effect]");
@@ -110,24 +117,37 @@ const setLetterEffect = function () {
 // call the letter effect function after window loaded
 window.addEventListener("load", setLetterEffect);
 
-// When scrolled down, this JS code will deveal the data in a fading animation: =================================================
+// When scrolled down, this JS code will reveal the data in a fading animation: =================================================
+// Use IntersectionObserver instead of reading getBoundingClientRect() for every
+// element on every scroll event. That avoids forced layout/reflow on scroll,
+// which was a major cause of scroll stutter.
 const revealElements = document.querySelectorAll("[data-reveal]");
 
-const scrollReveal = function () {
-  for (let i = 0; i < revealElements.length; i++) {
-    const elementIsInScreen = revealElements[i].getBoundingClientRect().top < window.innerHeight / 1.15;
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+      } else {
+        entry.target.classList.remove("revealed");
+      }
+    });
+  }, {
+    // Mirror the old trigger point (~top < innerHeight / 1.15) by trimming
+    // the bottom of the viewport root.
+    rootMargin: "0px 0px -13% 0px",
+    threshold: 0
+  });
 
-    if (elementIsInScreen) {
-      revealElements[i].classList.add("revealed");
-    } else {
-      revealElements[i].classList.remove("revealed");
-    }
-  }
+  revealElements.forEach(function (el) {
+    revealObserver.observe(el);
+  });
+} else {
+  // Fallback for very old browsers: reveal everything.
+  revealElements.forEach(function (el) {
+    el.classList.add("revealed");
+  });
 }
-
-window.addEventListener("scroll", scrollReveal);
-
-scrollReveal();
 
 
 // JS for the custom cursor: ==========================================================================================
@@ -365,6 +385,18 @@ function initCarousel() {
   
   if (!carouselTrack || !leftBtn || !rightBtn) {
     // console.log('Carousel elements not found');
+    return;
+  }
+
+  // On touch devices (phones + tablets) skip the JS transform auto-scroll and let
+  // the browser handle native horizontal swipe scrolling (see the CSS scroll-snap
+  // rules). This is smoother and avoids the long-press "open in new tab" issue on
+  // the control buttons. We clear any inline styles so CSS is fully in control.
+  const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (isTouchDevice) {
+    carouselTrack.style.transform = '';
+    carouselTrack.style.animation = 'none';
+    carouselTrack.style.cursor = '';
     return;
   }
 

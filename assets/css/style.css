@@ -42,14 +42,26 @@
   --fw-300: 300;
   --fw-400: 400;
   --fw-500: 500;
+  --fw-600: 600;
+  --fw-700: 700;
 
 
 /* Spacing */
   --section-padding: 60px;
 
 
+/* Accents */
+  --accent-gradient: linear-gradient(135deg, hsl(346, 100%, 63%), hsl(346, 100%, 50%));
+  --accent-shadow: 0 6px 18px -4px hsla(346, 100%, 58%, 0.45);
+  --accent-shadow-hover: 0 10px 26px -6px hsla(346, 100%, 58%, 0.6);
+
+
 /* Shadows */
   --shadow: 0 12px 30px -10px hsla(0, 0%, 14%, 0.1);
+  --shadow-card: 0 2px 10px hsla(0, 0%, 0%, 0.28);
+  --shadow-card-hover: 0 16px 40px -14px hsla(0, 0%, 0%, 0.6);
+  --card-line: hsla(0, 0%, 100%, 0.07);
+  --card-line-hover: hsla(0, 0%, 100%, 0.18);
 
 
 /* Border radius */
@@ -143,7 +155,6 @@ address { font-style: normal; }
 html {
   font-family: var(--ff-gordita);
   font-size: 10px;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   /* iOS viewport fix */
   height: -webkit-fill-available;
@@ -336,7 +347,10 @@ body.active { overflow: hidden; }
 }
 
 .header.active {
-  background-color: var(--eerie-black-2);
+  background-color: hsla(0, 0%, 11%, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-line);
   padding-block: 12px;
   box-shadow: var(--shadow);
 }
@@ -598,18 +612,19 @@ body.active { overflow: hidden; }
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--card-line);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  transition: all 0.8s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
 }
 
 .education-details:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+  transform: translateY(-4px);
+  border-color: var(--card-line-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .education-content {
@@ -657,21 +672,21 @@ body.active { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(135deg, var(--primary-color), #4a90e2);
+  background: var(--accent-gradient);
   color: var(--white);
   padding: 10px 25px;
   border-radius: 40px;
   text-decoration: none;
   font-size: 1.2em;
   font-weight: var(--fw-500);
-  transition: all 0.8s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 2px solid transparent;
-  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+  box-shadow: var(--accent-shadow);
 }
 
 .resume-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+  box-shadow: var(--accent-shadow-hover);
   border-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -754,14 +769,16 @@ body.active { overflow: hidden; }
   background-color: var(--eerie-black);
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--card-line);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   gap: 15px;
 }
 
 .experienceCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+  transform: translateY(-6px);
+  border-color: var(--card-line-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 /* Experience Info Styling */
@@ -865,14 +882,16 @@ body.active { overflow: hidden; }
   background-color: var(--eerie-black);
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--card-line);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   gap: 15px;
 }
 
 .publicationCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+  transform: translateY(-6px);
+  border-color: var(--card-line-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 /* Publication Info Styling */
@@ -1022,18 +1041,20 @@ body.active { overflow: hidden; }
   max-width: 350px;
   margin: 0;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--card-line);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   background: var(--eerie-black);
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .projectCarousel .projectCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+  transform: translateY(-6px);
+  border-color: var(--card-line-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 
@@ -1225,7 +1246,8 @@ body.active { overflow: hidden; }
   max-width: 400px;
   margin: 0 auto;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--card-line);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   background: var(--eerie-black);
   display: flex;
@@ -1234,9 +1256,9 @@ body.active { overflow: hidden; }
 }
 
 .projectCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
-
+  transform: translateY(-6px);
+  border-color: var(--card-line-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .projectLink {
@@ -1271,7 +1293,7 @@ body.active { overflow: hidden; }
 .projectDescription {
   margin-top: 0;
   font-size: 1em;
-  color: #666;
+  color: var(--white_a70);
 }
 
 
@@ -1380,15 +1402,17 @@ body.active { overflow: hidden; }
   background-color: var(--eerie-black);
   padding: 15px 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--card-line);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   gap: 15px;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .certificationCard:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+  transform: translateY(-4px);
+  border-color: var(--card-line-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 /* Certification Info Styling */
@@ -1470,15 +1494,17 @@ body.active { overflow: hidden; }
   padding: 25px;
   background-color: var(--eerie-black);
   border-radius: 15px;
+  border: 1px solid var(--card-line);
   text-decoration: none;
   color: var(--white);
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  box-shadow: var(--shadow-card);
 }
 
 .contactLink:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+  transform: translateY(-4px);
+  border-color: var(--card-line-hover);
+  box-shadow: var(--shadow-card-hover);
   background-color: rgba(255, 255, 255, 0.05);
 }
 
@@ -3626,6 +3652,58 @@ body.active { overflow: hidden; }
   }
 }
 
+/* ============================================================
+   Touch devices (phones + tablets): native swipe projects carousel
+   Replaces the JS transform-driven auto-scroll with smooth native
+   horizontal scrolling + scroll-snap. The prev/next buttons are
+   hidden (they caused the long-press "open in new tab" issue on
+   mobile Chrome and are unnecessary with swipe).
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+  /* Custom cursor is meaningless on touch (also hidden here for tablets) */
+  .cursor { display: none !important; }
+
+  .projectCarousel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* momentum scrolling on iOS */
+    scroll-padding-inline: 20px;
+    scrollbar-width: none;             /* hide scrollbar: Firefox */
+    padding: 10px 0;
+    /* subtle fade hint that content continues on the sides */
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+            mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+  }
+
+  .projectCarousel::-webkit-scrollbar { display: none; } /* hide scrollbar: Chrome/Safari */
+
+  /* Hide the prev/next control buttons on touch */
+  .carouselBtn { display: none !important; }
+
+  .carouselTrack {
+    transform: none !important;   /* override any inline transform from JS */
+    animation: none !important;
+    width: max-content;
+    max-width: none;              /* beat the global `* { max-width: 100% }` */
+    gap: 16px;
+    padding-inline: 20px;         /* breathing room for first/last card */
+  }
+
+  /* Native scroll doesn't loop, so hide the duplicate second set of cards */
+  .carouselTrack .projectCard:nth-child(n + 9) { display: none; }
+
+  /* Snap each card to center as the user swipes */
+  .projectCarousel .projectCard {
+    scroll-snap-align: center;
+  }
+
+  /* Remove the desktop scale-up hover; keep a light tap feedback instead */
+  .projectCarousel .projectCard:active {
+    transform: scale(0.98);
+  }
+}
+
 /* Improved focus states for accessibility */
 .resume-button:focus,
 .carouselBtn:focus,
@@ -3684,7 +3762,7 @@ body.active { overflow: hidden; }
 
   .resume-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5);
+    box-shadow: var(--accent-shadow-hover);
   }
 
   .carouselBtn:hover {
@@ -3693,16 +3771,18 @@ body.active { overflow: hidden; }
   }
 
   .contactLink:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    border-color: var(--card-line-hover);
+    box-shadow: var(--shadow-card-hover);
   }
 
   .experienceCard:hover,
   .publicationCard:hover,
   .projectCard:hover,
   .certificationCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    transform: translateY(-6px);
+    border-color: var(--card-line-hover);
+    box-shadow: var(--shadow-card-hover);
   }
 
   .perk:hover {
@@ -3747,7 +3827,7 @@ body.active { overflow: hidden; }
 
   /* Improved button styling for mobile */
   .resume-button {
-    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+    box-shadow: var(--accent-shadow);
   }
 
   .sendButton {
@@ -3803,10 +3883,9 @@ body.active { overflow: hidden; }
 }
 
 /* Better animation performance */
-.carouselTrack,
-.projectCard,
-.experienceCard,
-.publicationCard {
+/* Only promote the carousel track (it animates continuously). Promoting every
+   card permanently forces many GPU layers and hurts scroll performance. */
+.carouselTrack {
   will-change: transform;
 }
 
