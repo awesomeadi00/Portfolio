@@ -441,20 +441,43 @@ function initCarousel() {
 
   // --- Frame-rate independent movement --------------------------------------
   // requestAnimationFrame fires at the display's refresh rate (60/90/120/144Hz),
-  // so moving a fixed amount per frame makes the carousel faster on high-refresh
-  // screens (e.g. ProMotion MacBooks, gaming laptops) and slower on any device
-  // dropping frames. All the speed values above were tuned assuming 60fps, so we
-  // scale each frame's movement by how many 60fps-frames actually elapsed. This
-  // keeps the speed identical everywhere (matching a 60Hz MacBook baseline).
-  const FRAME_MS = 1000 / 60; // duration of one 60fps frame
-  let animateLastTime = null;
+  // so moving a fixed amount per frame would make the carousel faster on
+  // high-refresh screens (ProMotion MacBooks, gaming laptops).
+  //
+  // We previously scaled each frame by its own (timestamp - lastTime) delta.
+  // That kept the average speed correct but made the *per-frame* step wobble:
+  // rAF timestamps are never perfectly even and jitter most when the main thread
+  // is busy (page scroll, fade-in transitions), so the motion visibly stuttered.
+  //
+  // Instead we measure the display's average frame duration ONCE at startup and
+  // then move a CONSTANT step every frame. Constant per-frame movement is
+  // perfectly smooth, and the measured factor keeps the real-world speed
+  // identical to a 60Hz baseline (i.e. exactly what a 60Hz MacBook shows).
+  const FRAME_MS = 1000 / 60; // one 60fps frame (baseline)
+  let frameFactor = 1;        // avgFrameMs / FRAME_MS (== 1 on a 60Hz display)
 
-  // Elapsed 60fps-frames since the previous animation callback, clamped so a
-  // backgrounded/janky tab can't produce a huge jump on the next frame.
-  function frameScale(timestamp, lastTime) {
-    if (lastTime == null) return 1;
-    return Math.min((timestamp - lastTime) / FRAME_MS, 4);
-  }
+  (function measureRefreshRate() {
+    let samples = 0;
+    let lastTs = null;
+    let totalMs = 0;
+    const NEEDED = 12;
+    function sample(ts) {
+      if (lastTs != null) {
+        totalMs += ts - lastTs;
+        samples++;
+      }
+      lastTs = ts;
+      if (samples < NEEDED) {
+        requestAnimationFrame(sample);
+      } else {
+        const avgFrameMs = totalMs / samples;
+        // Clamp to a sane range (~30-240Hz) so a couple of janky startup frames
+        // can't skew the constant step.
+        frameFactor = Math.min(Math.max(avgFrameMs / FRAME_MS, 0.25), 2);
+      }
+    }
+    requestAnimationFrame(sample);
+  })();
 
   // Mouse events for left button
   leftBtn.addEventListener('mousedown', () => startLeftScroll());
@@ -543,26 +566,22 @@ function initCarousel() {
     
     // Start manual scrolling
     if (!animationId) {
-      animateLastTime = null; // reset delta-time tracking for a clean first frame
       animationId = requestAnimationFrame(animate);
     }
   }
 
-  function animate(timestamp) {
-    // How many 60fps-frames elapsed since the last callback (frame-rate safe).
-    const frames = frameScale(timestamp, animateLastTime);
-    animateLastTime = timestamp;
-
-    // Determine scroll direction and speed (acceleration scaled by elapsed frames)
+  function animate() {
+    // Constant per-frame step (frameFactor measured once) => smooth motion with
+    // refresh-rate-independent speed.
     if (isLeftPressed) {
       // Scroll left (negative speed)
-      currentSpeed = Math.max(currentSpeed - acceleration * frames, -maxSpeed);
+      currentSpeed = Math.max(currentSpeed - acceleration * frameFactor, -maxSpeed);
     } else if (isRightPressed) {
       // Scroll right (positive speed)
-      currentSpeed = Math.min(currentSpeed + acceleration * frames, maxSpeed);
+      currentSpeed = Math.min(currentSpeed + acceleration * frameFactor, maxSpeed);
     } else {
       // No button pressed, decelerate to default speed
-      const decel = deceleration * frames;
+      const decel = deceleration * frameFactor;
       if (currentSpeed > defaultSpeed) {
         // Decelerate from positive speed to default
         currentSpeed = Math.max(currentSpeed - decel, defaultSpeed);
@@ -578,10 +597,10 @@ function initCarousel() {
       }
     }
 
-    // Apply the scroll (distance scaled by elapsed frames = constant px/second)
+    // Apply the scroll (constant step per frame => smooth, refresh-rate safe)
     if (currentSpeed !== 0) {
       const currentTransform = getCurrentTransform();
-      let newTransform = currentTransform + currentSpeed * frames;
+      let newTransform = currentTransform + currentSpeed * frameFactor;
       
       // Handle infinite loop
       const totalWidth = getTotalWidth();
@@ -657,28 +676,25 @@ function initCarousel() {
 
   function startAutoScrollFromCurrentPosition() {
     let currentPosition = getCurrentTransform();
-    let autoScrollSpeed = defaultSpeed; // px per 60fps-frame (same as default)
-    let lastTime = null;
-    
-    function autoScroll(timestamp) {
+    const autoScrollSpeed = defaultSpeed; // px per 60fps-frame (same as default)
+
+    function autoScroll() {
       if (!isLeftPressed && !isRightPressed) {
-        // Distance scaled by elapsed 60fps-frames => constant px/second on any
-        // refresh rate.
-        const frames = frameScale(timestamp, lastTime);
-        lastTime = timestamp;
-        currentPosition -= autoScrollSpeed * frames;
-        
+        // Constant step per frame (frameFactor normalizes for refresh rate) =>
+        // consistent speed across devices without per-frame timestamp jitter.
+        currentPosition -= autoScrollSpeed * frameFactor;
+
         // Handle infinite loop
         const totalWidth = getTotalWidth();
         if (totalWidth > 0 && currentPosition < -totalWidth) {
           currentPosition += totalWidth;
         }
-        
+
         carouselTrack.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
         animationId = requestAnimationFrame(autoScroll);
       }
     }
-    
+
     animationId = requestAnimationFrame(autoScroll);
   }
 
@@ -729,26 +745,45 @@ if (document.readyState === 'loading') {
  * scan; tapping a card expands its details. On larger screens this does nothing
  * (the whole card is a link handled via CSS). `linkSelector` is the inner link
  * that should still navigate normally instead of toggling the card.
+ *
+ * Because the small company/journal text is an unclear tap target on mobile, we
+ * also inject an obvious "visit" button into each card's collapsible area
+ * (derived from the same link, so there's no HTML to keep in sync). Tapping the
+ * card expands it and reveals the button; tapping the button opens the link.
  */
-function initCardAccordion(cardSelector, linkSelector) {
+function initCardAccordion(cardSelector, linkSelector, ctaLabel, descSelector) {
   const cards = document.querySelectorAll(cardSelector);
   if (!cards.length) return;
 
   const mobileMQ = window.matchMedia('(max-width: 767px)');
 
   cards.forEach((card) => {
+    const link = card.querySelector(linkSelector);
+    const desc = card.querySelector(descSelector);
+    if (link && desc && !desc.querySelector('.cardVisitLink')) {
+      const visit = document.createElement('a');
+      visit.className = 'cardVisitLink';
+      visit.href = link.href;
+      visit.target = '_blank';
+      visit.rel = 'noopener noreferrer';
+      visit.innerHTML =
+        `<span>${ctaLabel}</span>` +
+        `<ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>`;
+      desc.appendChild(visit);
+    }
+
     card.addEventListener('click', (e) => {
       if (!mobileMQ.matches) return;
-      // Let the company/journal link navigate normally.
-      if (e.target.closest(linkSelector)) return;
+      // Let the company/journal link and the visit button navigate normally.
+      if (e.target.closest(linkSelector) || e.target.closest('.cardVisitLink')) return;
       card.classList.toggle('expanded');
     });
   });
 }
 
 function initAccordions() {
-  initCardAccordion('.experienceCard', '.experienceCompany');
-  initCardAccordion('.publicationCard', '.publicationJournal');
+  initCardAccordion('.experienceCard', '.experienceCompany', 'Visit website', '.experienceDescription');
+  initCardAccordion('.publicationCard', '.publicationJournal', 'View publication', '.publicationDescription');
 }
 
 if (document.readyState === 'loading') {

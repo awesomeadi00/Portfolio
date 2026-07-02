@@ -967,6 +967,7 @@ body.active { overflow: hidden; }
   font-weight: var(--fw-500);
   margin-bottom: 5px;
   line-height: 1.4;
+  transition: color 0.3s;
 }
 
 .experienceDuration {
@@ -1100,6 +1101,7 @@ body.active { overflow: hidden; }
   font-weight: var(--fw-500);
   margin-bottom: 5px;
   line-height: 1.4;
+  transition: color 0.3s;
 }
 
 .publicationDuration {
@@ -1126,6 +1128,12 @@ body.active { overflow: hidden; }
   color: var(--white_a50);
   line-height: 1.5;
   margin-top: 10px;
+}
+
+/* "Visit" call-to-action injected into each card on mobile (see script.js).
+   Hidden on desktop, where the whole card is already a link. */
+.cardVisitLink {
+  display: none;
 }
 
 .publicationImage {
@@ -2791,6 +2799,43 @@ body.active { overflow: hidden; }
     margin-bottom: 5px;
   }
 
+  /* Clear tap target to open the experience/publication link once the card is
+     expanded. Sits at the bottom of the collapsible details as an obvious pill
+     button instead of relying on the tiny company/journal text link. */
+  .cardVisitLink {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    margin-top: 14px;
+    padding: 9px 16px;
+    border: 1px solid var(--card-line);
+    border-radius: 999px;
+    background: hsla(0, 0%, 100%, 0.05);
+    color: var(--white);
+    font-size: 0.82em;
+    font-weight: var(--fw-600);
+    line-height: 1;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .cardVisitLink ion-icon {
+    font-size: 1.15em;
+    transition: transform 0.2s ease;
+  }
+
+  .cardVisitLink:active {
+    background: hsla(0, 0%, 100%, 0.1);
+    border-color: var(--card-line-hover);
+    transform: scale(0.98);
+  }
+
+  .cardVisitLink:active ion-icon {
+    transform: translateX(2px);
+  }
+
   /* Publication Settings */
   .publicationsContainer {
     padding: 15px;
@@ -3907,11 +3952,21 @@ body.active { overflow: hidden; }
   }
 
   /* Better touch feedback for cards */
-  .experienceCard:active,
-  .publicationCard:active,
   .projectCard:active,
   .certificationCard:active {
     transform: scale(0.98);
+  }
+
+  /* Experience & publication cards are tap-to-expand accordions on touch, so a
+     tap should ONLY expand them. Neutralize the sticky :hover lift and the
+     :active scale that made the card appear to "jump" up on tap. */
+  .experienceCard:hover,
+  .publicationCard:hover,
+  .experienceCard:active,
+  .publicationCard:active {
+    transform: none;
+    border-color: var(--card-line);
+    box-shadow: var(--shadow-card);
   }
 
   /* Improve form inputs for touch */
@@ -4098,6 +4153,12 @@ body.active { overflow: hidden; }
     transform: translateY(-6px);
     border-color: var(--card-line-hover);
     box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Title turns red on card hover, matching the company/journal link. */
+  .experienceCard:hover .experiencePosition,
+  .publicationCard:hover .publicationInfo .publicationTitle {
+    color: var(--radical-red);
   }
 
   .perk:hover {
