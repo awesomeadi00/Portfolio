@@ -65,42 +65,39 @@ const setLetterEffect = function () {
     let letterAnimationDelay = 0;
 
     // get all character from the current letter box
-    const letters = letterBoxes[i].textContent.trim();
+    const phrase = letterBoxes[i].textContent.trim();
     // remove all character from the current letter box
     letterBoxes[i].textContent = "";
 
-    // loop through all letters
-    for (let j = 0; j < letters.length; j++) {
+    const stateClass = i === activeLetterBoxIndex ? "in" : "out";
 
-      // create a span
-      const span = document.createElement("span");
+    // Wrap each word's letters in an atomic .word span so words never split
+    // across lines; wrapping only happens at the spaces between words.
+    const words = phrase.split(" ");
+    words.forEach((wordText, wordIndex) => {
+      const wordSpan = document.createElement("span");
+      wordSpan.classList.add("word");
 
-      // set animation delay on span
-      span.style.animationDelay = `${letterAnimationDelay}s`;
-
-      // set the "in" class on the span, if current letter box is active
-      // otherwise class is "out"
-      if (i === activeLetterBoxIndex) {
-        span.classList.add("in");
-      } else {
-        span.classList.add("out");
+      for (let j = 0; j < wordText.length; j++) {
+        const span = document.createElement("span");
+        span.style.animationDelay = `${letterAnimationDelay}s`;
+        span.classList.add(stateClass);
+        span.textContent = wordText[j];
+        wordSpan.appendChild(span);
+        letterAnimationDelay += 0.05;
       }
 
-      // pass current letter into span
-      span.textContent = letters[j];
+      letterBoxes[i].appendChild(wordSpan);
 
-      // add space class on span, when current letter contain space
-      if (letters[j] === " ") span.classList.add("space");
-
-      // pass the span on current letter box
-      letterBoxes[i].appendChild(span);
-
-      // skip letterAnimationDelay when loop is in the last index
-      if (j >= letters.length - 1) break;
-      // otherwise update
-      letterAnimationDelay += 0.05;
-
-    }
+      if (wordIndex < words.length - 1) {
+        const spaceSpan = document.createElement("span");
+        spaceSpan.style.animationDelay = `${letterAnimationDelay}s`;
+        spaceSpan.classList.add(stateClass, "space");
+        spaceSpan.textContent = " ";
+        letterBoxes[i].appendChild(spaceSpan);
+        letterAnimationDelay += 0.05;
+      }
+    });
 
     // get total delay of active letter box
     if (i === activeLetterBoxIndex) {
@@ -350,20 +347,37 @@ const updateSubtitlePosition = function (word) {
 const animateSubtitles = function () {
   for (let i = 0; i < subtitleBoxes.length; i++) {
     let charDelay = 0;
-    const word = subtitleBoxes[i].textContent.trim();
+    const phrase = subtitleBoxes[i].textContent.trim();
     subtitleBoxes[i].textContent = "";
+    const stateClass = i === currentSubtitleIndex ? "in" : "out";
 
-    for (let j = 0; j < word.length; j++) {
-      const characterSpan = document.createElement("span");
-      characterSpan.style.animationDelay = `${charDelay}s`;
-      characterSpan.classList.add(i === currentSubtitleIndex ? "in" : "out");
-      characterSpan.textContent = word[j];
+    // Build each word inside its own atomic .word wrapper so letters never
+    // break mid-word; only the spaces between words are wrap opportunities.
+    const words = phrase.split(" ");
+    words.forEach((wordText, wordIndex) => {
+      const wordSpan = document.createElement("span");
+      wordSpan.classList.add("word");
 
-      if (word[j] === " ") characterSpan.classList.add("space");
+      for (let j = 0; j < wordText.length; j++) {
+        const characterSpan = document.createElement("span");
+        characterSpan.style.animationDelay = `${charDelay}s`;
+        characterSpan.classList.add(stateClass);
+        characterSpan.textContent = wordText[j];
+        wordSpan.appendChild(characterSpan);
+        charDelay += 0.05;
+      }
 
-      subtitleBoxes[i].appendChild(characterSpan);
-      if (j < word.length - 1) charDelay += 0.05;
-    }
+      subtitleBoxes[i].appendChild(wordSpan);
+
+      if (wordIndex < words.length - 1) {
+        const spaceSpan = document.createElement("span");
+        spaceSpan.style.animationDelay = `${charDelay}s`;
+        spaceSpan.classList.add(stateClass, "space");
+        spaceSpan.textContent = " ";
+        subtitleBoxes[i].appendChild(spaceSpan);
+        charDelay += 0.05;
+      }
+    });
 
     if (i === currentSubtitleIndex) {
       animationDelayTotal = Number(charDelay.toFixed(2));
@@ -730,9 +744,6 @@ function initCardAccordion(cardSelector, linkSelector) {
       card.classList.toggle('expanded');
     });
   });
-
-  // Expand the first card by default so the tap-to-expand pattern is obvious.
-  cards[0].classList.add('expanded');
 }
 
 function initAccordions() {

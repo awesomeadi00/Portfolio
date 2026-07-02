@@ -401,10 +401,10 @@ body.active { overflow: hidden; }
 .sidebar {
   position: fixed;
   top: 0;
+  bottom: 0;      /* pin top+bottom so the fixed panel always fills the real
+                     viewport (no gap when the mobile browser bar hides/shows) */
   right: -100%;   /* Hidden off-screen */
-  width: min(82vw, 340px);
-  height: 100vh;
-  height: 100svh;
+  width: min(80vw, 320px);
   background-color: hsla(0, 0%, 7%, 0.92);
   -webkit-backdrop-filter: blur(22px);
   backdrop-filter: blur(22px);
@@ -652,12 +652,24 @@ body.active { overflow: hidden; }
   transform: translateX(-50%);
 }
 
+/* Each subtitle word is an atomic inline-block so its letters never break
+   across lines. Line breaks can therefore only happen at the spaces between
+   words (see .space), giving clean "Software" / "Development" wrapping on
+   narrow screens instead of splitting a word mid-way. */
+.wrapper .word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 /* Animation for Text Wave CSS Properties: */
 .wrapper .space { padding: 0.1em; }
 
 .main .wrapper :is(.in, .out) {
   opacity: 0;
   transform: scaleY(0);
+  /* Letters are nested inside .word, so they need to be inline-block for the
+     scaleY wave transform to apply (transforms are ignored on inline boxes). */
+  display: inline-block;
 }
 
 .main .strong.active .out {
@@ -2509,6 +2521,29 @@ body.active { overflow: hidden; }
 
   .subTitle {
     font-size: 2.8em;
+    /* Keep long phrases off the screen edges + reserve room for two lines */
+    padding-inline: 16px;
+    min-height: 2.4em;
+  }
+
+  /* On phones, let long subtitles (e.g. "Software Development") wrap at the
+     space into two centered lines instead of overflowing to the edges. We swap
+     the non-wrapping flex row for normal text flow: letters are inline-block
+     (so the wave animation still works) and the space stays a real line-break
+     opportunity. Vertically centered within the reserved height. */
+  .wrapper .strong {
+    display: block;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.05;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* On phones the space is a real inline break opportunity, so long phrases
+     wrap between whole words. */
+  .main .wrapper .space {
+    display: inline;
   }
 
   /* About Settings */
@@ -2672,6 +2707,19 @@ body.active { overflow: hidden; }
     font-size: 1.05em;
     line-height: 1.25;
     margin-bottom: 3px;
+    /* Keep the collapsed header compact + consistent between cards: clamp the
+       title to 2 lines, then show it in full once the card is expanded. */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .experienceCard.expanded .experiencePosition {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
   }
 
   .experienceDuration {
@@ -2757,7 +2805,7 @@ body.active { overflow: hidden; }
   }
 
   .publicationCardContainer {
-    gap: 20px;
+    gap: 12px;
   }
 
   /* Publication cards use the same compact tap-to-expand accordion as the
@@ -2799,6 +2847,23 @@ body.active { overflow: hidden; }
     font-size: 1.05em;
     line-height: 1.25;
     margin-bottom: 3px;
+    /* Reset the section-header padding that leaks in via the shared
+       .publicationTitle class (the <h2> heading uses padding-top for nav
+       spacing; the card <h3> must not, or it gets a weird gap at the top). */
+    padding-top: 0;
+    /* Keep the collapsed header compact + consistent between cards: clamp the
+       title to 2 lines, then show it in full once the card is expanded. */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .publicationCard.expanded .publicationInfo .publicationTitle {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
   }
 
   .publicationDuration {
@@ -3068,7 +3133,7 @@ body.active { overflow: hidden; }
   }
 
   .sidebar {
-    width: min(86vw, 300px);
+    width: min(78vw, 272px);
   }
 
   /* Home Settings */
@@ -3078,6 +3143,8 @@ body.active { overflow: hidden; }
 
   .subTitle {
     font-size: 2.4em;
+    padding-inline: 14px;
+    min-height: 2.4em;
   }
 
   /* About Settings */
@@ -3156,6 +3223,7 @@ body.active { overflow: hidden; }
 
   .publicationInfo .publicationTitle {
     font-size: 1em;
+    padding-top: 0;
   }
 
   .publicationDuration {
@@ -3406,7 +3474,7 @@ body.active { overflow: hidden; }
   }
 
   .sidebar {
-    width: min(88vw, 270px);
+    width: min(82vw, 244px);
   }
 
   .sidebarNav a {
@@ -4114,10 +4182,9 @@ body.active { overflow: hidden; }
   content: '';
   position: fixed;
   top: 0;
+  bottom: 0;      /* pin top+bottom so the backdrop fills the real viewport too */
   left: 0;
   width: 100vw;
-  height: 100vh;
-  height: 100svh;
   background: hsla(0, 0%, 0%, 0.55);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
