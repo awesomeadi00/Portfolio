@@ -1859,6 +1859,56 @@ body.active { overflow: hidden; }
   }
 }
 
+/* Wide but short screens (e.g. 1080p laptops like the Lenovo Legion). These
+   are wide enough to hit the 1600px+ styles but too short for the full-size
+   about section, so its content (down to the Download Resume button) spills
+   below the fold. Compact the about typography/spacing when vertical room is
+   limited so everything fits in the viewport. Tall large monitors keep the
+   full-size layout. */
+@media screen and (min-width: 1600px) and (max-height: 1100px) {
+  .aboutContainer {
+    min-height: calc(100vh - 100px);
+    min-height: calc(100svh - 100px);
+  }
+
+  .about .section-title {
+    margin-block-end: 20px;
+  }
+
+  .about .section-text {
+    font-size: 1.25em;
+    line-height: 1.6;
+    margin-block-end: 18px;
+  }
+
+  .education-section {
+    margin-block-end: 14px;
+  }
+
+  .education-section h3 {
+    font-size: 1.6em;
+    margin-block-end: 8px;
+  }
+
+  .education-details {
+    padding: 14px 18px;
+  }
+
+  .education-details p {
+    font-size: 1em;
+    margin-block-end: 6px;
+  }
+
+  .resume-section {
+    margin-block-start: 18px;
+  }
+
+  .resume-button {
+    padding: 10px 24px;
+    font-size: 1.1em;
+  }
+}
+
 /* Standard Desktop and MacBook Screens (1200px - 1599px) */
 @media screen and (min-width: 1200px) and (max-width: 1599px) {
   .navbar a {
@@ -1930,10 +1980,11 @@ body.active { overflow: hidden; }
     height: 70px;
   }
   
-  /* Samsung Galaxy S21 Ultra and similar devices - Skills Grid Fix */
+  /* Standard laptop / MacBook screens: tighten the skills grid so icons aren't
+     overly spread out (was 4 cols, too sparse on ~1440-1512px MacBooks). */
   .skillsGrid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 30px 24px;
   }
   
   .skillImage {

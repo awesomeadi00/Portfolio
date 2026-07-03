@@ -150,6 +150,16 @@ if ("IntersectionObserver" in window) {
   });
 
   revealElements.forEach(function (el) {
+    // Cards inside the project carousel continuously cross the viewport's left/
+    // right edges as the track auto-scrolls. If they were observed, each crossing
+    // would toggle `.revealed`, re-running the fade + translateY animation — which
+    // showed up as a jitter/glitch on the loop-back (when previously off-screen
+    // cards animated in for the first time). Keep them permanently visible and
+    // skip observing them entirely.
+    if (el.closest(".carouselTrack")) {
+      el.classList.add("revealed");
+      return;
+    }
     revealObserver.observe(el);
   });
 } else {
@@ -438,6 +448,9 @@ function initCarousel() {
   let acceleration = isMobile ? 0.08 : 0.1; // Slower acceleration on mobile
   let deceleration = isMobile ? 0.04 : 0.05; // Slower deceleration on mobile
   let autoScrollTimeout = null;
+  // Exact pixel width of one full set of (duplicated) cards, measured from the
+  // live layout. Cached so we don't force a layout read every animation frame.
+  let cachedTotalWidth = 0;
 
   // --- Frame-rate independent movement --------------------------------------
   // requestAnimationFrame fires at the display's refresh rate (60/90/120/144Hz),
@@ -642,36 +655,29 @@ function initCarousel() {
     return matrix.m41; // translateX value
   }
 
+  // Measure the exact distance of one full set of cards straight from the live
+  // layout. The track holds two identical sets, so the loop period is the gap
+  // between card[0] and card[halfCards] (the first card of the second set).
+  // getBoundingClientRect gives sub-pixel precision and, because both cards live
+  // inside the same transformed track, the track's translate cancels out in the
+  // difference — so the result is invariant to the current scroll position.
+  //
+  // Using the real measured width (instead of hardcoded card/gap guesses) makes
+  // the infinite-loop wraparound pixel-perfect, removing the jitter/glitch that
+  // happened when the guessed width didn't match the actual rendered width.
+  function measureTotalWidth() {
+    const cards = carouselTrack.children;
+    const halfCards = Math.floor(cards.length / 2);
+    if (halfCards === 0) return 0;
+    const firstLeft = cards[0].getBoundingClientRect().left;
+    const midLeft = cards[halfCards].getBoundingClientRect().left;
+    return midLeft - firstLeft;
+  }
+
   function getTotalWidth() {
-    // Calculate the total width of one complete set of cards based on screen size
-    let cardWidth, gap;
-    
-    if (window.innerWidth <= 480) {
-      // Small mobile phones
-      cardWidth = 240;
-      gap = 15;
-    } else if (window.innerWidth <= 767) {
-      // Mobile devices
-      cardWidth = 260;
-      gap = 15;
-    } else if (window.innerWidth <= 1023) {
-      // Portrait tablets
-      cardWidth = 280;
-      gap = 20;
-    } else if (window.innerWidth <= 1199) {
-      // Landscape tablets and small laptops
-      cardWidth = 300;
-      gap = 25;
-    } else {
-      // Desktop and larger screens
-      cardWidth = 350;
-      gap = 30;
-    }
-    
-    const actualCardWidth = cardWidth + gap;
-    const totalCards = carouselTrack.children.length;
-    const halfCards = Math.floor(totalCards / 2);
-    return halfCards * actualCardWidth;
+    // Fall back to a fresh measurement if the cache hasn't been primed yet.
+    if (!cachedTotalWidth) cachedTotalWidth = measureTotalWidth();
+    return cachedTotalWidth;
   }
 
   function startAutoScrollFromCurrentPosition() {
@@ -703,19 +709,26 @@ function initCarousel() {
     // Ensure no CSS animation is running
     carouselTrack.style.animation = 'none';
     carouselTrack.style.transform = 'translate3d(0, 0, 0)';
-    
+
+    // Prime the exact loop width from the current layout before scrolling.
+    cachedTotalWidth = measureTotalWidth();
+
     // Start auto-scroll from the beginning immediately
     startAutoScrollFromCurrentPosition();
   }
 
   // Handle window resize
   window.addEventListener('resize', () => {
+    // Card widths change at breakpoints, so re-measure the loop width.
+    cachedTotalWidth = measureTotalWidth();
+
     // Reset carousel position on resize
     if (!isLeftPressed && !isRightPressed) {
       carouselTrack.style.transform = 'translate3d(0, 0, 0)';
       carouselTrack.style.animation = 'none';
       // Restart auto-scroll after resize
       setTimeout(() => {
+        cachedTotalWidth = measureTotalWidth();
         startAutoScrollFromCurrentPosition();
       }, 100);
     }
